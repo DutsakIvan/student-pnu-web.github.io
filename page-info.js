@@ -1,14 +1,10 @@
-// Функція для додавання інформаційного повідомлення на сторінку
+
 function addPageInfo(pageType) {
     console.log('[PAGE-INFO] Ініціалізація інформаційного повідомлення для', pageType);
-    
-    // Перевіряємо, чи потрібно показувати повідомлення
     if (localStorage.getItem(`${pageType}InfoShown`) === 'true') {
         console.log('[PAGE-INFO] Повідомлення вже було показано раніше');
         return;
     }
-    
-    // Визначаємо вміст для різних типів сторінок
     const pageInfoContent = {
         'schedule': {
             title: 'Розклад занять',
@@ -88,38 +84,27 @@ function addPageInfo(pageType) {
             `
         }
     };
-    
-    // Отримуємо інформацію для поточної сторінки
     const info = pageInfoContent[pageType];
     if (!info) {
         console.error('[PAGE-INFO] Немає інформації для типу сторінки:', pageType);
         return;
     }
-    
-    // Створюємо HTML блок інформаційного повідомлення
     const infoBlock = document.createElement('div');
     infoBlock.className = 'page-info';
-    
-    // Для сторінки розкладу додаємо додатковий клас
     if (pageType === 'schedule') {
         infoBlock.classList.add('schedule-info');
     }
-    
     infoBlock.innerHTML = `
         <h3>${info.title}</h3>
         ${info.content}
         <button class="close-btn">&times;</button>
     `;
-    
-    // Додаємо повідомлення на сторінку (на початку body або в специфічний контейнер)
     const container = document.querySelector('.container') || document.body;
     if (container.firstChild) {
         container.insertBefore(infoBlock, container.firstChild);
     } else {
         container.appendChild(infoBlock);
     }
-    
-    // Додаємо обробник події для закриття повідомлення
     const closeBtn = infoBlock.querySelector('.close-btn');
     if (closeBtn) {
         closeBtn.addEventListener('click', () => {
@@ -128,38 +113,26 @@ function addPageInfo(pageType) {
             setTimeout(() => {
                 infoBlock.remove();
             }, 500);
-            
-            // Зберігаємо інформацію про те, що повідомлення було показано
             localStorage.setItem(`${pageType}InfoShown`, 'true');
             console.log('[PAGE-INFO] Повідомлення закрито, статус збережено');
         });
     }
-    
     console.log('[PAGE-INFO] Інформаційне повідомлення додано на сторінку');
 }
-
-// Визначаємо тип поточної сторінки
 function getCurrentPageType() {
     const path = window.location.pathname;
-    
     if (path.includes('schedule.html')) return 'schedule';
     if (path.includes('profile.html')) return 'profile';
     if (path.includes('rating.html')) return 'rating';
     if (path.includes('saved.html')) return 'saved';
     if (path.includes('schedule-details.html')) return 'schedule-details';
     if (path.includes('rating-details.html')) return 'rating-details';
-    
-    // Якщо це головна сторінка або не вдалося визначити
     if (path.includes('index.html') || path.endsWith('/')) return 'index';
-    
     return null;
 }
-
-// Ініціалізуємо інформаційне повідомлення при завантаженні сторінки
 document.addEventListener('DOMContentLoaded', function() {
     const pageType = getCurrentPageType();
     console.log('[PAGE-INFO] Визначено тип сторінки:', pageType);
-    
     if (pageType) {
         addPageInfo(pageType);
     }

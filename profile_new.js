@@ -1,12 +1,10 @@
-// Дані про групи
+
 const groups = {
     "КН": ["КН-11", "КН-12", "КН-13", "КН-21", "КН-22", "КН-23", "КН-31", "КН-32", "КН-41", "КН-42"],
     "ІПЗ": ["ІПЗ-11", "ІПЗ-12", "ІПЗ-21", "ІПЗ-22"],
     "ІСТ": ["ІСТ-11", "ІСТ-12", "ІСТ-21"],
     "ПР": ["ПР-31", "ПР-32", "ПР-33", "ПР-34", "ПР-35"]
 };
-
-// Дані про предмети з підгрупами для "Автоматично обраних предметів"
 const subjectsData = {
     "фізична культура": { displayName: "Фізична культура", credits: null, assessment: null, semester: "1,2,3,4", subgroups: ["Підгрупа 1", "Підгрупа 2"] },
     "українська мова за професійним спрямуванням": { displayName: "Українська мова за професійним спрямуванням", credits: 3, assessment: "Залік", semester: "1", subgroups: ["Підгрупа 1", "Підгрупа 2"] },
@@ -76,19 +74,15 @@ const subjectsData = {
     "програмування mac ios": { displayName: "Програмування Mac iOS", credits: 6, assessment: "Залік", semester: "8", subgroups: ["Підгрупа 1", "Підгрупа 2"] },
     "атестація": { displayName: "Атестація", credits: 3, assessment: "Екзамен", semester: "8", subgroups: ["Підгрупа 1", "Підгрупа 2"] },
 };
-
-// Стан профілю
 window.currentState = {
     faculty: null,
     group: null,
     semester: null,
-    selectedSubjects: {}, // { "предмет": ["підгрупа1", "підгрупа2", ...] }
+    selectedSubjects: {}, 
     dateFrom: '',
     dateTo: '',
     teacherSearch: ''
 };
-
-// Функція нормалізації назв
 const normalizeSubgroup = (subgroup) => {
     if (!subgroup) return '';
     let normalized = subgroup
@@ -101,20 +95,14 @@ const normalizeSubgroup = (subgroup) => {
     if (numberMatch) return numberMatch[0];
     return normalized;
 };
-
-// Функція для нормалізації типу заняття
 function normalizeType(type) {
     if (!type) return '';
-    
-    // Видаляємо всі зайві символи та пробіли
     type = type
         .toLowerCase()
-        .replace(/[\(\)\[\]\{\}]/g, '')  // видаляємо всі види дужок
-        .replace(/\s+/g, '')             // видаляємо всі пробіли
-        .replace(/[-_]/g, '')            // видаляємо дефіси та підкреслення
+        .replace(/[\(\)\[\]\{\}]/g, '')  
+        .replace(/\s+/g, '')             
+        .replace(/[-_]/g, '')            
         .trim();
-    
-    // Розширений список всіх можливих варіантів
     const typeMap = {
         'л': 'Лекція',
         'лек': 'Лекція',
@@ -132,23 +120,16 @@ function normalizeType(type) {
         'екзамен': 'Екзамен',
         'держат': 'Держ. атестація'
     };
-    
-    // Перевіряємо точні співпадіння
     if (typeMap[type]) {
         return typeMap[type];
     }
-    
-    // Перевіряємо часткові співпадіння
     for (const [key, value] of Object.entries(typeMap)) {
         if (type.includes(key)) {
             return value;
         }
     }
-    
     return type.charAt(0).toUpperCase() + type.slice(1);
 }
-
-// Функція завантаження даних з localStorage
 function loadState() {
     const savedState = localStorage.getItem('appState');
     if (savedState) {
@@ -160,30 +141,21 @@ function loadState() {
             showStep('step-faculty');
             return;
         }
-        // Якщо є всі дані, показуємо профіль
         if (window.currentState.faculty && window.currentState.group && window.currentState.semester && window.currentState.selectedSubjects) {
             showProfileSummary();
         } else {
-            // Якщо даних немає, показуємо вибір факультету
             showStep('step-faculty');
         }
     } else {
         showStep('step-faculty');
     }
 }
-
-// Функція збереження даних в localStorage
 function saveState() {
     console.log('[PROFILE] Зберігаю стан:', window.currentState);
     localStorage.setItem('appState', JSON.stringify(window.currentState));
 }
-
-// Функція очищення стану профілю
 function clearProfileState() {
-    // Зберігаємо поточну тему перед очищенням
     const currentTheme = localStorage.getItem('theme');
-    
-    // Оновлюємо стан без очищення всього localStorage
     window.currentState = {
         faculty: null,
         group: null,
@@ -194,91 +166,61 @@ function clearProfileState() {
         teacherSearch: ''
     };
     saveState();
-    
-    // Відзначаємо, що користувач мав обрані предмети, які були очищені
     localStorage.setItem('hadSelectedSubjects', 'true');
-    
-    // Видаляємо лише дані профілю, але зберігаємо тему та збережені дані
     const keysToKeep = ['theme', 'schedulesData', 'hadSelectedSubjects', 'savedSchedules', 'savedRatings'];
     Object.keys(localStorage).forEach(key => {
         if (!keysToKeep.includes(key)) {
             localStorage.removeItem(key);
         }
     });
-    
-    // Відновлюємо збережену тему
     if (currentTheme) {
         localStorage.setItem('theme', currentTheme);
     }
-    
     console.log('[PROFILE] Профіль очищено');
-    
-    // Перезавантажуємо сторінку
     location.reload();
 }
-
-// Ініціалізація сторінки
 document.addEventListener('DOMContentLoaded', () => {
     console.log('[PROFILE] Ініціалізація сторінки');
-    
     if (typeof schedulesData === 'undefined') {
         console.error('[PROFILE] Помилка: schedulesData не завантажено');
         alert('Помилка завантаження даних розкладу. Будь ласка, оновіть сторінку.');
         return;
     }
-
-    // Обробник вибору факультету
     document.querySelectorAll('.faculty-card').forEach(card => {
         card.addEventListener('click', () => {
-            // Знімаємо виділення з усіх карток
             document.querySelectorAll('.faculty-card').forEach(c => c.classList.remove('selected'));
-            // Додаємо виділення до обраної картки
             card.classList.add('selected');
-            
             const selectedFaculty = card.dataset.faculty;
             console.log('[PROFILE] Обрано факультет:', selectedFaculty);
-            
             window.currentState.faculty = selectedFaculty;
             window.currentState.group = null;
             window.currentState.semester = null;
             window.currentState.selectedSubjects = {};
-            
             console.log('[PROFILE] Поточний стан:', window.currentState);
-            
             if (!groups || !groups[selectedFaculty]) {
                 console.error('[PROFILE] Помилка: немає груп для факультету', selectedFaculty);
                 alert('Помилка: немає доступних груп для цієї спеціальності');
                 return;
             }
-            
             showGroups(selectedFaculty);
             nextStep('step-faculty', 'step-group');
             saveState();
         });
     });
-
-    // Обробник вибору семестру
     document.querySelectorAll('.semester-card').forEach(card => {
         card.addEventListener('click', () => {
-            // Знімаємо виділення з усіх карток
             document.querySelectorAll('.semester-card').forEach(c => c.classList.remove('selected'));
-            // Додаємо виділення до обраної картки
             card.classList.add('selected');
-            
             const selectedSemester = card.dataset.semester;
             console.log('[PROFILE] Обрано семестр:', selectedSemester);
-            
             window.currentState.semester = selectedSemester;
             window.currentState.selectedSubjects = {};
-            
             console.log('[PROFILE] Показую предмети для семестру:', selectedSemester);
             showSubjects(selectedSemester, window.currentState.group);
             nextStep('step-semester', 'step-subjects');
             saveState();
         });
     });
-
-    // Ініціалізація мобільного меню
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navList = document.querySelector('.nav-list');
     if (mobileMenuBtn && navList) {
@@ -286,8 +228,6 @@ document.addEventListener('DOMContentLoaded', () => {
             navList.classList.toggle('show');
         });
     }
-
-    // Оновлюємо навігаційні кнопки для переходу на розклад
     const scheduleLink = document.querySelector('nav a[href="schedule_new.html"]');
     if (scheduleLink) {
         scheduleLink.setAttribute('href', 'javascript:void(0)');
@@ -296,37 +236,27 @@ document.addEventListener('DOMContentLoaded', () => {
             checkProfileBeforeSchedule();
         });
     }
-
     loadState();
 });
-
-// Функція для визначення курсу за групою
 function getCourseFromGroup(group) {
     if (!group) return null;
     const match = group.match(/(\d+)/);
     return match ? parseInt(match[0].charAt(0)) : 1;
 }
-
-// Функція для отримання унікальних підгруп для предмета з розкладу
 function getUniqueSubgroupsForSubject(subjectName) {
     const uniqueSubgroups = new Set();
     console.log('[PROFILE] Шукаю підгрупи для предмета:', subjectName);
-    
     if (typeof schedulesData === 'undefined') {
         console.error('[PROFILE] schedulesData не визначено');
         return [];
     }
-
     const currentGroup = window.currentState.group;
     if (!currentGroup || !schedulesData[currentGroup]) {
         console.error('[PROFILE] Група не вибрана або не знайдена');
         return [];
     }
-
     const currentFaculty = schedulesData[currentGroup].faculty;
     const currentCourse = getCourseFromGroup(currentGroup);
-
-    // Збираємо розклад з усіх груп того ж факультету і курсу
     let allLessons = [];
     for (const [groupName, data] of Object.entries(schedulesData)) {
         if (data.faculty === currentFaculty && getCourseFromGroup(groupName) === currentCourse) {
@@ -339,31 +269,22 @@ function getUniqueSubgroupsForSubject(subjectName) {
             });
         }
     }
-
-    // Перевіряємо всі заняття цього предмета
     allLessons.forEach(lesson => {
         let lessonSubject = lesson.subject;
-            // Для збірних груп та потокових лекцій беремо назву з другого рядка
             if (lesson.subject.includes('Збірна група') || lesson.subject.includes('Потік')) {
                 const lines = lesson.subject.split('\n');
                 if (lines.length > 1) {
                     lessonSubject = lines[1];
                 }
             }
-
             const normalizedLessonSubject = normalizeSubject(extractCoreSubject(lessonSubject));
             const normalizedSearchSubject = normalizeSubject(subjectName);
-
             if (normalizedLessonSubject.includes(normalizedSearchSubject) || 
                 normalizedSearchSubject.includes(normalizedLessonSubject)) {
-                
                 console.log('[PROFILE] Знайдено співпадіння для предмета:', lesson.subject);
-
-                // Для потокових лекцій
                 if (lesson.subject.includes('Потік')) {
                     uniqueSubgroups.add('Лекція');
                 }
-                // Для збірних груп (універсальний regex)
                 else if (lesson.subject.includes('Збірна група')) {
                     const zbMatch = lesson.subject.match(/Збірна група\s+(\S+)/);
                     const typeMatch = lesson.subject.match(/\((Л|Лек|Лекція|Лаб|ПрС|Сем|Семінар|КСР|КЕк|Екз|Консультація|Практика|Держ\.Ат\.)\)$/i);
@@ -373,14 +294,12 @@ function getUniqueSubgroupsForSubject(subjectName) {
                         uniqueSubgroups.add(`${groupId}(${type})`);
                     }
                 }
-                // Для підгруп
                 else if (lesson.subject.match(/^\(підгр\. \d+\)/)) {
                     const subgroupMatch = lesson.subject.match(/^\(підгр\. (\d+)\)/);
                     if (subgroupMatch) {
                         uniqueSubgroups.add(`Підгрупа ${subgroupMatch[1]}`);
                     }
                 }
-                // Для звичайних занять
                 else {
                     const typeMatch = lesson.subject.match(/\((Л|Лек|Лекція|Лаб|ПрС|Сем|Семінар|КСР|КЕк|Екз|Консультація|Практика|Держ\.Ат\.)\)$/i);
                     if (typeMatch) {
@@ -389,13 +308,10 @@ function getUniqueSubgroupsForSubject(subjectName) {
                 }
         }
     });
-
     const result = Array.from(uniqueSubgroups);
     console.log('[PROFILE] Знайдені підгрупи:', result);
     return result;
 }
-
-// Функція для нормалізації назви предмета
 function normalizeSubject(subject) {
     if (!subject) return '';
     return subject
@@ -404,38 +320,30 @@ function normalizeSubject(subject) {
         .replace(/\s+/g, ' ')
         .trim();
 }
-
-// Функція для витягнення основної назви предмета
 function extractCoreSubject(subject) {
     if (!subject) return '';
     return subject
         .replace(/^\(підгр\. \d+\)\s*/, '')
-        .replace(/^Збірна група\s+\S+\s+/, '')  // Універсальний: "Збірна група XXX "
-        .replace(/^Потік\s+[\wА-Яа-яіїєґІЇЄҐ'`'\-,\s]+?\s+(?=[А-ЯІЇЄҐA-Z])/, '')  // "Потік КН-41, КН-42 "
-        .replace(/^[А-ЯІЇЄҐA-Z]{1,4}-\d{1,2}\s+/, '')  // "КН-41 " — префікс групи
-        .replace(/\.\.\.[^(]*/, '')  // "... Держ.Ат. Консультації"
+        .replace(/^Збірна група\s+\S+\s+/, '')  
+        .replace(/^Потік\s+[\wА-Яа-яіїєґІЇЄҐ'`'\-,\s]+?\s+(?=[А-ЯІЇЄҐA-Z])/, '')  
+        .replace(/^[А-ЯІЇЄҐA-Z]{1,4}-\d{1,2}\s+/, '')  
+        .replace(/\.\.\.[^(]*/, '')  
         .replace(/\s*\((Л|Лек|Лекція|Лаб|ПрС|Сем|Семінар|КСР|КЕк|Екз|Консультація|Практика|Держ\.Ат\.)\)$/i, '')
         .replace(/\n/g, ' ')
         .trim();
 }
-
-// Показати групи для факультету
 function showGroups(faculty) {
     console.log('[PROFILE] Показую групи для факультету:', faculty);
-    
     const groupsContainer = document.querySelector('.groups-container');
     if (!groupsContainer) {
         console.error('[PROFILE] Не знайдено контейнер для груп');
         return;
     }
-    
     groupsContainer.innerHTML = '';
-    
     if (!groups[faculty]) {
         console.error('[PROFILE] Немає груп для факультету:', faculty);
         return;
     }
-    
     groups[faculty].forEach(group => {
         console.log('[PROFILE] Додаю групу:', group);
         const groupCard = document.createElement('div');
@@ -445,28 +353,19 @@ function showGroups(faculty) {
             <h3>${group}</h3>
             <p>Курс ${getCourseFromGroup(group)}</p>
         `;
-        
         groupCard.addEventListener('click', () => {
-            // Знімаємо виділення з усіх карток
             document.querySelectorAll('.group-card').forEach(c => c.classList.remove('selected'));
-            // Додаємо виділення до обраної картки
             groupCard.classList.add('selected');
-            
             window.currentState.group = group;
             window.currentState.semester = null;
             window.currentState.selectedSubjects = {};
             nextStep('step-group', 'step-semester');
             saveState();
         });
-        
         groupsContainer.appendChild(groupCard);
     });
-    
-    // Оновлюємо прогрес-бар
     updateProgressBar(2);
 }
-
-// Функція показу предметів
 function showSubjects(semester, group) {
     const container = document.querySelector('.subjects-container');
     if (!container) {
@@ -474,8 +373,6 @@ function showSubjects(semester, group) {
         return;
     }
     container.innerHTML = '';
-
-    // Перевірка вхідних даних
     if (!semester || isNaN(parseInt(semester))) {
         console.error('[PROFILE] Недійсний семестр:', semester);
         container.innerHTML = '<p>Будь ласка, оберіть семестр.</p>';
@@ -486,15 +383,11 @@ function showSubjects(semester, group) {
         container.innerHTML = '<p>Будь ласка, оберіть групу.</p>';
         return;
     }
-
     const course = getCourseFromGroup(group);
     const calculatedSemester = (course - 1) * 2 + parseInt(semester);
     console.log('[PROFILE] Розраховано семестр:', calculatedSemester, 'для курсу:', course, 'і семестру:', semester);
-
     const autoSelectedSubjects = [];
     const otherSubjects = [];
-
-    // Розділяємо предмети на автоматично обрані та інші
     for (const [subject, info] of Object.entries(subjectsData)) {
         const semesters = String(info.semester).split(',').map(s => s.trim());
         const isInSemester = semesters.some(s => parseInt(s) === calculatedSemester);
@@ -504,18 +397,13 @@ function showSubjects(semester, group) {
             otherSubjects.push({ name: subject, ...info });
         }
     }
-
     console.log('[PROFILE] Автоматично обрані предмети:', autoSelectedSubjects.map(s => s.displayName));
     console.log('[PROFILE] Інші предмети:', otherSubjects.map(s => s.displayName));
-
-    // Функція створення блоку для предмета
     function createSubjectDiv(subjectData, isAutoSelected) {
         const subjectDiv = document.createElement('div');
         subjectDiv.className = 'subject-item';
-
         const isChecked = window.currentState.selectedSubjects.hasOwnProperty(subjectData.name);
         let selectedSubgroups = window.currentState.selectedSubjects[subjectData.name] || [];
-
         const subjectInfo = document.createElement('div');
         subjectInfo.className = 'subject-info';
         subjectInfo.innerHTML = `
@@ -529,13 +417,11 @@ function showSubjects(semester, group) {
             </small>
         `;
         subjectDiv.appendChild(subjectInfo);
-
         const availableSubgroups = getUniqueSubgroupsForSubject(subjectData.displayName);
         if (availableSubgroups.length > 0) {
             const subgroupsDiv = document.createElement('div');
             subgroupsDiv.className = 'subgroups';
             subgroupsDiv.style.display = isChecked ? 'block' : 'none';
-
             availableSubgroups.forEach(subgroup => {
                 const label = document.createElement('label');
                     label.innerHTML = `
@@ -547,25 +433,20 @@ function showSubjects(semester, group) {
                 });
                 subjectDiv.appendChild(subgroupsDiv);
         }
-
         const checkbox = subjectDiv.querySelector('input[type="checkbox"]');
         checkbox.addEventListener('change', (event) => {
             const subject = event.target.dataset.subject;
             const subgroupsDiv = subjectDiv.querySelector('.subgroups');
             const subgroupCheckboxes = subjectDiv.querySelectorAll('.subgroups input[type="checkbox"]');
-            
             if (event.target.checked) {
                 window.currentState.selectedSubjects[subject] = [];
                 if (subgroupsDiv) subgroupsDiv.style.display = 'block';
-                
-                // Автоматично вибираємо всі підгрупи
                 subgroupCheckboxes.forEach(cb => {
                     cb.checked = true;
                     window.currentState.selectedSubjects[subject].push(cb.dataset.subgroup);
                 });
             } else {
                 if (subgroupsDiv) subgroupsDiv.style.display = 'none';
-                // Знімаємо виділення з усіх підгруп
                 subgroupCheckboxes.forEach(cb => {
                     cb.checked = false;
                 });
@@ -585,7 +466,6 @@ function showSubjects(semester, group) {
                     if (!window.currentState.selectedSubjects[subjectNameDataset].includes(subgroup)) {
                         window.currentState.selectedSubjects[subjectNameDataset].push(subgroup);
                     }
-                    // Якщо вибрали підгрупу, ставимо галочку і на головному предметі
                     const mainCb = subjectDiv.querySelector('input[type="checkbox"]:not([data-subgroup])');
                     if (mainCb && !mainCb.checked) mainCb.checked = true;
                 } else {
@@ -593,7 +473,6 @@ function showSubjects(semester, group) {
                         window.currentState.selectedSubjects[subjectNameDataset].filter(s => s !== subgroup);
                     if (window.currentState.selectedSubjects[subjectNameDataset].length === 0) {
                         delete window.currentState.selectedSubjects[subjectNameDataset];
-                        // Знімаємо галочку з предмета, якщо всі підгрупи вимкнуті
                         const mainCb = subjectDiv.querySelector('input[type="checkbox"]:not([data-subgroup])');
                         if (mainCb) mainCb.checked = false;
                         const subgroupsDiv = subjectDiv.querySelector('.subgroups');
@@ -603,11 +482,8 @@ function showSubjects(semester, group) {
                 saveState();
             });
         });
-
         return subjectDiv;
     }
-
-    // Додаємо автоматично обрані предмети
     if (autoSelectedSubjects.length > 0) {
         const autoSelectedDiv = document.createElement('div');
         autoSelectedDiv.className = 'subject-category-group';
@@ -622,8 +498,6 @@ function showSubjects(semester, group) {
     } else {
         container.innerHTML += '<p>Немає автоматично обраних предметів для цього семестру.</p>';
     }
-
-    // Додаємо інші предмети
     if (otherSubjects.length > 0) {
         const otherSubjectsDiv = document.createElement('div');
         otherSubjectsDiv.className = 'subject-category-group';
@@ -639,35 +513,25 @@ function showSubjects(semester, group) {
             subjectsList.appendChild(createSubjectDiv(subjectData, false));
         });
         container.appendChild(otherSubjectsDiv);
-
         const updateArrow = () => {
             const arrow = title.querySelector('.toggle-arrow');
             arrow.textContent = subjectsList.style.display === 'none' ? '▶' : '▼';
         };
-
         title.addEventListener('click', () => {
             subjectsList.style.display = subjectsList.style.display === 'none' ? 'block' : 'none';
             updateArrow();
         });
     }
-
     updateProgressBar(4);
 }
-
-// Функція показу підсумку профілю
 function showProfileSummary() {
     console.log('[PROFILE] Відображаю профіль, selectedSubjects:', window.currentState.selectedSubjects);
-    
-    // Приховуємо всі кроки
     document.querySelectorAll('.profile-step').forEach(step => {
         step.classList.remove('active-step');
     });
-    
-    // Показуємо підсумок профілю
     const profileSummary = document.getElementById('profile-summary');
     if (profileSummary) {
         profileSummary.classList.add('active-step');
-        
         const summaryContent = profileSummary.querySelector('.profile-summary-content');
         if (summaryContent) {
             summaryContent.innerHTML = `
@@ -676,7 +540,6 @@ function showProfileSummary() {
                 <p><strong>Група:</strong> ${window.currentState.group}</p>
                 <p><strong>Курс:</strong> ${getCourseFromGroup(window.currentState.group)}</p>
                 <p><strong>Семестр:</strong> ${window.currentState.semester}</p>
-                
                 <h3><i class="fas fa-book"></i> Обрані предмети</h3>
                 <ul>
                     ${Object.entries(window.currentState.selectedSubjects).map(([subject, subgroups]) => {
@@ -686,88 +549,55 @@ function showProfileSummary() {
                     }).join('')}
                 </ul>
             `;
-            
-            // Ховаємо кроки на сторінці за допомогою додавання класу до body
             document.body.classList.add('profile-completed');
         }
     }
-    
     saveState();
 }
-
-// Функція редагування предметів
 function editSubjects() {
-    // Відновлюємо відображення кроків
     document.body.classList.remove('profile-completed');
-    
     showStep('step-subjects');
     showSubjects(window.currentState.semester, window.currentState.group);
 }
-
-// Функція для перевірки стану профілю перед переходом на сторінку розкладу
 function checkProfileBeforeSchedule() {
     console.log('[PROFILE] === Перевірка стану профілю перед переходом на розклад ===');
-    
-    // Перевіряємо, чи обрані предмети в профілі
     const hasSelectedSubjects = window.currentState.selectedSubjects && 
                                Object.keys(window.currentState.selectedSubjects).length > 0;
-    
     console.log('[PROFILE] Стан профілю:');
     console.log('[PROFILE] - Обрані предмети:', hasSelectedSubjects);
     console.log('[PROFILE] - Кількість обраних предметів:', Object.keys(window.currentState.selectedSubjects || {}).length);
-    
-    // Якщо користувач очистив предмети
     if (!hasSelectedSubjects) {
-        // Підготовка до показу повідомлення на сторінці розкладу
-        // Відзначаємо, що користувач мав обрані предмети
         localStorage.setItem('hadSelectedSubjects', 'true');
-        
         console.log('[PROFILE] Підготовлено показ повідомлення на сторінці розкладу');
     }
-    
     window.location.href = 'schedule_new.html';
 }
-
-// Управління кроками
 function showStep(stepId) {
     console.log('[PROFILE] Показую крок:', stepId);
-    
-    // Приховуємо всі кроки
     document.querySelectorAll('.profile-step').forEach(step => {
         step.classList.remove('active-step');
     });
-    
-    // Показуємо потрібний крок
     const currentStep = document.getElementById(stepId);
     if (!currentStep) {
         console.error('[PROFILE] Не знайдено крок з id:', stepId);
         return;
     }
-    
     currentStep.classList.add('active-step');
     console.log('[PROFILE] Крок успішно показано:', stepId);
-    
-    // Оновлюємо активний крок у прогрес-барі
     const stepNumber = {
         'step-faculty': 1,
         'step-group': 2,
         'step-semester': 3,
         'step-subjects': 4
     };
-    
     if (stepNumber[stepId]) {
         updateProgressBar(stepNumber[stepId]);
     }
 }
-
-// Функція для переходу до наступного кроку
 function nextStep(currentStepId, nextStepId) {
     showStep(nextStepId);
 }
-
-// Функція для повернення до попереднього кроку
 function previousStep(currentStepId) {
-    // Масив кроків у потрібному порядку
     const steps = ["step-faculty", "step-group", "step-semester", "step-subjects"];
     const currentIndex = steps.indexOf(currentStepId);
     if (currentIndex > 0) {
@@ -775,10 +605,7 @@ function previousStep(currentStepId) {
         showStep(previousStepId);
     }
 }
-
-// Функція для оновлення прогрес-бару
 function updateProgressBar(step) {
-    // Оновлюємо активний крок
     document.querySelectorAll('.progress-step').forEach((stepEl, index) => {
         if (index + 1 <= step) {
             stepEl.classList.add('active');
@@ -786,15 +613,11 @@ function updateProgressBar(step) {
             stepEl.classList.remove('active');
         }
     });
-    
-    // Оновлюємо заповнення прогрес-бару
     const progressFill = document.querySelector('.progress-fill');
     if (progressFill) {
         progressFill.style.width = `${(step / 4) * 100}%`;
     }
 }
-
-// Функція для збереження профілю
 function saveProfile() {
     console.log('[PROFILE] Зберігаю профіль');
     showProfileSummary();

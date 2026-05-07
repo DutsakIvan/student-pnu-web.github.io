@@ -1,13 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const ratingData = JSON.parse(localStorage.getItem('currentRatingDetails'));
     const container = document.getElementById('ratingDetails');
-
     if (!ratingData) {
         container.innerHTML = '<p>Дані не знайдено</p>';
         return;
     }
-
-    // Генеруємо HTML таблиці
     const tableHTML = `
         <h2 class="section-title">${ratingData.name}</h2>
         <p class="rating-date">Дата: ${ratingData.date}</p>
@@ -33,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         `).join('')}
                 </tbody>
             </table>
-            
             <div class="rating-summary">
                 <div>Екзамени: <span>${ratingData.examRating}</span></div>
                 <div>Заліки: <span>${ratingData.creditRating}</span></div>
@@ -41,6 +37,5 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         </div>
     `;
-
     container.innerHTML = tableHTML;
 });

@@ -5,25 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Профіль студента</title>
     <link rel="stylesheet" href="profile_new.css">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Додаємо schedule_data.js перед profile.js -->
     <script src="schedule_data.js"></script>
     <script src="theme.js"></script>
     <script src="profile_new.js" defer></script>
 </head>
 <body>
-    <!-- Тема -->
     <button id="theme-toggle" class="theme-toggle">
         <i class="fas fa-moon moon-icon"></i>
         <i class="fas fa-sun sun-icon"></i>
     </button>
-
-    <!-- Навігація -->
     <nav class="main-nav">
         <div class="nav-container">
             <div class="logo">
@@ -61,8 +55,6 @@
             </button>
         </div>
     </nav>
-
-    <!-- Головний контент -->
     <main class="main-content">
         <div class="container">
             <div class="profile-header">
@@ -72,8 +64,6 @@
                 </h1>
                 <p class="profile-subtitle">Налаштуйте свій профіль для персоналізованого досвіду</p>
             </div>
-
-            <!-- Прогрес заповнення профілю -->
             <div class="profile-progress">
                 <div class="progress-steps">
                     <div class="progress-step active" data-step="faculty">
@@ -105,8 +95,6 @@
                     <div class="progress-fill" style="width: 25%"></div>
                 </div>
             </div>
-
-            <!-- Крок 1: Вибір спеціальності -->
             <div id="step-faculty" class="profile-step active-step">
                 <div class="step-content">
                     <h2 class="section-title">Оберіть вашу спеціальність</h2>
@@ -142,8 +130,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Крок 2: Вибір групи -->
             <div id="step-group" class="profile-step">
                 <div class="step-content">
                     <h2 class="section-title">Оберіть вашу групу</h2>
@@ -155,8 +141,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Крок 3: Вибір семестру -->
             <div id="step-semester" class="profile-step">
                 <div class="step-content">
                     <h2 class="section-title">Оберіть семестр</h2>
@@ -183,13 +167,10 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Крок 4: Список предметів -->
             <div id="step-subjects" class="profile-step">
                 <div class="step-content">
                     <h2 class="section-title">Предмети вашого семестру</h2>
                     <div class="subjects-container">
-                        <!-- Тут будуть предмети -->
                     </div>
                     <div class="step-actions">
                         <button class="btn btn-secondary" onclick="previousStep('step-subjects')">
@@ -201,13 +182,10 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Підсумок профілю (з'являється після заповнення) -->
             <div id="profile-summary" class="profile-step">
                 <div class="step-content">
                     <h2 class="section-title">Ваш профіль</h2>
                     <div class="profile-summary-content">
-                        <!-- Тут буде інформація про профіль -->
                     </div>
                     <div class="step-actions">
                         <button class="btn btn-secondary" onclick="editSubjects()">
@@ -224,13 +202,10 @@
             </div>
         </div>
     </main>
-
-    <!-- Футер -->
     <footer class="footer">
         <div class="container">
             <p>© 2026 Student PNU. Всі права захищені.</p>
         </div>
     </footer>
-
 </body>
 </html>

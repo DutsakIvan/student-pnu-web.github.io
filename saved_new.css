@@ -1,59 +1,40 @@
-/* ======================== */
-/* Змінні та базові стилі   */
-/* ======================== */
 
 :root {
-    /* Основні кольори */
     --primary-color: #4361ee;
     --primary-light: #4895ef;
     --primary-dark: #3a0ca3;
     --secondary-color: #f72585;
     --accent-color: #f72585;
-
-    /* Нейтральні кольори */
     --light-color: #f8f9fa;
     --light-gray: #e9ecef;
     --medium-gray: #adb5bd;
     --dark-gray: #495057;
     --dark-color: #212529;
-
-    /* Функціональні кольори */
     --success-color: #4ade80;
     --warning-color: #fbbf24;
     --danger-color: #f43f5e;
     --info-color: #38bdf8;
-
-    /* Розміри і відступи */
     --spacing-xs: 0.2rem;
     --spacing-sm: 0.4rem;
     --spacing-md: 0.8rem;
     --spacing-lg: 1.2rem;
     --spacing-xl: 1.6rem;
     --spacing-xxl: 2.4rem;
-
-    /* Радіуси і тіні */
     --border-radius-sm: 0.25rem;
     --border-radius-md: 0.5rem;
     --border-radius-lg: 1rem;
     --border-radius-xl: 1.5rem;
     --border-radius-circle: 50%;
-
     --box-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
     --box-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
     --box-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
     --box-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
-
-    /* Анімації */
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
     --transition-slow: 0.5s ease;
-
-    /* Шрифт і типографіка */
     --base-font-size: 14px;
     --title-font-size: 16px;
 }
-
-/* Базові стилі */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -61,7 +42,6 @@
     overflow-wrap: break-word;
     word-wrap: break-word;
 }
-
 body {
     font-family: 'Montserrat', sans-serif;
     line-height: 1.5;
@@ -71,18 +51,12 @@ body {
     display: flex;
     flex-direction: column;
 }
-
 .container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--spacing-xs);
 }
-
-/* ======================== */
-/* Навігація                */
-/* ======================== */
-
 .main-nav {
     background-color: white;
     padding: 0;
@@ -92,7 +66,6 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
 }
-
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -101,7 +74,6 @@ body {
     align-items: center;
     padding: 0.5rem 1rem;
 }
-
 .logo {
     display: flex;
     align-items: center;
@@ -111,11 +83,9 @@ body {
     font-weight: 700;
     text-decoration: none;
 }
-
 .logo i {
     font-size: 1.25rem;
 }
-
 .nav-list {
     display: flex;
     list-style: none;
@@ -123,11 +93,9 @@ body {
     padding: 0;
     gap: 1rem;
 }
-
 .nav-item {
     margin: 0;
 }
-
 .nav-link {
     display: flex;
     align-items: center;
@@ -140,30 +108,24 @@ body {
     border-radius: 0.375rem;
     transition: all 0.3s ease;
 }
-
 .nav-link i {
     font-size: 1rem;
     color: var(--primary-color);
 }
-
 .nav-link:hover {
     background-color: var(--primary-color);
     color: white;
 }
-
 .nav-link:hover i {
     color: white;
 }
-
 .nav-link.active {
     background-color: var(--primary-color);
     color: white;
 }
-
 .nav-link.active i {
     color: white;
 }
-
 .mobile-menu-btn {
     display: none;
     background: none;
@@ -172,46 +134,35 @@ body {
     font-size: 1.5rem;
     cursor: pointer;
 }
-
-/* Темна тема для навігації */
 [data-theme="dark"] .main-nav {
     background-color: #1a1a1a;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
-
 [data-theme="dark"] .logo {
     color: var(--primary-light);
 }
-
 [data-theme="dark"] .nav-link {
     color: #e2e8f0;
 }
-
 [data-theme="dark"] .nav-link i {
     color: var(--primary-light);
 }
-
 [data-theme="dark"] .nav-link:hover,
 [data-theme="dark"] .nav-link.active {
     background-color: var(--primary-light);
     color: #1a202c;
 }
-
 [data-theme="dark"] .nav-link:hover i,
 [data-theme="dark"] .nav-link.active i {
     color: #1a202c;
 }
-
 [data-theme="dark"] .mobile-menu-btn {
     color: #e2e8f0;
 }
-
-/* Мобільна версія навігації */
 @media (max-width: 768px) {
     .nav-container {
         padding: 0.375rem 0.75rem;
     }
-
     .nav-list {
         display: none;
         position: absolute;
@@ -224,45 +175,33 @@ body {
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         z-index: 1000;
     }
-
     .nav-list.show {
         display: flex;
     }
-
     .nav-item {
         width: 100%;
     }
-
     .nav-link {
         width: 100%;
         padding: 0.5rem 0.75rem;
         font-size: 0.875rem;
     }
-
     .mobile-menu-btn {
         display: block;
         font-size: 1.25rem;
     }
-
     [data-theme="dark"] .nav-list {
         background-color: #1a202c;
     }
 }
-
-/* ======================== */
-/* Головний контент         */
-/* ======================== */
-
 .main-content {
     flex: 1;
     padding: 1.5rem 0;
 }
-
 .profile-header {
     text-align: center;
     margin-bottom: var(--spacing-lg);
 }
-
 .page-title {
     color: var(--dark-color);
     font-size: 1.5rem;
@@ -272,23 +211,16 @@ body {
     align-items: center;
     gap: 0.5rem;
 }
-
 .page-title i {
     font-size: 1.5rem;
     color: var(--primary-color);
 }
-
 .profile-subtitle {
     font-size: 0.875rem;
     color: var(--dark-gray);
     margin-bottom: 1.5rem;
     line-height: 1.5;
 }
-
-/* ======================== */
-/* Секції                   */
-/* ======================== */
-
 .rating-section {
     background-color: white;
     border-radius: 8px;
@@ -296,7 +228,6 @@ body {
     margin-bottom: 1.5rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
-
 .section-title {
     font-size: 1.25rem;
     font-weight: 600;
@@ -308,7 +239,6 @@ body {
     position: relative;
     padding-bottom: 0.5rem;
 }
-
 .section-title::after {
     content: '';
     position: absolute;
@@ -318,30 +248,22 @@ body {
     height: 1px;
     background-color: var(--light-gray);
 }
-
 .section-title i {
     color: var(--primary-color);
 }
-
-/* ======================== */
-/* Збережені елементи       */
-/* ======================== */
 .saved-content {
     display: grid;
     gap: 1.5rem;
 }
-
 .saved-category {
     background-color: white;
     border-radius: 8px;
     padding: 1.5rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
-
 .saved-items-container {
     margin-top: 1rem;
 }
-
 .saved-item {
     background-color: #f8f9fa;
     border-radius: 6px;
@@ -350,59 +272,46 @@ body {
     transition: all 0.2s ease;
     border: 1px solid #e9ecef;
 }
-
 .saved-item:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
-
 .saved-item-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0.75rem;
 }
-
 .saved-item-header h3 {
     font-size: 1rem;
     font-weight: 600;
     color: var(--dark-color);
     margin: 0;
 }
-
 .saved-item-header p {
     font-size: 0.875rem;
     color: var(--dark-gray);
     margin: 0;
 }
-
 .saved-item-meta {
     display: flex;
     justify-content: space-between;
     margin-bottom: 0.75rem;
     font-size: 0.875rem;
 }
-
 .saved-item-date {
     color: var(--dark-gray);
     display: flex;
     align-items: center;
     gap: 0.25rem;
 }
-
 .saved-item-date i {
     color: var(--primary-color);
 }
-
 .saved-item-actions {
     display: flex;
     gap: 0.5rem;
 }
-
-/* ======================== */
-/* Кнопки                   */
-/* ======================== */
-
 .control-btn {
     display: inline-flex;
     align-items: center;
@@ -418,66 +327,54 @@ body {
     text-align: center;
     justify-content: center;
 }
-
 .control-btn i {
     font-size: 0.8rem;
 }
-
 .control-btn.primary {
     background-color: var(--primary-color);
     color: white;
 }
-
 .control-btn.primary:hover {
     background-color: var(--primary-dark);
     transform: translateY(-2px);
     box-shadow: var(--box-shadow-md);
 }
-
 .control-btn.secondary {
     background-color: var(--light-gray);
     color: var(--dark-gray);
 }
-
 .control-btn.secondary:hover {
     background-color: var(--medium-gray);
     color: var(--dark-color);
     transform: translateY(-2px);
 }
-
 .control-btn.success {
     background-color: var(--success-color);
     color: white;
 }
-
 .control-btn.success:hover {
     background-color: #34d399;
     transform: translateY(-2px);
     box-shadow: var(--box-shadow-md);
 }
-
 .control-btn.info {
     background-color: var(--info-color);
     color: white;
 }
-
 .control-btn.info:hover {
     background-color: #0ea5e9;
     transform: translateY(-2px);
     box-shadow: var(--box-shadow-md);
 }
-
 .control-btn.danger {
     background-color: var(--danger-color);
     color: white;
 }
-
 .control-btn.danger:hover {
     background-color: #e11d48;
     transform: translateY(-2px);
     box-shadow: var(--box-shadow-md);
 }
-
 .edit-btn,
 .remove-btn,
 .load-btn {
@@ -489,41 +386,30 @@ body {
     border-radius: var(--border-radius-md);
     transition: all var(--transition-fast);
 }
-
 .load-btn {
     color: var(--info-color);
 }
-
 .load-btn:hover {
     background-color: var(--info-color);
     color: white;
     transform: scale(1.1);
 }
-
 .edit-btn {
     color: var(--warning-color);
 }
-
 .edit-btn:hover {
     background-color: var(--warning-color);
     color: white;
     transform: scale(1.1);
 }
-
 .remove-btn {
     color: var(--danger-color);
 }
-
 .remove-btn:hover {
     background-color: var(--danger-color);
     color: white;
     transform: scale(1.1);
 }
-
-/* ======================== */
-/* Перемикач теми           */
-/* ======================== */
-
 .theme-toggle {
     position: fixed;
     bottom: 20px;
@@ -543,33 +429,25 @@ body {
     box-shadow: var(--box-shadow-lg);
     transition: all var(--transition-normal);
 }
-
 .theme-toggle:hover {
     transform: translateY(-3px);
     background-color: var(--primary-dark);
 }
-
 .theme-toggle .moon-icon,
 .theme-toggle .sun-icon {
     position: absolute;
     transition: all var(--transition-normal);
 }
-
 .theme-toggle .moon-icon {
     opacity: 1;
     transform: rotate(0);
 }
-
 .theme-toggle .sun-icon {
     position: absolute;
     opacity: 0;
     transform: rotate(180deg);
     transition: all var(--transition-normal);
 }
-
-/* ======================== */
-/* Темна тема               */
-/* ======================== */
 [data-theme="dark"] {
     --primary-color: #6c5ce7;
     --primary-light: #a29bfe;
@@ -583,188 +461,144 @@ body {
     --dark-gray: #9ca3af;
     --dark-color: #f3f4f6;
 }
-
 [data-theme="dark"] body {
     background-color: #111827;
     color: var(--dark-color);
 }
-
 [data-theme="dark"] .main-nav {
     background-color: #1a1a1a;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
-
 [data-theme="dark"] .logo {
     color: var(--primary-light);
 }
-
 [data-theme="dark"] .nav-link {
     color: #e2e8f0;
 }
-
 [data-theme="dark"] .nav-link:hover,
 [data-theme="dark"] .nav-link.active {
     background-color: var(--primary-light);
     color: #1a202c;
 }
-
 [data-theme="dark"] .nav-link:hover i,
 [data-theme="dark"] .nav-link.active i {
     color: #1a202c;
 }
-
 [data-theme="dark"] .mobile-menu-btn {
     color: #e2e8f0;
 }
-
 [data-theme="dark"] .rating-section,
 [data-theme="dark"] .saved-category {
     background-color: #2d3748;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-
 [data-theme="dark"] .section-title::after {
     background-color: #4a5568;
 }
-
 [data-theme="dark"] .saved-item {
     background-color: #1a202c;
     border-color: #2d3748;
 }
-
 [data-theme="dark"] .saved-items-container {
     background-color: #2d3748;
     border-radius: 6px;
 }
-
 [data-theme="dark"] .saved-item:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
-
 [data-theme="dark"] .page-title,
 [data-theme="dark"] .section-title,
 [data-theme="dark"] .saved-item-header h3 {
     color: #e2e8f0;
 }
-
 [data-theme="dark"] .profile-subtitle,
 [data-theme="dark"] .saved-item-header p,
 [data-theme="dark"] .saved-item-date,
 [data-theme="dark"] .empty-message {
     color: #a0aec0;
 }
-
 [data-theme="dark"] .empty-message {
     background-color: #1a202c;
 }
-
 [data-theme="dark"] .theme-toggle {
     background-color: var(--primary-dark);
 }
-
 [data-theme="dark"] .theme-toggle:hover {
     background-color: var(--primary-color);
 }
-
 [data-theme="dark"] .theme-toggle .moon-icon {
     opacity: 0;
     transform: rotate(-180deg);
 }
-
 [data-theme="dark"] .theme-toggle .sun-icon {
     opacity: 1;
     transform: rotate(0);
 }
-
-/* Стилі для кнопок в темній темі */
 [data-theme="dark"] .control-btn {
     background-color: #2d3748;
     color: #e2e8f0;
     border-color: #4a5568;
 }
-
 [data-theme="dark"] .control-btn:hover {
     background-color: #4a5568;
 }
-
 [data-theme="dark"] .control-btn.primary {
     background-color: #3182ce;
     border-color: #2b6cb0;
 }
-
 [data-theme="dark"] .control-btn.primary:hover {
     background-color: #2b6cb0;
 }
-
 [data-theme="dark"] .control-btn.info {
     background-color: #4299e1;
     border-color: #3182ce;
 }
-
 [data-theme="dark"] .control-btn.info:hover {
     background-color: #3182ce;
 }
-
 [data-theme="dark"] .control-btn.danger {
     background-color: #e53e3e;
     border-color: #c53030;
 }
-
 [data-theme="dark"] .control-btn.danger:hover {
     background-color: #c53030;
 }
-
-/* ======================== */
-/* Адаптивний дизайн для мобільних пристроїв (до 768px) */
-/* ======================== */
-
 @media (max-width: 768px) {
     .container {
         padding: 1rem;
     }
-    
     .page-title {
         font-size: 1.5rem;
         margin-bottom: 0.5rem;
     }
-    
     .profile-subtitle {
         font-size: 0.8rem;
     }
-    
     .rating-section,
     .saved-category {
         padding: 1rem;
     }
-    
     .section-title {
         font-size: 1.1rem;
         margin-bottom: 1rem;
     }
-    
     .section-title::after {
         margin-top: 0.5rem;
     }
-    
     .saved-item {
         padding: 0.75rem;
     }
-    
     .saved-item-header {
         flex-direction: column;
         align-items: flex-start;
     }
-    
     .saved-item-meta {
         margin-top: 0.5rem;
     }
-    
     .saved-item-actions {
         flex-wrap: wrap;
         gap: 0.5rem;
     }
-    
-    /* Перемикач теми */
     .theme-toggle {
         width: 40px;
         height: 40px;
@@ -773,8 +607,6 @@ body {
         right: 10px;
     }
 }
-
-/* Стилі для інформаційних повідомлень сторінок */
 .page-info {
     background-color: #55efc4;
     color: #2d3436;
@@ -788,14 +620,12 @@ body {
     border-left: 5px solid #00b894;
     line-height: 1.6;
 }
-
 [data-theme="dark"] .page-info {
     background-color: #2d3436;
     color: var(--dark-color);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     border-left: 5px solid #6c5ce7;
 }
-
 .page-info h3 {
     margin-top: 0;
     color: #004cff;
@@ -803,24 +633,19 @@ body {
     margin-bottom: 12px;
     font-weight: 600;
 }
-
 [data-theme="dark"] .page-info h3 {
     color: #a29bfe;
 }
-
 .page-info p {
     margin-bottom: 10px;
 }
-
 .page-info ul {
     padding-left: 25px;
     margin-bottom: 15px;
 }
-
 .page-info li {
     margin-bottom: 5px;
 }
-
 .page-info .close-btn {
     position: absolute;
     top: 10px;
@@ -838,16 +663,10 @@ body {
     justify-content: center;
     transition: all 0.3s;
 }
-
 .page-info .close-btn:hover {
     background: rgba(0, 184, 148, 0.4);
     transform: rotate(90deg);
 }
-
-/* ======================== */
-/* Анімації                 */
-/* ======================== */
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -858,7 +677,6 @@ body {
         transform: translateY(0);
     }
 }
-
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -869,50 +687,35 @@ body {
         transform: translateX(0);
     }
 }
-
-/* ======================== */
-/* Збільшення розміру для десктопу (без масштабування) */
-/* ======================== */
 @media (min-width: 769px) {
     :root {
-        /* Збільшені розміри для десктопу */
         --spacing-xs: 0.25rem;
         --spacing-sm: 0.5rem;
         --spacing-md: 1rem;
         --spacing-lg: 1.5rem;
         --spacing-xl: 2rem;
-        
-        /* Шрифт і типографіка для десктопу */
         --base-font-size: 16px;
         --title-font-size: 18px;
     }
-    
     .page-title {
         font-size: 1.75rem;
     }
-    
     .section-title {
         font-size: 1.25rem;
     }
-    
     .control-btn {
         padding: 0.5rem 1rem;
     }
-    
     .nav-link {
         font-size: 1rem;
     }
-    
     .profile-subtitle, .faculty-card p, .semester-card p, .group-card p, .subject-item, .subject-item .details, .subgroups label, .profile-summary-content p, .profile-summary-content li, .footer p, .saved-item-header p, .saved-item-header h3, .saved-item-meta, .control-btn {
         font-size: 1rem;
     }
-    
     .logo {
         font-size: 1.125rem;
     }
 }
-
-/* Повідомлення про відсутність даних */
 .empty-message {
     text-align: center;
     padding: 1.5rem;
@@ -922,19 +725,10 @@ body {
     border-radius: 6px;
     margin-top: 0.5rem;
 }
-
 [data-theme="dark"] .main-content {
-    /* background-color: #111827; */
 }
-
 [data-theme="dark"] .container {
-    /* background-color: #111827; */
 }
-
-/* ======================== */
-/* Футер                    */
-/* ======================== */
-
 .footer {
     background-color: #0b78bc !important;
     color: white;
@@ -943,19 +737,15 @@ body {
     margin-top: auto;
     width: 100%;
 }
-
 .footer .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--spacing-md);
     background-color: #0b78bc !important;
 }
-
-/* Явно перевизначаємо стилі для футера в темній темі */
 [data-theme="dark"] .footer {
     background-color: #0b78bc !important;
 }
-
 [data-theme="dark"] .footer .container {
     background-color: #0b78bc !important;
     color: white;

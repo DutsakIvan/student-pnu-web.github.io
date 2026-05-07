@@ -1,61 +1,43 @@
-/* ======================== */
-/* Змінні та базові стилі   */
-/* ======================== */
 
 :root {
-    /* Основні кольори */
     --primary-color: #4361ee;
     --primary-light: #4895ef;
     --primary-dark: #3a0ca3;
     --secondary-color: #f72585;
     --accent-color: #f72585;
-
-    /* Нейтральні кольори */
     --light-color: #f8f9fa;
     --light-gray: #e9ecef;
     --medium-gray: #adb5bd;
     --dark-gray: #495057;
     --dark-color: #212529;
-
-    /* Функціональні кольори */
     --success-color: #4ade80;
     --warning-color: #fbbf24;
     --danger-color: #f43f5e;
     --info-color: #38bdf8;
-
-    /* Розміри і відступи */
     --spacing-xs: 0.25rem;
     --spacing-sm: 0.5rem;
     --spacing-md: 1rem;
     --spacing-lg: 1.5rem;
     --spacing-xl: 2rem;
     --spacing-xxl: 3rem;
-
-    /* Радіуси і тіні */
     --border-radius-sm: 0.25rem;
     --border-radius-md: 0.5rem;
     --border-radius-lg: 1rem;
     --border-radius-xl: 1.5rem;
     --border-radius-circle: 50%;
-
     --box-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
     --box-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
     --box-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
     --box-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
-
-    /* Анімації */
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
     --transition-slow: 0.5s ease;
 }
-
-/* Базові стилі */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-
 body {
     font-family: 'Montserrat', sans-serif;
     line-height: 1.6;
@@ -65,18 +47,12 @@ body {
     display: flex;
     flex-direction: column;
 }
-
 .container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--spacing-md);
 }
-
-/* ======================== */
-/* Навігація                */
-/* ======================== */
-
 .main-nav {
     background-color: white;
     padding: 0;
@@ -86,7 +62,6 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
 }
-
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -95,7 +70,6 @@ body {
     align-items: center;
     padding: 0.75rem 1rem;
 }
-
 .logo {
     display: flex;
     align-items: center;
@@ -105,11 +79,9 @@ body {
     font-weight: 700;
     text-decoration: none;
 }
-
 .logo i {
     font-size: 1.5rem;
 }
-
 .nav-list {
     display: flex;
     list-style: none;
@@ -117,11 +89,9 @@ body {
     padding: 0;
     gap: 1rem;
 }
-
 .nav-item {
     margin: 0;
 }
-
 .nav-link {
     display: flex;
     align-items: center;
@@ -134,30 +104,24 @@ body {
     border-radius: 0.375rem;
     transition: all 0.3s ease;
 }
-
 .nav-link i {
     font-size: 1.25rem;
     color: var(--primary-color);
 }
-
 .nav-link:hover {
     background-color: var(--primary-color);
     color: white;
 }
-
 .nav-link:hover i {
     color: white;
 }
-
 .nav-link.active {
     background-color: var(--primary-color);
     color: white;
 }
-
 .nav-link.active i {
     color: white;
 }
-
 .mobile-menu-btn {
     display: none;
     background: none;
@@ -166,46 +130,35 @@ body {
     font-size: 1.5rem;
     cursor: pointer;
 }
-
-/* Темна тема для навігації */
 [data-theme="dark"] .main-nav {
     background-color: #1a1a1a;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
-
 [data-theme="dark"] .logo {
     color: var(--primary-light);
 }
-
 [data-theme="dark"] .nav-link {
     color: #e2e8f0;
 }
-
 [data-theme="dark"] .nav-link i {
     color: var(--primary-light);
 }
-
 [data-theme="dark"] .nav-link:hover,
 [data-theme="dark"] .nav-link.active {
     background-color: var(--primary-light);
     color: #1a202c;
 }
-
 [data-theme="dark"] .nav-link:hover i,
 [data-theme="dark"] .nav-link.active i {
     color: #1a202c;
 }
-
 [data-theme="dark"] .mobile-menu-btn {
     color: #e2e8f0;
 }
-
-/* Мобільна версія навігації */
 @media (max-width: 768px) {
     .nav-container {
         padding: 0.5rem;
     }
-
     .nav-list {
         display: none;
         position: absolute;
@@ -218,48 +171,38 @@ body {
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         z-index: 1000;
     }
-
     .nav-list.show {
         display: flex;
     }
-
     .nav-item {
         width: 100%;
     }
-
     .nav-link {
         width: 100%;
         padding: 0.75rem 1rem;
     }
-
     .mobile-menu-btn {
         display: block;
     }
-
     [data-theme="dark"] .nav-list {
         background-color: #1a202c;
     }
-
-    /* Скорочений текст для заголовків таблиці на мобільних */
     .results-table th:nth-child(2)::before {
         content: "ОЦІН...";
         display: block;
         visibility: visible;
         height: auto;
     }
-
     .results-table th:nth-child(3)::before {
         content: "КРЕДИ...";
         display: block;
         visibility: visible;
         height: auto;
     }
-
     .results-table th:nth-child(2), 
     .results-table th:nth-child(3) {
         font-size: 0;
     }
-
     .results-table th:nth-child(2)::before, 
     .results-table th:nth-child(3)::before {
         font-size: 0.6rem;
@@ -267,21 +210,14 @@ body {
         letter-spacing: -0.2px;
     }
 }
-
-/* ======================== */
-/* Головний контент         */
-/* ======================== */
-
 .main-content {
     flex: 1;
     padding: var(--spacing-xl) 0;
 }
-
 .profile-header {
     text-align: center;
     margin-bottom: var(--spacing-xl);
 }
-
 .page-title {
     font-size: 2.5rem;
     font-weight: 700;
@@ -292,11 +228,9 @@ body {
     justify-content: center;
     gap: var(--spacing-sm);
 }
-
 .page-title i {
     color: var(--primary-color);
 }
-
 .profile-subtitle {
     font-size: 1.1rem;
     color: var(--dark-gray);
@@ -304,11 +238,6 @@ body {
     margin: 0 auto;
     margin-bottom: var(--spacing-md);
 }
-
-/* ======================== */
-/* Секції                   */
-/* ======================== */
-
 .rating-section {
     background-color: white;
     border-radius: var(--border-radius-lg);
@@ -317,7 +246,6 @@ body {
     box-shadow: var(--box-shadow-md);
     animation: fadeIn var(--transition-normal);
 }
-
 .section-title {
     font-size: 1.5rem;
     font-weight: 600;
@@ -326,7 +254,6 @@ body {
     position: relative;
     padding-bottom: var(--spacing-sm);
 }
-
 .section-title::after {
     content: '';
     position: absolute;
@@ -337,22 +264,15 @@ body {
     background-color: var(--primary-color);
     border-radius: var(--border-radius-sm);
 }
-
-/* ======================== */
-/* Введення даних           */
-/* ======================== */
-
 .input-group {
     margin-bottom: var(--spacing-md);
 }
-
 .input-label {
     display: block;
     margin-bottom: var(--spacing-xs);
     font-weight: 500;
     color: var(--dark-gray);
 }
-
 .subject-input {
     width: 100%;
     padding: var(--spacing-sm) var(--spacing-md);
@@ -362,21 +282,14 @@ body {
     transition: border-color var(--transition-fast);
     color: var(--dark-color);
 }
-
 .subject-input:focus {
     border-color: var(--primary-color);
     outline: none;
     box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
 }
-
-/* ======================== */
-/* Автодоповнення           */
-/* ======================== */
-
 .autocomplete-wrapper {
     position: relative;
 }
-
 .suggestions-list {
     position: absolute;
     top: 100%;
@@ -394,41 +307,31 @@ body {
     padding: 0;
     margin: 0;
 }
-
 .suggestions-list li {
     padding: var(--spacing-sm) var(--spacing-md);
     cursor: pointer;
     transition: background-color var(--transition-fast);
     color: var(--dark-color);
 }
-
 .suggestions-list li:hover {
     background-color: var(--light-gray);
 }
-
 .suggestions-list li.selected {
     background-color: var(--primary-light);
     color: white;
 }
-
-/* ======================== */
-/* Список предметів         */
-/* ======================== */
-
 .subjects-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--spacing-lg);
     margin-bottom: var(--spacing-lg);
 }
-
 .subject-category {
     background-color: var(--light-color);
     border-radius: var(--border-radius-lg);
     padding: var(--spacing-lg);
     box-shadow: var(--box-shadow-sm);
 }
-
 .subject-category h3 {
     font-size: 1.2rem;
     font-weight: 600;
@@ -438,17 +341,14 @@ body {
     align-items: center;
     gap: var(--spacing-sm);
 }
-
 .subject-category h3 i {
     color: var(--primary-color);
 }
-
 .subject-list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
-
 .subject-item {
     display: flex;
     justify-content: space-between;
@@ -460,80 +360,62 @@ body {
     box-shadow: var(--box-shadow-sm);
     transition: all var(--transition-normal);
 }
-
 .subject-item:hover {
     background-color: var(--light-gray);
     transform: translateY(-2px);
     box-shadow: var(--box-shadow-md);
 }
-
 .subject-details {
     flex: 1;
 }
-
 .subject-header {
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
     margin-bottom: var(--spacing-xs);
 }
-
 .subject-type-icon {
     font-size: 1.2rem;
 }
-
 .subject-type-icon .fa-graduation-cap {
     color: var(--primary-color);
 }
-
 .subject-type-icon .fa-check-circle {
     color: var(--success-color);
 }
-
 .subject-name {
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--dark-color);
 }
-
 .subject-meta {
     display: flex;
     gap: var(--spacing-md);
     font-size: 0.9rem;
     color: var(--dark-gray);
 }
-
 .subject-score,
 .subject-credits {
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
 }
-
 .subject-score i {
     color: var(--warning-color);
 }
-
 .subject-credits i {
     color: var(--info-color);
 }
-
 .subject-actions {
     display: flex;
     gap: var(--spacing-sm);
 }
-
-/* ======================== */
-/* Кнопки                   */
-/* ======================== */
-
 .button-group {
     display: flex;
     justify-content: flex-start;
     gap: var(--spacing-md);
     margin-top: var(--spacing-lg);
 }
-
 .control-btn {
     display: inline-flex;
     align-items: center;
@@ -548,66 +430,54 @@ body {
     white-space: nowrap;
     box-shadow: var(--box-shadow-sm);
 }
-
 .control-btn i {
     font-size: 1rem;
 }
-
 .control-btn.primary {
     background-color: var(--primary-color);
     color: white;
 }
-
 .control-btn.primary:hover {
     background-color: var(--primary-dark);
     transform: translateY(-2px);
     box-shadow: var(--box-shadow-md);
 }
-
 .control-btn.secondary {
     background-color: var(--light-gray);
     color: var(--dark-gray);
 }
-
 .control-btn.secondary:hover {
     background-color: var(--medium-gray);
     color: var(--dark-color);
     transform: translateY(-2px);
 }
-
 .control-btn.success {
     background-color: var(--success-color);
     color: white;
 }
-
 .control-btn.success:hover {
     background-color: #34d399;
     transform: translateY(-2px);
     box-shadow: var(--box-shadow-md);
 }
-
 .control-btn.info {
     background-color: var(--info-color);
     color: white;
 }
-
 .control-btn.info:hover {
     background-color: #0ea5e9;
     transform: translateY(-2px);
     box-shadow: var(--box-shadow-md);
 }
-
 .control-btn.danger {
     background-color: var(--danger-color);
     color: white;
 }
-
 .control-btn.danger:hover {
     background-color: #e11d48;
     transform: translateY(-2px);
     box-shadow: var(--box-shadow-md);
 }
-
 .edit-btn,
 .remove-btn {
     background-color: var(--light-gray);
@@ -618,31 +488,22 @@ body {
     border-radius: 0;
     transition: all var(--transition-fast);
 }
-
 .edit-btn {
     color: var(--warning-color);
 }
-
 .edit-btn:hover {
     background-color: var(--warning-color);
     color: white;
     transform: scale(1.1);
 }
-
 .remove-btn {
     color: var(--danger-color);
 }
-
 .remove-btn:hover {
     background-color: var(--danger-color);
     color: white;
     transform: scale(1.1);
 }
-
-/* ======================== */
-/* Результати               */
-/* ======================== */
-
 #results-section {
     position: relative;
     width: 100%;
@@ -650,24 +511,20 @@ body {
     overflow: visible !important;
     padding: 10px;
 }
-
 .results-table {
     width: 100%;
     overflow-x: auto;
     border: 1px solid #dee2e6;
 }
-
 .results-table table {
     width: 100%;
     border-collapse: collapse;
 }
-
 .results-table th,
 .results-table td {
     padding: 8px;
     border: 1px solid #dee2e6;
 }
-
 .results-table thead th {
     background-color: var(--primary-color);
     color: white;
@@ -675,51 +532,41 @@ body {
     text-transform: uppercase;
     font-size: 0.9rem;
 }
-
 .results-table tbody tr {
     transition: background-color var(--transition-fast);
 }
-
 .results-table tbody tr:hover {
     background-color: var(--light-gray);
 }
-
 .results-table tbody tr:nth-child(even) {
     background-color: var(--light-color);
 }
-
 .results-table td {
     font-size: 0.95rem;
     color: var(--dark-color);
 }
-
 .results-table th:nth-child(1),
 .results-table td:nth-child(1) {
     min-width: 200px;
 }
-
 .results-table th:nth-child(2),
 .results-table td:nth-child(2) {
     min-width: 100px;
 }
-
 .results-table th:nth-child(3),
 .results-table td:nth-child(3) {
     min-width: 100px;
 }
-
 .results-table th:nth-child(4),
 .results-table td:nth-child(4) {
     min-width: 100px;
 }
-
 .rating-summary {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
 }
-
 .rating-card {
     opacity: 1 !important;
     padding: 10px;
@@ -732,94 +579,69 @@ body {
     gap: var(--spacing-sm);
     transition: all var(--transition-normal);
 }
-
 .rating-card:hover {
     transform: translateY(-2px);
     box-shadow: var(--box-shadow-md);
 }
-
 .rating-card i {
     font-size: 1.5rem;
 }
-
 .rating-card .rating-label {
     font-weight: 500;
     color: var(--dark-gray);
     flex: 1;
 }
-
 .rating-card .rating-value {
     font-size: 1.2rem;
     font-weight: 600;
 }
-
 .exam-rating i {
     color: var(--primary-color);
 }
-
 .exam-rating .rating-value {
     color: var(--primary-color);
 }
-
 .credit-rating i {
     color: var(--success-color);
 }
-
 .credit-rating .rating-value {
     color: var(--success-color);
 }
-
 .total-rating i {
     color: var(--warning-color);
 }
-
 .total-rating .rating-value {
     color: var(--warning-color);
 }
-
-/* ======================== */
-/* Графік                   */
-/* ======================== */
-
 .chart-wrapper {
     width: 100%;
     overflow: visible;
     margin-bottom: var(--spacing-lg);
 }
-
 .chart-label {
     font-size: 0.9rem;
     font-weight: 500;
     color: var(--dark-gray);
     margin-bottom: var(--spacing-xs);
 }
-
 .chart-container {
     width: 100%;
     height: 20px;
     overflow: visible;
     border-radius: 4px;
 }
-
 .chart-bar {
     height: 20px;
     display: block;
     opacity: 1 !important;
     border-radius: 4px;
 }
-
 .exam-bar {
     background-color: var(--primary-color);
 }
-
 .credit-bar {
     background-color: var(--success-color);
 }
-
-/* ======================== */
-/* Футер                    */
-/* ======================== */
-
 .footer {
     background-color: #0b78bc;
     color: white;
@@ -827,11 +649,6 @@ body {
     text-align: center;
     margin-top: auto;
 }
-
-/* ======================== */
-/* Перемикач теми           */
-/* ======================== */
-
 .theme-toggle {
     position: fixed;
     bottom: 20px;
@@ -851,31 +668,23 @@ body {
     box-shadow: var(--box-shadow-lg);
     transition: all var(--transition-normal);
 }
-
 .theme-toggle:hover {
     transform: translateY(-3px);
     background-color: var(--primary-dark);
 }
-
 .theme-toggle .moon-icon,
 .theme-toggle .sun-icon {
     position: absolute;
     transition: all var(--transition-normal);
 }
-
 .theme-toggle .moon-icon {
     opacity: 1;
     transform: rotate(0);
 }
-
 .theme-toggle .sun-icon {
     opacity: 0;
     transform: rotate(180deg);
 }
-
-/* ======================== */
-/* Темна тема               */
-/* ======================== */
 [data-theme="dark"] {
     --primary-color: #6c5ce7;
     --primary-light: #a29bfe;
@@ -889,329 +698,250 @@ body {
     --dark-gray: #9ca3af;
     --dark-color: #f3f4f6;
 }
-
 [data-theme="dark"] body {
     background-color: #111827;
     color: var(--dark-color);
 }
-
 [data-theme="dark"] .main-nav {
     background-color: #1a1a1a;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
-
 [data-theme="dark"] .logo {
     color: var(--primary-light);
 }
-
 [data-theme="dark"] .nav-link {
     color: #e2e8f0;
 }
-
 [data-theme="dark"] .nav-link:hover,
 [data-theme="dark"] .nav-link.active {
     background-color: var(--primary-light);
     color: #1a202c;
 }
-
 [data-theme="dark"] .nav-link:hover i,
 [data-theme="dark"] .nav-link.active i {
     color: #1a202c;
 }
-
 [data-theme="dark"] .rating-section {
     background-color: #1f2937;
     box-shadow: var(--box-shadow-lg);
 }
-
 [data-theme="dark"] .subject-input {
     background-color: var(--light-color);
     border-color: var(--light-gray);
     color: var(--dark-color);
 }
-
 [data-theme="dark"] .subject-input:focus {
     box-shadow: 0 0 0 3px rgba(72, 149, 239, 0.3);
 }
-
 [data-theme="dark"] .suggestions-list {
     background-color: var(--light-color);
     border-color: var(--light-gray);
 }
-
 [data-theme="dark"] .suggestions-list li {
     color: var(--dark-color);
 }
-
 [data-theme="dark"] .suggestions-list li:hover {
     background-color: var(--light-gray);
 }
-
 [data-theme="dark"] .subject-category {
     background-color: #374151;
 }
-
 [data-theme="dark"] .subject-item {
     background-color: #2d3748;
     border: 1px solid #4a5568;
 }
-
 [data-theme="dark"] .subject-item:hover {
     background-color: #374151;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
-
 [data-theme="dark"] .subject-name {
     color: #f3f4f6;
 }
-
 [data-theme="dark"] .subject-score,
 [data-theme="dark"] .subject-credits {
     color: #cbd5e0;
 }
-
 [data-theme="dark"] .edit-btn,
 [data-theme="dark"] .remove-btn {
     background-color: #4a5568;
 }
-
 [data-theme="dark"] .edit-btn:hover,
 [data-theme="dark"] .remove-btn:hover {
     background-color: var(--primary-light);
 }
-
 [data-theme="dark"] .results-table {
     background-color: #2d3748;
     border: 1px solid #4a5568;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
-
 [data-theme="dark"] .results-table thead th {
     background-color: var(--primary-dark);
     color: #f3f4f6;
     border-bottom: 1px solid #4a5568;
 }
-
 [data-theme="dark"] .results-table tbody tr:nth-child(even) {
     background-color: #374151;
 }
-
 [data-theme="dark"] .results-table tbody tr:hover {
     background-color: #4a5568;
 }
-
 [data-theme="dark"] .results-table td {
     color: #f3f4f6;
     border-bottom: 1px solid #4a5568;
 }
-
 [data-theme="dark"] .rating-card {
     background-color: #2d3748;
     border: 1px solid #4a5568;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
-
 [data-theme="dark"] .rating-card .rating-label {
     color: #f3f4f6;
 }
-
 [data-theme="dark"] .rating-card .rating-value {
     color: #f3f4f6;
 }
-
 [data-theme="dark"] .chart-container {
     background-color: #2d3748;
     border: 1px solid #4a5568;
 }
-
 [data-theme="dark"] .chart-label {
     color: #f3f4f6;
 }
-
 [data-theme="dark"] .theme-toggle {
     background-color: var(--primary-dark);
 }
-
 [data-theme="dark"] .theme-toggle:hover {
     background-color: var(--primary-color);
 }
-
 [data-theme="dark"] .theme-toggle .moon-icon {
     opacity: 0;
     transform: rotate(-180deg);
 }
-
 [data-theme="dark"] .theme-toggle .sun-icon {
     opacity: 1;
     transform: rotate(0);
 }
-
-/* ======================== */
-/* Адаптивний дизайн для мобільних пристроїв (до 768px) */
-/* ======================== */
-
 @media (max-width: 768px) {
-    /* Загальні стилі контейнера */
     .container {
         padding: var(--spacing-sm);
     }
-
-    /* Навігація */
     .nav-container {
         padding: var(--spacing-sm);
     }
-
-    /* Заголовки */
     .page-title {
         font-size: 1.75rem;
     }
-
     .page-title i {
         font-size: 1.5rem;
     }
-
     .profile-subtitle {
         font-size: 0.9rem;
     }
-
-    /* Секції */
     .rating-section {
         padding: var(--spacing-md);
         margin-bottom: var(--spacing-md);
     }
-
     .section-title {
         font-size: 1.25rem;
     }
-
-    /* Введення даних */
     .input-group {
         margin-bottom: var(--spacing-sm);
     }
-
     .input-label {
         font-size: 0.9rem;
     }
-
     .subject-input {
         font-size: 0.9rem;
         padding: var(--spacing-xs) var(--spacing-sm);
     }
-
-    /* Автодоповнення */
     .suggestions-list {
         max-height: 150px;
         width: 100% !important;
     }
-
     .suggestions-list li {
         font-size: 0.9rem;
         padding: var(--spacing-xs) var(--spacing-sm);
     }
-
-    /* Список предметів */
     .subjects-container {
         grid-template-columns: 1fr;
         gap: var(--spacing-md);
     }
-
     .subject-category {
         padding: var(--spacing-md);
     }
-
     .subject-category h3 {
         font-size: 1.1rem;
     }
-
     .subject-item {
         flex-direction: column;
         align-items: flex-start;
         padding: var(--spacing-sm);
     }
-
     .subject-header {
         flex-direction: column;
         align-items: flex-start;
         gap: var(--spacing-xs);
     }
-
     .subject-name {
         font-size: 1rem;
     }
-
     .subject-meta {
         flex-direction: column;
         gap: var(--spacing-xs);
         font-size: 0.85rem;
     }
-
     .subject-actions {
         margin-top: var(--spacing-sm);
         width: 100%;
         justify-content: flex-end;
     }
-
     .edit-btn,
     .remove-btn {
         padding: var(--spacing-xs);
         font-size: 0.9rem;
     }
-
-    /* Кнопки */
     .button-group {
         flex-direction: column;
         gap: var(--spacing-sm);
     }
-
     .control-btn {
         width: 100%;
         justify-content: center;
         padding: var(--spacing-sm);
         font-size: 0.9rem;
     }
-
-    /* Результати */
     #results-section {
         padding: var(--spacing-sm);
     }
-
     .results-table {
         font-size: 0.85rem;
         overflow-x: auto;
     }
-
     .results-table th,
     .results-table td {
         padding: var(--spacing-xs);
         font-size: 0.85rem;
     }
-
     .results-table table {
         width: 100%;
         table-layout: fixed;
     }
-
     .results-table th:nth-child(1),
     .results-table td:nth-child(1) {
         width: 40%;
     }
-
     .results-table th:nth-child(2),
     .results-table td:nth-child(2) {
         width: 20%;
     }
-
     .results-table th:nth-child(3),
     .results-table td:nth-child(3) {
         width: 20%;
     }
-
     .results-table th:nth-child(4),
     .results-table td:nth-child(4) {
         width: 20%;
     }
-
-    /* Виправлення для мобільних - заголовки таблиці */
     .results-table th {
         padding: 3px 1px;
         font-size: 0.55rem;
@@ -1223,36 +953,28 @@ body {
         overflow: visible;
         letter-spacing: -0.3px;
     }
-    
-    /* Встановлення мінімальної ширини для стовпців */
     .results-table th:nth-child(1),
     .results-table td:nth-child(1) {
         min-width: 120px;
     }
-    
     .results-table th:nth-child(2),
     .results-table td:nth-child(2) {
         min-width: 60px;
     }
-    
     .results-table th:nth-child(3),
     .results-table td:nth-child(3) {
         min-width: 60px;
     }
-    
     .results-table th:nth-child(4),
     .results-table td:nth-child(4) {
         min-width: 60px;
     }
-
-    /* Рейтингова інформація */
     .rating-summary {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: var(--spacing-sm);
     }
-
     .rating-card {
         padding: var(--spacing-sm);
         margin: 5px 0;
@@ -1260,43 +982,31 @@ body {
         flex-direction: row;
         justify-content: space-between;
     }
-
     .rating-card i {
         font-size: 1.2rem;
     }
-
     .rating-card .rating-label {
         font-size: 0.9rem;
     }
-
     .rating-card .rating-value {
         font-size: 1rem;
     }
-
-    /* Графік */
     .chart-wrapper {
         margin-bottom: var(--spacing-md);
     }
-
     .chart-label {
         font-size: 0.85rem;
     }
-
     .chart-container {
         height: 15px;
     }
-
     .chart-bar {
         height: 15px;
     }
-
-    /* Футер */
     .footer {
         padding: var(--spacing-md);
         font-size: 0.9rem;
     }
-
-    /* Перемикач теми */
     .theme-toggle {
         width: 40px;
         height: 40px;
@@ -1305,8 +1015,6 @@ body {
         right: 10px;
     }
 }
-
-/* Стилі для інформаційних повідомлень сторінок */
 .page-info {
     background-color: #55efc4;
     color: #2d3436;
@@ -1321,14 +1029,12 @@ body {
     line-height: 1.6;
     animation: fadeIn var(--transition-normal);
 }
-
 [data-theme="dark"] .page-info {
     background-color: #2d3436;
     color: #f5f6fa;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     border-left: 5px solid #6c5ce7;
 }
-
 .page-info h3 {
     margin-top: 0;
     color: #004cff;
@@ -1336,24 +1042,19 @@ body {
     margin-bottom: 12px;
     font-weight: 600;
 }
-
 [data-theme="dark"] .page-info h3 {
     color: #a29bfe;
 }
-
 .page-info p {
     margin-bottom: 10px;
 }
-
 .page-info ul {
     padding-left: 25px;
     margin-bottom: 15px;
 }
-
 .page-info li {
     margin-bottom: 5px;
 }
-
 .page-info .close-btn {
     position: absolute;
     top: 10px;
@@ -1371,16 +1072,10 @@ body {
     justify-content: center;
     transition: all 0.3s;
 }
-
 .page-info .close-btn:hover {
     background: rgba(0, 184, 148, 0.4);
     transform: rotate(90deg);
 }
-
-/* ======================== */
-/* Анімації                 */
-/* ======================== */
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -1391,7 +1086,6 @@ body {
         transform: translateY(0);
     }
 }
-
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -1402,7 +1096,6 @@ body {
         transform: translateX(0);
     }
 }
-
 .modal {
     position: fixed;
     top: 0;
@@ -1414,7 +1107,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-
 .modal-content {
     background: white;
     padding: 20px;
@@ -1422,17 +1114,14 @@ body {
     width: 90%;
     max-width: 500px;
 }
-
 .modal-content h3 {
     margin-top: 0;
 }
-
 .input-group select,
 .input-group input {
     width: 100%;
     margin-bottom: 10px;
 }
-
 #results-section {
     position: relative;
     width: 100%;
@@ -1440,43 +1129,36 @@ body {
     overflow: visible !important;
     padding: 10px;
 }
-
 .results-table {
     width: 100%;
     overflow-x: auto;
     border: 1px solid #dee2e6;
 }
-
 .results-table table {
     width: 100%;
     border-collapse: collapse;
 }
-
 .results-table th,
 .results-table td {
     padding: 8px;
     border: 1px solid #dee2e6;
 }
-
 .chart-wrapper {
     width: 100%;
     overflow: visible;
 }
-
 .chart-container {
     width: 100%;
     height: 20px;
     overflow: visible;
     border-radius: 4px;
 }
-
 .chart-bar {
     height: 20px;
     display: block;
     opacity: 1 !important;
     border-radius: 4px;
 }
-
 .rating-card {
     opacity: 1 !important;
     padding: 10px;
@@ -1489,165 +1171,130 @@ body {
     gap: var(--spacing-sm);
     transition: all var(--transition-normal);
 }
-
 .rating-card:hover {
     transform: translateY(-2px);
     box-shadow: var(--box-shadow-md);
 }
-
 .rating-card i {
     font-size: 1.5rem;
 }
-
 .rating-card .rating-label {
     font-weight: 500;
     color: var(--dark-gray);
     flex: 1;
 }
-
 .rating-card .rating-value {
     font-size: 1.2rem;
     font-weight: 600;
 }
-
 .exam-rating i {
     color: var(--primary-color);
 }
-
 .exam-rating .rating-value {
     color: var(--primary-color);
 }
-
 .credit-rating i {
     color: var(--success-color);
 }
-
 .credit-rating .rating-value {
     color: var(--success-color);
 }
-
 .total-rating i {
     color: var(--warning-color);
 }
-
 .total-rating .rating-value {
     color: var(--warning-color);
 }
-
 .rating-summary {
     display: flex;
     justify-content: space-around;
     margin: 10px 0;
 }
-
 .button-group {
     margin-top: 10px;
 }
-
 [data-theme="dark"] #results-section {
     background-color: #1f2937;
     color: #f3f4f6;
 }
-
 [data-theme="dark"] .results-table {
     background-color: #2d3748;
     border-color: #4a5568;
 }
-
 [data-theme="dark"] .results-table th,
 [data-theme="dark"] .results-table td {
     border-color: #4a5568;
     color: #f3f4f6;
 }
-
 [data-theme="dark"] .chart-wrapper {
     background-color: transparent;
 }
-
 [data-theme="dark"] .chart-container {
     background-color: #374151 !important;
 }
-
 [data-theme="dark"] .rating-card {
     background-color: #2d3748;
     color: #f3f4f6;
 }
-
 [data-theme="dark"] .page-title,
 [data-theme="dark"] .section-title {
     color: #f3f4f6;
 }
-
 [data-theme="dark"] .chart-bar {
     background-color: #4a5568;
 }
-
 [data-theme="dark"] .exam-bar {
     background-color: var(--primary-light);
 }
-
 [data-theme="dark"] .credit-bar {
     background-color: var(--success-color);
 }
-
 [data-theme="dark"] .subject-item {
     background-color: #2d3748;
     border: 1px solid #4a5568;
 }
-
 [data-theme="dark"] .subject-item:hover {
     background-color: #374151;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
-
 [data-theme="dark"] .subject-header {
     color: #f3f4f6;
 }
-
 [data-theme="dark"] .subject-name {
     color: #f3f4f6;
 }
-
 [data-theme="dark"] .subject-meta {
     color: #cbd5e0;
 }
-
 [data-theme="dark"] .control-btn {
     background-color: #2d3748;
     color: #f3f4f6;
     border: 1px solid #4a5568;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-
 [data-theme="dark"] .control-btn:hover {
     background-color: #374151;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
-
 [data-theme="dark"] .control-btn.primary {
     background-color: var(--primary-dark);
     color: #f3f4f6;
     border: 1px solid var(--primary-light);
 }
-
 [data-theme="dark"] .control-btn.primary:hover {
     background-color: var(--primary-light);
 }
-
 [data-theme="dark"] .control-btn.success {
     background-color: var(--success-color);
     color: #f3f4f6;
 }
-
 [data-theme="dark"] .control-btn.success:hover {
     background-color: rgba(0, 184, 148, 0.8);
 }
-
 [data-theme="dark"] .control-btn.danger {
     background-color: var(--danger-color);
     color: #f3f4f6;
 }
-
 [data-theme="dark"] .control-btn.danger:hover {
     background-color: rgba(255, 118, 117, 0.8);
 }

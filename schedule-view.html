@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="theme.js"></script>
     <style>
-        /* Стилі для виправлення проблем із блоком інформації */
         .schedule-info {
             position: static !important;
             z-index: auto !important;
@@ -23,15 +22,10 @@
             background-color: #1a1a1a !important;
             border-left: 4px solid var(--primary-light);
         }
-        
-        /* Виправлення для мобільного меню - сховати на десктопі */
         .mobile-menu-btn {
             display: none !important;
         }
-        
-        /* Стилі для мобільної навігації */
         @media (max-width: 768px) {
-            /* Показуємо кнопку мобільного меню */
             .mobile-menu-btn {
                 display: block !important;
                 position: relative;
@@ -43,8 +37,6 @@
                 cursor: pointer;
                 color: #e2e8f0;
             }
-            
-            /* Ховаємо список навігації за замовчуванням */
             .nav-list {
                 display: none !important;
                 position: absolute;
@@ -58,32 +50,23 @@
                 z-index: 100;
                 width: 100%;
             }
-            
-            /* Клас show для відображення меню при натисканні */
             .nav-list.show {
                 display: flex !important;
             }
-            
-            /* Стилі для пунктів меню на мобільних */
             .nav-item {
                 width: 100%;
             }
-            
             .nav-link {
                 width: 100%;
                 padding: 0.75rem 1rem;
             }
-            
-            /* Стилі для світлої теми */
             [data-theme="light"] .mobile-menu-btn {
                 color: #4a5568;
             }
-            
             [data-theme="light"] .nav-list {
                 background-color: white;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
-            
             .theme-toggle {
                 position: fixed;
                 top: auto;
@@ -94,7 +77,6 @@
                 font-size: 1rem;
                 z-index: 1000;
             }
-            
             .scroll-to-top-btn {
                 position: fixed;
                 bottom: 70px;
@@ -104,13 +86,9 @@
                 height: 36px;
                 z-index: 1000;
             }
-            
-            /* Приховуємо навігаційний список за замовчуванням на мобільних */
             .nav-list {
                 display: none !important; 
             }
-            
-            /* Показуємо при активації */
             .nav-list.show {
                 display: flex !important;
                 flex-direction: column;
@@ -122,13 +100,10 @@
                 z-index: 100;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
-            
             [data-theme="dark"] .nav-list.show {
                 background-color: #1a1a1a;
                 border-top: 1px solid #333;
             }
-            
-            /* Правильний стиль для кнопки меню на мобільних */
             .mobile-menu-btn {
                 display: block !important;
                 position: absolute;
@@ -140,13 +115,10 @@
                 color: #333;
                 cursor: pointer;
             }
-            
             [data-theme="dark"] .mobile-menu-btn {
                 color: #fff;
             }
         }
-        
-        /* Для світлої теми */
         [data-theme="light"] .schedule-info {
             background-color: white !important;
             border-left: 4px solid var(--primary-color);
@@ -158,11 +130,9 @@
         <i class="fas fa-moon moon-icon"></i>
         <i class="fas fa-sun sun-icon"></i>
     </button>
-
     <button id="scrollToTopBtn" class="scroll-to-top-btn" data-direction="up">
         <span class="toggle-arrow"><i class="fas fa-arrow-up"></i></span>
     </button>
-
     <nav class="main-nav">
         <div class="nav-container">
             <div class="logo">
@@ -200,7 +170,6 @@
             </button>
         </div>
     </nav>
-    
     <main class="main-content">
         <div class="container">
             <section class="rating-section">
@@ -208,11 +177,8 @@
                     <i class="fas fa-table"></i>
                     Перегляд розкладу
                 </h1>
-                
                 <div id="scheduleView" class="schedule-view">
-                    <!-- Тут буде вставлений контент розкладу -->
                 </div>
-                
                 <div class="button-group">
                     <button class="control-btn primary" onclick="window.location.href='saved_new.html'">
                         <i class="fas fa-arrow-left"></i> Повернутися до списку
@@ -221,47 +187,35 @@
             </section>
         </div>
     </main>
-
     <footer class="footer">
         <div class="container">
             <p>© 2026 Student PNU. Всі права захищені.</p>
         </div>
     </footer>
-    
     <script src="page-info.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Ініціалізація мобільного меню
             const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
             const navList = document.querySelector('.nav-list');
-            
             if (mobileMenuBtn && navList) {
                 mobileMenuBtn.addEventListener('click', function() {
                     navList.classList.toggle('show');
                 });
-                
-                // Закривати меню при кліку на пункт меню
                 const navItems = document.querySelectorAll('.nav-item');
                 navItems.forEach(item => {
                     item.addEventListener('click', function() {
                         navList.classList.remove('show');
                     });
                 });
-                
-                // Закривати меню при кліку поза ним
                 document.addEventListener('click', function(event) {
                     if (!navList.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
                         navList.classList.remove('show');
                     }
                 });
             }
-            
-            // Поява кнопки прокрутки вгору/вниз із анімацією
             window.onscroll = function () {
                 scrollFunction();
             };
-            
-            // Функція для плавної прокрутки вгору/вниз
             document.getElementById("scrollToTopBtn").addEventListener("click", function () {
                 const direction = this.dataset.direction;
                 if (direction === "up") {
@@ -270,27 +224,20 @@
                     scrollToBottom();
                 }
             });
-            
-            // Отримуємо дані розкладу
             const scheduleDataStr = localStorage.getItem('viewSchedule');
             console.log('Дані розкладу з localStorage:', scheduleDataStr);
-            
             if (!scheduleDataStr) {
                 document.getElementById('scheduleView').innerHTML = '<p class="empty-message">Дані розкладу не знайдено.</p>';
                 return;
             }
-            
             try {
                 const scheduleData = JSON.parse(scheduleDataStr);
                 console.log('Розпарсені дані розкладу:', scheduleData);
-                
                 if (!scheduleData) {
                     document.getElementById('scheduleView').innerHTML = '<p class="empty-message">Розклад порожній або має неправильний формат.</p>';
                     console.log('Проблема з форматом даних розкладу:', scheduleData);
                     return;
                 }
-                
-                // Показуємо інформацію про розклад (без рядка Факультет)
                 const scheduleInfo = document.createElement('div');
                 scheduleInfo.className = 'schedule-info';
                 scheduleInfo.innerHTML = `
@@ -299,24 +246,15 @@
                     <p><strong>Збережено:</strong> ${new Date(scheduleData.createdAt).toLocaleString('uk-UA') || 'Не вказано'}</p>
                 `;
                 document.getElementById('scheduleView').appendChild(scheduleInfo);
-                
-                // Перевіряємо, який формат даних використовується
                 if (scheduleData.scheduleHTML) {
-                    // Новий формат - вставляємо HTML розкладу безпосередньо
                     console.log('Використовуємо HTML-формат розкладу');
-                    
-                    // Просто вставляємо HTML таблиці без модифікацій
                     document.getElementById('scheduleView').innerHTML += scheduleData.scheduleHTML;
                     console.log('Таблиця розкладу успішно вставлена');
-                    
                 } else if (scheduleData.scheduleItems && scheduleData.scheduleItems.length > 0) {
-                    // Старий формат - використовуємо обробку елементів розкладу
                     console.log('Використовуємо старий формат елементів розкладу');
-                    
                     const table = document.createElement('table');
                     table.id = "scheduleTable";
                     table.classList.add("results-table");
-
                     const thead = document.createElement('thead');
                     thead.innerHTML = `
                         <tr>
@@ -328,13 +266,9 @@
                         </tr>
                     `;
                     table.appendChild(thead);
-
                     const tbody = document.createElement('tbody');
                     console.log('Кількість елементів розкладу:', scheduleData.scheduleItems.length);
-                    
-                    // Сортування за датами
                     scheduleData.scheduleItems.sort((a, b) => {
-                        // Сортуємо за датою, потім за часом
                         if (a.date !== b.date) {
                             const partsA = a.date.split('.').map(Number);
                             const partsB = b.date.split('.').map(Number);
@@ -345,8 +279,6 @@
                             }
                             return a.date.localeCompare(b.date);
                         }
-                        
-                        // Якщо дати однакові, сортуємо за часом
                         const getTimeValue = (time) => {
                             if (!time) return 0;
                             const match = time.match(/(\d+):(\d+)/);
@@ -355,16 +287,11 @@
                             }
                             return 0;
                         };
-                        
                         return getTimeValue(a.time) - getTimeValue(b.time);
                     });
-                    
-                    // Групуємо за датою, але виводимо простіше
                     let currentDateStr = '';
-                    
                     scheduleData.scheduleItems.forEach(item => {
                         if (item.date !== currentDateStr) {
-                            // Додаємо заголовок нового дня
                             currentDateStr = item.date;
                             const dayHeader = document.createElement('tr');
                             dayHeader.classList.add('day-header');
@@ -374,47 +301,30 @@
                             dayHeader.appendChild(dayHeaderCell);
                             tbody.appendChild(dayHeader);
                         }
-                        
-                        // Додаємо урок
                         const row = document.createElement('tr');
-                        
-                        // Час
                         const timeCell = document.createElement('td');
                         timeCell.textContent = item.time || '';
                         timeCell.classList.add('time-slot');
                         row.appendChild(timeCell);
-                        
-                        // Предмет
                         const subjectCell = document.createElement('td');
                         subjectCell.textContent = item.subject || '';
                         row.appendChild(subjectCell);
-                        
-                        // Тип
                         const typeCell = document.createElement('td');
                         typeCell.textContent = item.type || '';
                         row.appendChild(typeCell);
-                        
-                        // Викладач
                         const teacherCell = document.createElement('td');
                         teacherCell.textContent = item.teacher || '';
                         row.appendChild(teacherCell);
-                        
-                        // Аудиторія
                         const roomCell = document.createElement('td');
                         roomCell.textContent = item.room || '';
                         row.appendChild(roomCell);
-                        
                         tbody.appendChild(row);
                     });
-                    
                     table.appendChild(tbody);
                     document.getElementById('scheduleView').appendChild(table);
                 } else {
-                    // Не знайдено даних у жодному з форматів
                     document.getElementById('scheduleView').innerHTML += '<p class="empty-message">Розклад порожній або має неправильний формат.</p>';
                 }
-                
-                // Видаляємо дані після завантаження для безпеки
                 setTimeout(() => {
                     localStorage.removeItem('viewSchedule');
                 }, 1000);
@@ -422,8 +332,6 @@
                 console.error('Помилка при обробці даних розкладу:', e);
                 document.getElementById('scheduleView').innerHTML = '<p class="empty-message">Помилка при обробці даних розкладу.</p>';
             }
-            
-            // Функція для відображення/приховування кнопки скролінгу
             function scrollFunction() {
                 let scrollToTopBtn = document.getElementById("scrollToTopBtn");
                 const arrow = scrollToTopBtn.querySelector('.toggle-arrow');
@@ -431,50 +339,37 @@
                 const scrollHeight = document.documentElement.scrollHeight;
                 const clientHeight = document.documentElement.clientHeight;
                 const scrollBottom = scrollHeight - clientHeight - scrollTop;
-
                 if (scrollTop > 20 || scrollBottom > 20) {
                     scrollToTopBtn.classList.add("show");
                 } else {
                     scrollToTopBtn.classList.remove("show");
                 }
-
-                // Логіка для зміни напрямку стрілки
                 if (scrollBottom < clientHeight / 2) {
-                    // Біля низу сторінки — стрілка вгору
                     scrollToTopBtn.dataset.direction = "up";
                     arrow.classList.remove('down');
                 } else if (scrollTop < clientHeight / 2) {
-                    // Біля верху сторінки — стрілка вниз
                     scrollToTopBtn.dataset.direction = "down";
                     arrow.classList.add('down');
                 } else {
-                    // В середині сторінки — стрілка вниз (за замовчуванням)
                     scrollToTopBtn.dataset.direction = "down";
                     arrow.classList.add('down');
                 }
             }
-
-            // Функція для прокрутки до верху сторінки
             function scrollToTop() {
                 window.scrollTo({
                     top: 0,
                     behavior: 'smooth'
                 });
             }
-
-            // Функція для прокрутки до низу сторінки
             function scrollToBottom() {
                 window.scrollTo({
                     top: document.documentElement.scrollHeight,
                     behavior: 'smooth'
                 });
             }
-            
-            // Функція для отримання дня тижня з дати
             function getDayOfWeek(dateString) {
                 const parts = dateString.split('.');
                 if (parts.length !== 3) return '';
-                
                 try {
                     const date = new Date(parts[2], parts[1] - 1, parts[0]);
                     const days = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', 'П\'ятниця', 'Субота'];

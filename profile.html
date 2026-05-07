@@ -5,9 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Профіль студента</title>
         <link rel="stylesheet" href="profile.css">
-        <!-- Додаємо Font Awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-        <!-- Додаємо schedule_data.js перед profile.js -->
         <script src="schedule_data.js"></script>
         <script src="theme.js"></script>
         <script src="profile.js"></script>
@@ -17,7 +15,6 @@
             <i class="fas fa-moon moon-icon"></i>
             <i class="fas fa-sun sun-icon"></i>
         </button>
-        
         <nav class="main-nav">
             <ul class="nav-list">
                 <li class="nav-item">
@@ -46,9 +43,7 @@
                 </li>
             </ul>
         </nav>
-
         <div class="container">
-            <!-- Крок 1: Вибір спеціальності -->
             <div id="step-faculty" class="rating-section active-step">
                 <h2 class="section-title">Оберіть вашу спеціальність</h2>
                 <div class="button-group faculties">
@@ -58,15 +53,11 @@
                     <button class="control-btn primary" data-faculty="ПР">Право</button>
                 </div>
             </div>
-
-            <!-- Крок 2: Вибір групи -->
             <div id="step-group" class="rating-section">
                 <h2 class="section-title">Оберіть вашу групу</h2>
                 <div class="button-group groups"></div>
                 <button class="control-btn warning" onclick="previousStep('step-group')">Назад</button>
             </div>
-
-            <!-- Крок 3: Вибір семестру -->
             <div id="step-semester" class="rating-section">
                 <h2 class="section-title">Оберіть семестр</h2>
                 <div class="button-group semesters">
@@ -75,8 +66,6 @@
                 </div>
                 <button class="control-btn warning" onclick="previousStep('step-group')">Назад</button>
             </div>
-
-            <!-- Крок 4: Список предметів -->
             <div id="step-subjects" class="rating-section">
                 <h2 class="section-title">Предмети вашого семестру</h2>
                 <div class="subjects-container"></div>

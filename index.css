@@ -1,61 +1,43 @@
-/* ======================== */
-/* Змінні та базові стилі   */
-/* ======================== */
 
 :root {
-    /* Основні кольори */
     --primary-color: #4361ee;
     --primary-light: #4895ef;
     --primary-dark: #3a0ca3;
     --secondary-color: #f72585;
     --accent-color: #f72585;
-
-    /* Нейтральні кольори */
     --light-color: #f8f9fa;
     --light-gray: #e9ecef;
     --medium-gray: #adb5bd;
     --dark-gray: #495057;
     --dark-color: #212529;
-
-    /* Функціональні кольори */
     --success-color: #4ade80;
     --warning-color: #fbbf24;
     --danger-color: #f43f5e;
     --info-color: #38bdf8;
-
-    /* Розміри і відступи */
     --spacing-xs: 0.25rem;
     --spacing-sm: 0.5rem;
     --spacing-md: 1rem;
     --spacing-lg: 1.5rem;
     --spacing-xl: 2rem;
     --spacing-xxl: 3rem;
-
-    /* Радіуси і тіні */
     --border-radius-sm: 0.25rem;
     --border-radius-md: 0.5rem;
     --border-radius-lg: 1rem;
     --border-radius-xl: 1.5rem;
     --border-radius-circle: 50%;
-
     --box-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
     --box-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
     --box-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
     --box-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
-
-    /* Анітації */
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
     --transition-slow: 0.5s ease;
 }
-
-/* Базові стилі */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-
 body {
     font-family: 'Montserrat', sans-serif;
     line-height: 1.6;
@@ -65,18 +47,12 @@ body {
     display: flex;
     flex-direction: column;
 }
-
 .container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--spacing-md);
 }
-
-/* ======================== */
-/* Навігація                */
-/* ======================== */
-
 .main-nav {
     background-color: white;
     padding: 0;
@@ -86,7 +62,6 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
 }
-
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -95,7 +70,6 @@ body {
     align-items: center;
     padding: 0.75rem 1rem;
 }
-
 .logo {
     display: flex;
     align-items: center;
@@ -105,11 +79,9 @@ body {
     font-weight: 700;
     text-decoration: none;
 }
-
 .logo i {
     font-size: 1.5rem;
 }
-
 .nav-list {
     display: flex;
     list-style: none;
@@ -117,11 +89,9 @@ body {
     padding: 0;
     gap: 1rem;
 }
-
 .nav-item {
     margin: 0;
 }
-
 .nav-link {
     display: flex;
     align-items: center;
@@ -134,30 +104,24 @@ body {
     border-radius: 0.375rem;
     transition: all 0.3s ease;
 }
-
 .nav-link i {
     font-size: 1.25rem;
     color: var(--primary-color);
 }
-
 .nav-link:hover {
     background-color: var(--primary-color);
     color: white;
 }
-
 .nav-link:hover i {
     color: white;
 }
-
 .nav-link.active {
     background-color: var(--primary-color);
     color: white;
 }
-
 .nav-link.active i {
     color: white;
 }
-
 .mobile-menu-btn {
     display: none;
     background: none;
@@ -166,19 +130,13 @@ body {
     font-size: 1.5rem;
     cursor: pointer;
 }
-
-/* ======================== */
-/* Головний контент         */
-/* ======================== */
-
 .main-content {
     flex: 1;
     padding: var(--spacing-xl) 0;
-    display: flex; /* Added to center content vertically */
-    justify-content: center; /* Added to center content horizontally */
-    align-items: center; /* Added to center content vertically */
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
 }
-
 .home-section {
     text-align: center;
     padding: var(--spacing-xxl);
@@ -187,9 +145,8 @@ body {
     box-shadow: var(--box-shadow-md);
     animation: fadeIn var(--transition-normal);
 }
-
 .page-title {
-    font-size: 3rem; /* Збільшено розмір заголовка для головної сторінки */
+    font-size: 3rem; 
     font-weight: 700;
     color: var(--primary-dark);
     margin-bottom: var(--spacing-sm);
@@ -198,24 +155,17 @@ body {
     justify-content: center;
     gap: var(--spacing-sm);
 }
-
 .page-title i {
     color: var(--primary-color);
-    font-size: 3rem; /* Збільшено розмір іконки для головної сторінки */
+    font-size: 3rem; 
 }
-
 .home-subtitle {
-    font-size: 1.2rem; /* Збільшено розмір підзаголовка для головної сторінки */
+    font-size: 1.2rem; 
     color: var(--dark-gray);
-    max-width: 700px; /* Збільшено max-width для підзаголовка */
+    max-width: 700px; 
     margin: 0 auto;
-    margin-bottom: var(--spacing-xl); /* Збільшено відступ знизу */
+    margin-bottom: var(--spacing-xl); 
 }
-
-/* ======================== */
-/* Футер                    */
-/* ======================== */
-
 .footer {
     background-color: #0b78bc;
     color: white;
@@ -223,11 +173,6 @@ body {
     text-align: center;
     margin-top: auto;
 }
-
-/* ======================== */
-/* Перемикач теми           */
-/* ======================== */
-
 .theme-toggle {
     position: fixed;
     bottom: 20px;
@@ -247,31 +192,23 @@ body {
     box-shadow: var(--box-shadow-lg);
     transition: all var(--transition-normal);
 }
-
 .theme-toggle:hover {
     transform: translateY(-3px);
     background-color: var(--primary-dark);
 }
-
 .theme-toggle .moon-icon,
 .theme-toggle .sun-icon {
     position: absolute;
     transition: all var(--transition-normal);
 }
-
 .theme-toggle .moon-icon {
     opacity: 1;
     transform: rotate(0);
 }
-
 .theme-toggle .sun-icon {
     opacity: 0;
     transform: rotate(180deg);
 }
-
-/* ======================== */
-/* Темна тема               */
-/* ======================== */
 [data-theme="dark"] {
     --light-color: #1f2937;
     --light-gray: #374151;
@@ -279,77 +216,57 @@ body {
     --dark-gray: #9ca3af;
     --dark-color: #f3f4f6;
 }
-
 [data-theme="dark"] body {
     background-color: #111827;
     color: var(--dark-color);
 }
-
 [data-theme="dark"] .main-nav {
     background-color: #1a202c;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
-
 [data-theme="dark"] .logo {
     color: var(--primary-light);
 }
-
 [data-theme="dark"] .nav-link {
     color: #e2e8f0;
 }
-
 [data-theme="dark"] .nav-link i {
     color: var(--primary-light);
 }
-
 [data-theme="dark"] .nav-link:hover,
 [data-theme="dark"] .nav-link.active {
     background-color: var(--primary-light);
     color: #1a202c;
 }
-
 [data-theme="dark"] .nav-link:hover i,
 [data-theme="dark"] .nav-link.active i {
     color: #1a202c;
 }
-
 [data-theme="dark"] .mobile-menu-btn {
     color: #e2e8f0;
 }
-
 [data-theme="dark"] .home-section {
     background-color: #1f2937;
     box-shadow: var(--box-shadow-lg);
 }
-
-
 [data-theme="dark"] .theme-toggle {
     background-color: var(--primary-dark);
 }
-
 [data-theme="dark"] .theme-toggle:hover {
     background-color: var(--primary-color);
 }
-
 [data-theme="dark"] .theme-toggle .moon-icon {
     opacity: 0;
     transform: rotate(-180deg);
 }
-
 [data-theme="dark"] .theme-toggle .sun-icon {
     opacity: 1;
     transform: rotate(0);
 }
-
-/* ======================== */
-/* Адаптивний дизайн для мобільних пристроїв (до 768px) */
-/* ======================== */
-
 @media (max-width: 768px) {
     .nav-container {
         padding: 0.5rem;
     }
-
     .nav-list {
         display: none;
         position: absolute;
@@ -362,65 +279,50 @@ body {
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         z-index: 1000;
     }
-
     .nav-list.show {
         display: flex;
     }
-
     .nav-item {
         width: 100%;
     }
-
     .nav-link {
         width: 100%;
         padding: 0.75rem 1rem;
     }
-
     .mobile-menu-btn {
         display: block;
     }
-
     [data-theme="dark"] .nav-list {
         background-color: #1a202c;
     }
-
-    /* Загальні стилі контейнера */
     .container {
         padding: var(--spacing-sm);
     }
-
     .nav-container {
         padding: var(--spacing-sm);
     }
-
     .main-content {
         padding: var(--spacing-md) 0;
     }
-
     .home-section {
         padding: var(--spacing-md);
     }
-
     .page-title {
         font-size: 1.75rem;
         margin-bottom: var(--spacing-md);
     }
-
     .page-title i {
         font-size: 1.5rem;
         margin-right: var(--spacing-xs);
     }
-
     .home-subtitle {
         font-size: 1rem;
         line-height: 1.6;
     }
-
     .footer {
         padding: var(--spacing-md);
         font-size: 0.875rem;
     }
-
     .theme-toggle {
         right: var(--spacing-sm);
         bottom: var(--spacing-lg);
@@ -429,11 +331,6 @@ body {
         font-size: 1.1rem;
     }
 }
-
-/* ======================== */
-/* Анімації                 */
-/* ======================== */
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -442,7 +339,6 @@ body {
         opacity: 1;
     }
 }
-
 @keyframes slideIn {
     from {
         opacity: 0;

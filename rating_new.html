@@ -5,14 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Рейтинговий бал</title>
     <link rel="stylesheet" href="rating_new.css">
-
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- html2canvas and jsPDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="schedule_data.js"></script>
@@ -20,13 +16,10 @@
     <script src="rating_new.js" defer></script>
 </head>
 <body>
-    <!-- Тема -->
     <button id="theme-toggle" class="theme-toggle">
         <i class="fas fa-moon moon-icon"></i>
         <i class="fas fa-sun sun-icon"></i>
     </button>
-
-    <!-- Навігація -->
     <nav class="main-nav">
         <div class="nav-container">
             <div class="logo">
@@ -64,8 +57,6 @@
             </button>
         </div>
     </nav>
-
-    <!-- Головний контент -->
     <main class="main-content">
         <div class="container">
             <h1 class="page-title">
@@ -73,8 +64,6 @@
                 Рейтинговий бал
             </h1>
             <p class="profile-subtitle">Розрахуйте свій середній бал та експортуйте результати</p>
-
-            <!-- Секція додавання предметів -->
             <section class="rating-section">
                 <h2 class="section-title"><i class="fas fa-plus-circle"></i> Додати предмет</h2>
                 <div class="input-group">
@@ -92,27 +81,21 @@
                     <button class="control-btn primary" onclick="addSubject()"><i class="fas fa-plus"></i> Додати</button>
                 </div>
             </section>
-
-            <!-- Секція доданих предметів -->
             <section class="rating-section">
                 <h2 class="section-title"><i class="fas fa-list"></i> Додані предмети</h2>
                 <div class="subjects-container">
                     <div class="subject-category">
                         <h3 class="category-title"><i class="fas fa-graduation-cap"></i> Екзамени</h3>
                         <ul id="examList" class="subject-list">
-                            <!-- Предмети тут -->
                         </ul>
                     </div>
                     <div class="subject-category">
                         <h3 class="category-title"><i class="fas fa-check-circle"></i> Заліки</h3>
                         <ul id="creditList" class="subject-list">
-                            <!-- Предмети тут -->
                         </ul>
                     </div>
                 </div>
             </section>
-
-            <!-- Секція результатів -->
             <section id="results-section" class="rating-section" style="display: none;">
                 <h2 class="section-title"><i class="fas fa-chart-bar"></i> Результати</h2>
                 <div class="results-table">
@@ -126,7 +109,6 @@
                             </tr>
                         </thead>
                         <tbody id="resultsTableBody">
-                            <!-- Таблиця результатів -->
                         </tbody>
                     </table>
                 </div>
@@ -165,8 +147,6 @@
             </section>
         </div>
     </main>
-
-    <!-- Футер -->
     <footer class="footer">
         <div class="container">
             <p>© 2026 Student PNU. Всі права захищені.</p>

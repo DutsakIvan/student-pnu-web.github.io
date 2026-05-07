@@ -1,21 +1,14 @@
 function loadSavedItems() {
-    // === Збережені розклади ===
     const savedSchedules = JSON.parse(localStorage.getItem('savedSchedules')) || {};
     const schedulesList = document.getElementById('savedSchedulesList');
     if (!schedulesList) return;
-
     if (Object.keys(savedSchedules).length === 0) {
         schedulesList.innerHTML = '<div class="empty-message">Немає збережених розкладів</div>';
     } else {
         schedulesList.innerHTML = '';
-        
-        // === ЗЧИТУЄМО schedulesData ===
         const schedulesData = JSON.parse(localStorage.getItem('schedulesData')) || {};
-        
         for (const key in savedSchedules) {
             let isValidKey = false;
-
-            // Перевіряємо тільки якщо schedulesData існує
             if (schedulesData) {
                 for (const groupKey in schedulesData) {
                     if (key.startsWith(groupKey + "_")) {
@@ -24,12 +17,10 @@ function loadSavedItems() {
                     }
                 }
             }
-
             if (!isValidKey) {
                 console.warn("Skipping invalid key:", key);
                 continue;
             }
-
             const scheduleData = savedSchedules[key];
             if (scheduleData && scheduleData.name && scheduleData.group) {
                 const item = document.createElement('div');
@@ -57,12 +48,9 @@ function loadSavedItems() {
             }
         }
     }
-
-    // === Збережені рейтинги ===
     const savedRatings = JSON.parse(localStorage.getItem('savedRatings')) || [];
     const ratingsList = document.getElementById('savedRatingsList');
     if (!ratingsList) return;
-
     if (savedRatings.length === 0) {
         ratingsList.innerHTML = '<div class="empty-message">Немає збережених рейтингів</div>';
     } else {
@@ -71,7 +59,6 @@ function loadSavedItems() {
             const examCount = rating.examSubjects.length;
             const creditCount = rating.creditSubjects.length;
             const totalSubjects = examCount + creditCount;
-
             const item = document.createElement('div');
             item.className = 'saved-item';
             item.innerHTML = `
@@ -105,31 +92,25 @@ function loadSavedItems() {
         });
     }
 }
-
 function deleteRating(index) {
     const savedRatings = JSON.parse(localStorage.getItem('savedRatings')) || [];
     const rating = savedRatings[index];
-    
     if (confirm(`Видалити рейтинг "${rating.name}"?`)) {
         savedRatings.splice(index, 1);
         localStorage.setItem('savedRatings', JSON.stringify(savedRatings));
-        loadSavedItems(); // Оновлюємо список
+        loadSavedItems(); 
     }
 }
-
 function showRatingDetails(index) {
     const savedRatings = JSON.parse(localStorage.getItem('savedRatings')) || [];
     const rating = savedRatings[index];
     if (!rating) return;
-
     localStorage.setItem('currentRatingDetails', JSON.stringify(rating));
     window.location.href = 'rating-details.html';
 }
-
 function showScheduleDetails(key) {
     const savedSchedules = JSON.parse(localStorage.getItem('savedSchedules')) || {};
     const scheduleData = savedSchedules[key];
-
     if (scheduleData) {
         localStorage.setItem('currentScheduleDetails', JSON.stringify(scheduleData));
         window.location.href = 'schedule-details.html';
@@ -137,7 +118,6 @@ function showScheduleDetails(key) {
         alert("Розклад не знайдено!");
     }
 }
-
 function deleteSchedule(key, buttonElement) {
     if (confirm("Видалити цей розклад?")) {
         const savedSchedules = JSON.parse(localStorage.getItem('savedSchedules')) || {};
@@ -148,17 +128,13 @@ function deleteSchedule(key, buttonElement) {
             document.getElementById('savedSchedulesList').innerHTML =
                 '<div class="empty-message">Немає збережених розкладів</div>';
         }
-
     }
 }
-
 function editRating(index) {
     const savedRatings = JSON.parse(localStorage.getItem('savedRatings')) || [];
     const rating = savedRatings[index];
     if (!rating) return;
-
     localStorage.setItem('currentRatingEdit', JSON.stringify(rating));
     window.location.href = 'rating.html?edit=true';
 }
-
 document.addEventListener('DOMContentLoaded', loadSavedItems);

@@ -1,4 +1,4 @@
-// База даних предметів
+
 const subjectsDatabase = {
     "Українська мова за професійним спрямуванням": [3, "Залік"],
     "Історія України": [3, "Залік"],
@@ -68,31 +68,23 @@ const subjectsDatabase = {
     "Тестування та забезпечення якості ІТ проектів": [3, "Залік"],
     "Програмування Mac iOS": [6, "Залік"]
 };
-
-// Змінні для зберігання доданих предметів
 let addedExamSubjects = [];
 let addedCreditSubjects = [];
-
-
 function showSuggestions(inputText) {
     const input = document.getElementById('subjectName');
     const suggestions = document.getElementById('suggestions');
     suggestions.innerHTML = '';
-
     if (!inputText) {
         suggestions.style.display = 'none';
         return;
     }
-
     const filtered = Object.keys(subjectsDatabase)
         .filter(item => item.toLowerCase().includes(inputText.toLowerCase()))
         .slice(0, 8);
-
     if (filtered.length === 0) {
         suggestions.style.display = 'none';
         return;
     }
-
     filtered.forEach(item => {
         const li = document.createElement('li');
         li.textContent = item;
@@ -102,36 +94,27 @@ function showSuggestions(inputText) {
         };
         suggestions.appendChild(li);
     });
-
     suggestions.style.display = 'block';
 }
-
-// Додавання предмету з перевіркою на дублікати
 function addSubject() {
     const subjectName = document.getElementById('subjectName').value.trim();
     const subjectScore = parseInt(document.getElementById('subjectScore').value);
-
     if (!subjectName || isNaN(subjectScore) || subjectScore < 0 || subjectScore > 100) {
         alert('Будь ласка, введіть коректну назву предмету та оцінку (0-100).');
         return;
     }
-
     const subject = subjectsDatabase[subjectName];
     if (!subject) {
         alert('Предмет не знайдено в базі даних.');
         return;
     }
-
-    // Перевірка на дублікати
     const isAlreadyAdded = 
         addedExamSubjects.some(subj => subj.name === subjectName) ||
         addedCreditSubjects.some(subj => subj.name === subjectName);
-
     if (isAlreadyAdded) {
         alert('Цей предмет уже додано!');
         return;
     }
-
     const [credits, type] = subject;
     if (type === "Екзамен") {
         addedExamSubjects.push({ 
@@ -148,13 +131,10 @@ function addSubject() {
             type
         });
     }
-
     updateAddedSubjectsList();
     document.getElementById('subjectName').value = '';
     document.getElementById('subjectScore').value = '';
 }
-
-// Видалення предмету
 function removeSubject(subjectName, isExam) {
     if (isExam) {
         addedExamSubjects = addedExamSubjects.filter(subj => subj.name !== subjectName);
@@ -163,14 +143,11 @@ function removeSubject(subjectName, isExam) {
     }
     updateAddedSubjectsList();
 }
-
-// Оновлення списків доданих предметів з кнопками видалення
 function updateAddedSubjectsList() {
     const examList = document.getElementById('examList');
     const creditList = document.getElementById('creditList');
     examList.innerHTML = '';
     creditList.innerHTML = '';
-
     addedExamSubjects.forEach(subject => {
         const li = document.createElement('li');
         li.innerHTML = `
@@ -194,7 +171,6 @@ function updateAddedSubjectsList() {
         `;
         examList.appendChild(li);
     });
-
     addedCreditSubjects.forEach(subject => {
         const li = document.createElement('li');
         li.innerHTML = `
@@ -219,51 +195,37 @@ function updateAddedSubjectsList() {
         creditList.appendChild(li);
     });
 }
-
-// Функція для редагування предмету
 function editSubject(subjectName, currentScore, isExam) {
     document.getElementById('subjectName').value = subjectName;
     document.getElementById('subjectScore').value = currentScore;
-    
-    // Видаляємо старий запис
     removeSubject(subjectName, isExam);
-    
-    // Фокусуємося на полі з оцінкою для редагування
     document.getElementById('subjectScore').focus();
 }
-
-// Розрахунок рейтингу (залишається без змін)
 function calculateRating() {
     if (addedExamSubjects.length === 0 && addedCreditSubjects.length === 0) {
         alert('Додайте хоча б один предмет.');
         return;
     }
-
     let examTotal = 0;
     let examCredits = 0;
     let creditTotal = 0;
     let creditCredits = 0;
-
     addedExamSubjects.forEach(subject => {
         examTotal += subject.score * subject.credits;
         examCredits += subject.credits;
     });
-
     addedCreditSubjects.forEach(subject => {
         creditTotal += subject.score * subject.credits;
         creditCredits += subject.credits;
     });
-
     const R_e = examCredits > 0 ? examTotal / examCredits : 0;
     const R_z = creditCredits > 0 ? creditTotal / creditCredits : 0;
     const totalCredits = examCredits + creditCredits;
     const R = totalCredits > 0 
         ? (2 * R_e * examCredits + R_z * creditCredits) / (2 * examCredits + creditCredits) 
         : 0;
-
     const tbody = document.querySelector('.results-table tbody');
     tbody.innerHTML = '';
-
     addedExamSubjects.forEach(subject => {
         tbody.innerHTML += `
             <tr>
@@ -274,7 +236,6 @@ function calculateRating() {
             </tr>
         `;
     });
-
     addedCreditSubjects.forEach(subject => {
         tbody.innerHTML += `
             <tr>
@@ -285,41 +246,32 @@ function calculateRating() {
             </tr>
         `;
     });
-
     document.getElementById('examRating').textContent = R_e.toFixed(2);
     document.getElementById('creditRating').textContent = R_z.toFixed(2);
     document.getElementById('totalRating').textContent = R.toFixed(2);
-
     window.examData = addedExamSubjects;
     window.creditData = addedCreditSubjects;
     window.R_e = R_e;
     window.R_z = R_z;
     window.R = R;
 }
-
-// Експорт до PDF, Очищення даних, Збереження локально (залишаються без змін)
 async function exportToPDF() {
     const resultsElement = document.querySelector("#results");
-    
     if (!resultsElement) {
         alert("Блок з результатами не знайдено!");
         return;
     }
-
     try {
         const canvas = await html2canvas(resultsElement, {
             scale: 2,
             useCORS: true,
             logging: false
         });
-
         const imgData = canvas.toDataURL("image/png");
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
-
         const imgWidth = doc.internal.pageSize.getWidth() - 20;
         const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
         doc.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
         doc.save("рейтинг.pdf");
     } catch (error) {
@@ -327,41 +279,34 @@ async function exportToPDF() {
         alert("Не вдалося створити PDF. Перевірте консоль для деталей.");
     }
 }
-
 function clearData() {
     addedExamSubjects = [];
     addedCreditSubjects = [];
     updateAddedSubjectsList();
     document.getElementById('results').innerHTML = '';
 }
-
 function saveLocally() {
     const name = prompt("Введіть назву для збереження рейтингу:");
     if (!name) return;
-
     const savedRatings = JSON.parse(localStorage.getItem('savedRatings') || '[]');
     const currentDate = new Date().toLocaleDateString('uk-UA');
-    
     const examList = document.getElementById('examList');
     const creditList = document.getElementById('creditList');
     const examRating = document.getElementById('examRating').textContent;
     const creditRating = document.getElementById('creditRating').textContent;
     const totalRating = document.getElementById('totalRating').textContent;
-
     const examSubjects = addedExamSubjects.map(subject => ({
         name: subject.name,
         score: subject.score,
         credits: subject.credits,
         type: "Екзамен"
     }));
-
     const creditSubjects = addedCreditSubjects.map(subject => ({
         name: subject.name,
         score: subject.score,
         credits: subject.credits,
         type: "Залік"
     }));
-
     const ratingData = {
         name: name,
         date: currentDate,
@@ -373,41 +318,28 @@ function saveLocally() {
         timestamp: new Date().toISOString(),
         html: document.getElementById('results').outerHTML
     };
-
-    // Перевіряємо, чи є вже збережений рейтинг з такою назвою
     const existingRatingIndex = savedRatings.findIndex(rating => rating.name === name);
-
     if (existingRatingIndex !== -1) {
-        // Якщо знайдено існуючий рейтинг, показуємо діалогове вікно
         const confirmOverwrite = confirm(`Рейтинг з назвою "${name}" вже існує. Бажаєте перезаписати його?`);
-        
         if (!confirmOverwrite) {
-            return; // Якщо користувач відмовився, виходимо з функції
+            return; 
         }
-        // Якщо користувач погодився, оновлюємо існуючий рейтинг
         savedRatings[existingRatingIndex] = ratingData;
     } else {
-        // Якщо рейтингу з такою назвою немає, додаємо новий
         savedRatings.push(ratingData);
     }
-
     localStorage.setItem('savedRatings', JSON.stringify(savedRatings));
     alert(`Рейтинг "${name}" успішно збережено!`);
-    
-    // Оновлюємо список збережених рейтингів, якщо ми на сторінці збережених
     if (window.location.pathname.includes('saved.html')) {
         displaySavedRatings();
     }
 }
-
-// Обробники подій (залишаються без змін)
 document.addEventListener('click', (e) => {
     if (!document.getElementById('subjectName').contains(e.target) && 
         !document.getElementById('suggestions').contains(e.target)) {
         document.getElementById('suggestions').style.display = 'none';
     }
 });
-
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('edit') === 'true') {
@@ -419,7 +351,6 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.removeItem('currentRatingEdit');
         }
     }
-    
     const savedData = localStorage.getItem('currentRating');
     if (savedData) {
         const data = JSON.parse(savedData);

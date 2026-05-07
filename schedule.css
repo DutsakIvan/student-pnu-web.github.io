@@ -1,4 +1,3 @@
-/* schedule.css */
 
 :root {
     --primary-color: #4a90e2;
@@ -11,13 +10,11 @@
     --text-color: #2d3436;
     --transition-speed: 0.3s;
 }
-
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-
 body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     line-height: 1.6;
@@ -25,38 +22,28 @@ body {
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     min-height: 100vh;
 }
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    /* Було: padding-top: 80px; – при фіксованому меню.
-       Якщо меню не фіксоване, цей відступ не потрібен */
     padding: 20px; 
 }
-
-/* Навігація */
 .main-nav {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-    /* Було: position: fixed; top: 0; left: 0; */
-    /* Повертаємо статичне позиціонування, щоб меню не "їхало" за прокруткою */
     position: static;
     width: 100%; 
-    z-index: 1000; /* можна залишити, якщо колись знадобиться шар зверху */
+    z-index: 1000; 
 }
-
 .nav-list {
     display: flex;
     justify-content: center;
     padding: 1rem 0;
     list-style: none;
 }
-
 .nav-item {
     margin: 0 1.5rem;
 }
-
 .nav-link {
     color: var(--dark-gray);
     text-decoration: none;
@@ -68,20 +55,16 @@ body {
     align-items: center;
     gap: 0.5rem;
 }
-
 .nav-link:hover {
     background: var(--primary-color);
     color: white;
     transform: translateY(-2px);
 }
-
 .nav-link.active {
     background: var(--primary-color);
     color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
-/* Секції */
 .rating-section {
     background: white;
     border-radius: 16px;
@@ -89,7 +72,6 @@ body {
     margin: 2rem 0;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
-
 .section-title {
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
@@ -98,8 +80,6 @@ body {
     gap: 0.75rem;
     color: var(--dark-gray);
 }
-
-/* Кнопки */
 .control-btn {
     padding: 0.75rem 1.5rem;
     display: inline-flex;
@@ -120,63 +100,51 @@ body {
     margin: 0 0.25rem;
     margin-top: 1.48rem;
 }
-
 .control-btn.primary {
     background: var(--primary-color);
     color: white;
 }
-
 .control-btn.success {
     background: var(--success-color);
     color: white;
 }
-
 .control-btn.warning {
     background: var(--warning-color);
     color: var(--text-color);
 }
-
 .control-btn.danger {
     background: var(--danger-color);
     color: white;
 }
-
 .control-btn.secondary {
     background: #7f8c8d;
     color: white;
 }
-
 .control-btn.secondary:hover {
     background: #95a5a6;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
-
 .control-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
-
-/* Форма введення */
 .input-section {
     background: var(--light-gray);
     border-radius: 12px;
     padding: 1.5rem;
     margin: 2rem 0;
 }
-
 .input-group {
     margin-bottom: 1.5rem;
     position: relative;
 }
-
 .input-label {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
     color: var(--dark-gray);
 }
-
 .subject-input {
     width: 100%;
     padding: 0.875rem;
@@ -185,19 +153,15 @@ body {
     font-size: 1rem;
     transition: border-color var(--transition-speed);
 }
-
 .subject-input:focus {
     border-color: var(--primary-color);
     outline: none;
     box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
 }
-
-/* Автодоповнення */
 .autocomplete-wrapper {
     position: relative;
     width: 100%;
 }
-
 .suggestions-list {
     position: absolute;
     top: 100%;
@@ -212,36 +176,29 @@ body {
     overflow-y: auto;
     display: none;
 }
-
 .suggestions-list li {
     padding: 12px 16px;
     cursor: pointer;
     transition: background 0.2s;
 }
-
 .suggestions-list li:hover {
     background: var(--light-gray);
 }
-
-/* Додані предмети */
 .subjects-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
     margin-top: 1.5rem;
 }
-
 .subject-category {
     background: white;
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
-
 .subject-list {
     list-style: none;
 }
-
 .subject-list li {
     padding: 1rem;
     margin-bottom: 0.75rem;
@@ -252,7 +209,6 @@ body {
     align-items: center;
     animation: slideIn 0.3s ease;
 }
-
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -263,8 +219,6 @@ body {
         transform: translateX(0);
     }
 }
-
-/* Результати та таблиця */
 .results-table {
     margin-top: 2rem;
     background: white;
@@ -272,12 +226,10 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     overflow: hidden;
 }
-
 .results-table table {
     width: 100%;
     border-collapse: collapse;
 }
-
 .results-table th,
 .results-table td {
     padding: 1rem 1.5rem;
@@ -286,21 +238,17 @@ body {
     white-space: normal;
     word-wrap: break-word;
 }
-
 .results-table thead {
     background: var(--primary-color);
     color: white;
 }
-
 .results-table tbody tr:nth-child(even) {
     background: #f8f9fa;
 }
-
 .results-table td:last-child {
     font-weight: 500;
     color: var(--secondary-color);
 }
-
 .rating-summary {
     padding: 1.5rem;
     background: var(--light-gray);
@@ -309,95 +257,74 @@ body {
     gap: 1rem;
     font-weight: 500;
 }
-
 .rating-summary .total {
     color: var(--success-color);
     font-weight: 600;
 }
-
-/* Групування кнопок */
 .button-group {
     display: flex;
     gap: 1rem;
     margin-top: 1.5rem;
     flex-wrap: wrap;
 }
-
 .button-group .control-btn {
     flex: 1;
     min-width: 200px;
 }
-
-/* Адаптивність */
 @media (max-width: 768px) {
     .filters {
         flex-direction: column;
         align-items: flex-start;
     }
-
     .filters .filter-group {
         width: 100%;
     }
-
     .filters .control-btn {
         width: auto;
         max-width: 250px;
         align-self: center;
         margin-top: 0.5rem;
     }
-
     .nav-list {
         flex-direction: column;
         align-items: center;
     }
-
     .nav-item {
         margin: 1rem 0;
     }
-
     .subjects-container {
         grid-template-columns: 1fr;
     }
-
     .controls-wrapper {
         display: flex;
         flex-direction: column;
         gap: 1rem;
     }
-
     .control-btn {
         width: 100%;
         justify-content: center;
         min-width: unset;
         margin: 0;
     }
-
     .button-group {
         flex-direction: column;
     }
-
     .button-group .control-btn {
         width: 100%;
         min-width: unset;
     }
-
     .suggestions-list {
         width: 100% !important;
     }
-
     .rating-summary {
         grid-template-columns: 1fr;
     }
-
     .table-wrapper {
         overflow-x: auto;
     }
-
     #scheduleTable td {
         font-size: 0.9em;
     }
-
-    /* --- Мобільні стилі для таблиці (компактні картки) --- */
     #scheduleTable {
         table-layout: auto;
         width: 100%;
@@ -405,117 +332,100 @@ body {
         margin-top: 1rem;
         font-size: 0.9em;
     }
-
     #scheduleTable thead {
-        display: none; /* Hide table headers on mobile */
+        display: none; 
     }
-
     #scheduleTable th,
     #scheduleTable td {
-        border: none; /* Remove borders from individual cells */
-        padding: 0; /* Remove padding from cells */
+        border: none; 
+        padding: 0; 
         text-align: left;
         word-wrap: break-word;
         overflow: visible;
         text-overflow: clip;
         white-space: normal;
-        display: block; /* Each cell as a block element */
+        display: block; 
         width: 100%;
         box-sizing: border-box;
     }
-
     #scheduleTable tbody tr {
-        margin-bottom: 15px; /* Increased margin between lesson cards for better spacing */
+        margin-bottom: 15px; 
         display: block;
         border: 1px solid #ddd;
         border-radius: 8px;
         overflow: hidden;
-        background-color: white; /* Added background for cards */
-        padding: 10px; /* Added padding to cards */
+        background-color: white; 
+        padding: 10px; 
     }
-
     #scheduleTable td:before {
         font-weight: bold;
         display: inline-block;
         width: auto;
-        min-width: 80px; /* Slightly reduced min-width for labels */
+        min-width: 80px; 
         margin-right: 5px;
         vertical-align: top;
     }
-
-    #scheduleTable td:nth-child(1), /* Time Slot */
-    #scheduleTable td:nth-child(2), /* Subject */
-    #scheduleTable td:nth-child(3), /* Teacher */
-    #scheduleTable td:nth-child(4)  /* Group */
+    #scheduleTable td:nth-child(1), 
+    #scheduleTable td:nth-child(2), 
+    #scheduleTable td:nth-child(3), 
+    #scheduleTable td:nth-child(4)  
     {
         width: auto;
         display: block;
         border: none;
-        padding: 0; /* Removed padding from individual TDs, padding is on TR now */
+        padding: 0; 
     }
-
-    #scheduleTable tbody tr.empty-slot { /* Styles for empty slots */
-        padding: 5px 10px; /* Reduced padding for empty slots */
-        margin-bottom: 10px; /* Reduced margin for empty slots */
-        border-color: #eee; /* Lighter border for empty slots */
-        background-color: #f8f9fa; /* Lighter background for empty slots */
-        color: #777; /* Grey text for empty slots */
+    #scheduleTable tbody tr.empty-slot { 
+        padding: 5px 10px; 
+        margin-bottom: 10px; 
+        border-color: #eee; 
+        background-color: #f8f9fa; 
+        color: #777; 
     }
-
     #scheduleTable tbody tr.empty-slot td {
-        padding: 0; /* No padding for cells in empty slots */
+        padding: 0; 
     }
-
     #scheduleTable tbody tr.empty-slot td:before {
-        content: none; /* Hide labels for empty slots */
+        content: none; 
     }
-
     .day-header {
         position: sticky;
-        top: 5px; /* Adjusted top value to be higher, less cut-off */
+        top: 5px; 
         z-index: 101;
         background-color: #e0e0e0;
         box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.3);
-        padding: 8px; /* Keep day header padding */
-        margin-top: 1rem; /* Keep day header margin */
-        border-radius: 4px; /* Keep day header border-radius */
+        padding: 8px; 
+        margin-top: 1rem; 
+        border-radius: 4px; 
     }
-
     .time-slot {
         font-size: 1em;
         margin-bottom: 2px;
-        display: inline-block; /* Changed to inline-block */
+        display: inline-block; 
     }
-
     #scheduleTable td:nth-child(2) {
-        font-weight: 500; /* Keep subject font-weight */
+        font-weight: 500; 
     }
-
     #scheduleTable tbody tr:nth-child(even) {
-        background-color: white; /* Ensure even rows have white background in card layout */
+        background-color: white; 
     }
-
-    /* Стиль для дати в мобільному розкладі - Right Style */
     .mobile-lesson-date-right {
         font-size: 1em;
         color: #777;
-        text-align: right; /* Align text to the right */
-        display: inline-block; /* Ensure inline layout */
-        margin-top: 0; /* Видалено margin-top, для вирівнювання по вертикалі */
-        vertical-align: baseline; /* Вирівнювання по базовій лінії, щоб текст був на одному рівні */
-        white-space: nowrap; /* Prevent date from wrapping */
-        margin-left: 10px; /* Add some left margin to separate from time */
-        position: relative; /* Added relative positioning */
-        top: -0.3em; /* Slightly adjust vertical position upwards */
+        text-align: right; 
+        display: inline-block; 
+        margin-top: 0; 
+        vertical-align: baseline; 
+        white-space: nowrap; 
+        margin-left: 10px; 
+        position: relative; 
+        top: -0.3em; 
     }
-    /* --- Кінець мобільних стилів таблиці (компактні картки) --- */
 }
-
 .autocomplete-wrapper {
     position: relative;
     width: 100%;
 }
-
 .suggestions-list {
     position: absolute;
     top: 100%;
@@ -533,36 +443,29 @@ body {
     padding: 0;
     list-style: none;
 }
-
 .suggestions-list li {
     padding: 12px 16px;
     cursor: pointer;
     transition: background-color 0.2s;
 }
-
 .suggestions-list li:hover {
     background-color: #f8f9fa;
 }
-
-/* Збережені матеріали */
 .saved-content {
     display: grid;
     gap: 2rem;
 }
-
 .saved-category {
     background: white;
     border-radius: 16px;
     padding: 2rem;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
-
 .saved-items-container {
     display: grid;
     gap: 1rem;
     margin-top: 1.5rem;
 }
-
 .saved-item {
     background: var(--light-gray);
     border-radius: 12px;
@@ -574,17 +477,14 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     transition: transform var(--transition-speed);
 }
-
 .saved-item:hover {
     transform: translateY(-3px);
 }
-
 .saved-item-header {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
-
 .delete-btn {
     background: var(--danger-color);
     color: white;
@@ -594,20 +494,15 @@ body {
     cursor: pointer;
     transition: opacity var(--transition-speed);
 }
-
 .delete-btn:hover {
     opacity: 0.9;
 }
-
 .empty-message {
     text-align: center;
     color: var(--dark-gray);
     padding: 2rem;
     font-style: italic;
 }
-
-/* --- Специфічні стилі для schedule.html --- */
-
 .faculty-selection {
     background-color: #f0f8ff;
     border: 1px solid #add8e6;
@@ -615,7 +510,6 @@ body {
     border-radius: 8px;
     margin-bottom: 1rem;
 }
-
 .group-selection {
     background-color: #f0f8ff;
     border: 1px solid #add8e6;
@@ -623,7 +517,6 @@ body {
     border-radius: 8px;
     margin-bottom: 1rem;
 }
-
 #faculties button,
 #groups button {
     background-color: var(--primary-color);
@@ -635,50 +528,41 @@ body {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
 #faculties button:hover,
 #groups button:hover {
     background-color: var(--secondary-color);
 }
-
-/* Таблиця розкладу */
 #scheduleTable {
-    table-layout: fixed; /* Важливо: фіксує розмітку таблиці */
-    width: 100%;        /* Займає 100% ширини батьківського контейнера */
+    table-layout: fixed; 
+    width: 100%;        
     border-collapse: collapse;
     margin-top: 1rem;
 }
-
 #scheduleTable th,
 #scheduleTable td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
-    word-wrap: break-word; /* Дозволяє переносити довгі слова */
-    overflow: hidden;      /* Приховує вміст, що виходить за межі */
-    text-overflow: ellipsis; /* Додає три крапки для обрізаного тексту (опціонально) */
+    word-wrap: break-word; 
+    overflow: hidden;      
+    text-overflow: ellipsis; 
 }
-
-#scheduleTable th:nth-child(1), /* Для колонки "Дата" */
+#scheduleTable th:nth-child(1), 
 #scheduleTable td:nth-child(1) {
-    width: 15%; /* Ширина колонки "Дата" */
+    width: 15%; 
 }
-
-#scheduleTable th:nth-child(2), /* Для колонки "Предмет" */
+#scheduleTable th:nth-child(2), 
 #scheduleTable td:nth-child(2) {
-    width: 45%; /* Ширина колонки "Предмет" */
+    width: 45%; 
 }
-
-#scheduleTable th:nth-child(3), /* Для колонки "Викладач" */
+#scheduleTable th:nth-child(3), 
 #scheduleTable td:nth-child(3) {
-    width: 25%; /* Ширина колонки "Викладач" */
+    width: 25%; 
 }
-
-#scheduleTable th:nth-child(4), /* Для колонки "Група" */
+#scheduleTable th:nth-child(4), 
 #scheduleTable td:nth-child(4) {
-    width: 15%; /* Ширина колонки "Група" */
+    width: 15%; 
 }
-
 .day-header {
     background-color: #e0e0e0;
     font-weight: bold;
@@ -687,30 +571,24 @@ body {
     margin-top: 1rem;
     border-radius: 4px;
 }
-
 .time-slot {
     color: #555;
     font-size: 0.9em;
     margin-bottom: 4px;
     display: block;
 }
-
 #scheduleTable td:nth-child(2) {
     font-weight: 500;
 }
-
 #scheduleTable td small {
     color: #777;
     display: block;
     margin-top: 4px;
     font-size: 0.85em;
 }
-
 #scheduleTable tbody tr.day-separator {
     border-top: 3px solid var(--primary-color);
 }
-
-/* Фільтри */
 .filters {
     display: flex;
     flex-wrap: nowrap;
@@ -719,7 +597,6 @@ body {
     align-items: center;
     justify-content: flex-start;
 }
-
 .filters.schedule-filters {
     display: flex;
     flex-wrap: wrap;
@@ -728,17 +605,14 @@ body {
     align-items: flex-start;
     justify-content: space-between;
 }
-
 .filter-group {
     display: flex;
     flex-direction: column;
 }
-
 .filters label {
     margin-bottom: 0.25rem;
     font-size: 0.9em;
 }
-
 .filters input[type="date"],
 .filters input[type="text"] {
     padding: 0.5rem;
@@ -746,12 +620,10 @@ body {
     border-radius: 4px;
     font-size: 1rem;
 }
-
 .autocomplete-wrapper {
     position: relative;
     width: 100%;
 }
-
 .suggestions-list {
     position: absolute;
     top: 100%;
@@ -768,82 +640,68 @@ body {
     padding: 0;
     list-style: none;
 }
-
 .suggestions-list li {
     padding: 12px 16px;
     cursor: pointer;
     transition: background-color 0.2s;
 }
-
 .suggestions-list li:hover {
     background-color: #f8f9fa;
 }
-
 .not-selected {
     color: #888;
     font-style: italic;
 }
-
-/* стрілочка */
 .scroll-to-top-btn {
     position: fixed;
     bottom: 20px;
     right: 20px;
     padding: 10px;
-    background-color: #4a90e2; /* Синій колір */
+    background-color: #4a90e2; 
     border: none;
-    border-radius: 50%; /* Кругла кнопка */
+    border-radius: 50%; 
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
-    display: none; /* Приховано за замовчуванням */
+    display: none; 
 }
-
 .scroll-to-top-btn:hover {
-    background-color: #357abd; /* Темніший колір при наведенні */
+    background-color: #357abd; 
 }
-
 .toggle-arrow {
     display: inline-block;
     font-size: 20px;
     color: white;
-    transition: transform 0.3s ease; /* Плавне обертання */
+    transition: transform 0.3s ease; 
 }
-
 .toggle-arrow.down {
-    transform: rotate(180deg); /* Обертання на 180 градусів */
+    transform: rotate(180deg); 
 }
-
 .scroll-to-top-btn.show {
-    display: block; /* Показуємо кнопку */
+    display: block; 
 }
-
-.table-wrapper.desktop-table.fixed-height { /* Додано клас fixed-height для ідентифікації */
+.table-wrapper.desktop-table.fixed-height { 
     margin-top: 2rem;
     background: white;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    overflow-x: auto; /* Додано горизонтальну прокрутку, якщо контент буде ширшим за таблицю */
-    width: 100%; /* Займає 100% ширини батьківського контейнера */
-    max-width: 1200px; /* Максимальна ширина таблиці, можна змінити за потреби */
-    margin-left: auto; /* Центрування таблиці по горизонталі */
-    margin-right: auto;/* Центрування таблиці по горизонталі */
+    overflow-x: auto; 
+    width: 100%; 
+    max-width: 1200px; 
+    margin-left: auto; 
+    margin-right: auto;
 }
-
 .table-wrapper.desktop-table.fixed-height table {
-    width: 100%; /* Таблиця займає 100% ширини обгортки */
+    width: 100%; 
     border-collapse: collapse;
 }
-
-/* --- Десктопні стилі для таблиці (фіксована ширина) --- */
 @media (min-width: 769px) {
     #scheduleTable {
-        table-layout: fixed; /* Фіксована розмітка таблиці тільки для десктопів */
+        table-layout: fixed; 
         width: 100%;
         border-collapse: collapse;
         margin-top: 1rem;
     }
-
     #scheduleTable th,
     #scheduleTable td {
         border: 1px solid #ddd;
@@ -853,30 +711,23 @@ body {
         overflow: hidden;
         text-overflow: ellipsis;
     }
-
     #scheduleTable th:nth-child(1),
     #scheduleTable td:nth-child(1) {
-        width: 15%; /* Ширина колонки "Дата" на десктопі */
+        width: 15%; 
     }
-
     #scheduleTable th:nth-child(2),
     #scheduleTable td:nth-child(2) {
-        width: 45%; /* Ширина колонки "Предмет" на десктопі */
+        width: 45%; 
     }
-
     #scheduleTable th:nth-child(3),
     #scheduleTable td:nth-child(3) {
-        width: 25%; /* Ширина колонки "Викладач" на десктопі */
+        width: 25%; 
     }
-
     #scheduleTable th:nth-child(4),
     #scheduleTable td:nth-child(4) {
-        width: 15%; /* Ширина колонки "Група" на десктопі */
+        width: 15%; 
     }
 }
-/* --- Кінець десктопних стилів таблиці --- */
-
-/* --- Мобільні стилі для таблиці (компактні картки) --- */
 @media (max-width: 768px) {
     #scheduleTable {
         table-layout: auto;
@@ -885,112 +736,96 @@ body {
         margin-top: 1rem;
         font-size: 0.9em;
     }
-
     #scheduleTable thead {
-        display: none; /* Hide table headers on mobile */
+        display: none; 
     }
-
     #scheduleTable th,
     #scheduleTable td {
-        border: none; /* Remove borders from individual cells */
-        padding: 0; /* Remove padding from cells */
+        border: none; 
+        padding: 0; 
         text-align: left;
         word-wrap: break-word;
         overflow: visible;
         text-overflow: clip;
         white-space: normal;
-        display: block; /* Each cell as a block element */
+        display: block; 
         width: 100%;
         box-sizing: border-box;
     }
-
     #scheduleTable tbody tr {
-        margin-bottom: 15px; /* Increased margin between lesson cards for better spacing */
+        margin-bottom: 15px; 
         display: block;
         border: 1px solid #ddd;
         border-radius: 8px;
         overflow: hidden;
-        background-color: white; /* Added background for cards */
-        padding: 10px; /* Added padding to cards */
+        background-color: white; 
+        padding: 10px; 
     }
-
     #scheduleTable td:before {
         font-weight: bold;
         display: inline-block;
         width: auto;
-        min-width: 80px; /* Slightly reduced min-width for labels */
+        min-width: 80px; 
         margin-right: 5px;
         vertical-align: top;
     }
-
-    #scheduleTable td:nth-child(1), /* Time Slot */
-    #scheduleTable td:nth-child(2), /* Subject */
-    #scheduleTable td:nth-child(3), /* Teacher */
-    #scheduleTable td:nth-child(4)  /* Group */
+    #scheduleTable td:nth-child(1), 
+    #scheduleTable td:nth-child(2), 
+    #scheduleTable td:nth-child(3), 
+    #scheduleTable td:nth-child(4)  
     {
         width: auto;
         display: block;
         border: none;
-        padding: 0; /* Removed padding from individual TDs, padding is on TR now */
+        padding: 0; 
     }
-
-    #scheduleTable tbody tr.empty-slot { /* Styles for empty slots */
-        padding: 5px 10px; /* Reduced padding for empty slots */
-        margin-bottom: 10px; /* Reduced margin for empty slots */
-        border-color: #eee; /* Lighter border for empty slots */
-        background-color: #f8f9fa; /* Lighter background for empty slots */
-        color: #777; /* Grey text for empty slots */
+    #scheduleTable tbody tr.empty-slot { 
+        padding: 5px 10px; 
+        margin-bottom: 10px; 
+        border-color: #eee; 
+        background-color: #f8f9fa; 
+        color: #777; 
     }
-
     #scheduleTable tbody tr.empty-slot td {
-        padding: 0; /* No padding for cells in empty slots */
+        padding: 0; 
     }
-
     #scheduleTable tbody tr.empty-slot td:before {
-        content: none; /* Hide labels for empty slots */
+        content: none; 
     }
-
     .day-header {
         position: sticky;
-        top: 5px; /* Adjusted top value to be higher, less cut-off */
+        top: 5px; 
         z-index: 101;
         background-color: #e0e0e0;
         box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.3);
-        padding: 8px; /* Keep day header padding */
-        margin-top: 1rem; /* Keep day header margin */
-        border-radius: 4px; /* Keep day header border-radius */
+        padding: 8px; 
+        margin-top: 1rem; 
+        border-radius: 4px; 
     }
-
     .time-slot {
         font-size: 1em;
         margin-bottom: 2px;
-        display: inline-block; /* Changed to inline-block */
+        display: inline-block; 
     }
-
     #scheduleTable td:nth-child(2) {
-        font-weight: 500; /* Keep subject font-weight */
+        font-weight: 500; 
     }
-
     #scheduleTable tbody tr:nth-child(even) {
-        background-color: white; /* Ensure even rows have white background in card layout */
+        background-color: white; 
     }
-
-    /* Стиль для дати в мобільному розкладі - Right Style */
     .mobile-lesson-date-right {
         font-size: 1em;
         color: #777;
-        text-align: right; /* Align text to the right */
-        display: inline-block; /* Ensure inline layout */
-        margin-top: 0; /* Видалено margin-top, для вирівнювання по вертикалі */
-        vertical-align: baseline; /* Вирівнювання по базовій лінії, щоб текст був на одному рівні */
-        white-space: nowrap; /* Prevent date from wrapping */
-        margin-left: 10px; /* Add some left margin to separate from time */
-        position: relative; /* Added relative positioning */
-        top: -0.3em; /* Slightly adjust vertical position upwards */
+        text-align: right; 
+        display: inline-block; 
+        margin-top: 0; 
+        vertical-align: baseline; 
+        white-space: nowrap; 
+        margin-left: 10px; 
+        position: relative; 
+        top: -0.3em; 
     }
-    /* --- Кінець мобільних стилів таблиці (компактні картки) --- */
 }
-
 .day-header .toggle-arrow {
     font-size: 0.8em;
     margin-left: 10px;
@@ -999,9 +834,6 @@ body {
     vertical-align: middle;
     color: var(--secondary-color);
 }
-
-
-/* Інформаційні повідомлення */
 .page-info {
     background: #8c7ae6;
     color: #fff;
@@ -1012,29 +844,24 @@ body {
     box-shadow: 0 4px 10px rgba(140, 122, 230, 0.3);
     animation: fadeIn 0.5s ease;
 }
-
 .page-info h3 {
     font-size: 1.2rem;
     margin-bottom: 10px;
     color: #ffffff;
     font-weight: 600;
 }
-
 .page-info p {
     margin-bottom: 10px;
     line-height: 1.5;
 }
-
 .page-info ul {
     padding-left: 20px;
     margin-bottom: 10px;
 }
-
 .page-info li {
     margin-bottom: 5px;
     line-height: 1.5;
 }
-
 .page-info .close-btn {
     position: absolute;
     top: 10px;
@@ -1052,18 +879,14 @@ body {
     cursor: pointer;
     transition: all 0.2s ease;
 }
-
 .page-info .close-btn:hover {
     background: rgba(255, 255, 255, 0.4);
     transform: scale(1.1);
 }
-
 .schedule-info {
     background: #8c7ae6;
     border-left: 4px solid #5f43e0;
 }
-
-/* Анімація появи */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -1074,8 +897,6 @@ body {
         transform: translateY(0);
     }
 }
-
-/* Темна тема */
 [data-theme="dark"] {
     --primary-color: #6c5ce7;
     --secondary-color: #a29bfe;
@@ -1087,24 +908,20 @@ body {
     --text-color: #f5f6fa;
     background: #1a1a1a;
 }
-
 [data-theme="dark"] body {
     background: #1a1a1a;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .main-nav {
     background: rgba(32, 32, 32, 0.95);
     backdrop-filter: blur(10px);
 }
-
 [data-theme="dark"] .rating-section,
 [data-theme="dark"] .faculty-selection,
 [data-theme="dark"] .group-selection {
     background: #2d3436;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] #scheduleTable {
     background-color: #1a1a1a;
     color: #ffffff;
@@ -1112,160 +929,127 @@ body {
     width: 100%;
     border: none !important;
 }
-
 [data-theme="dark"] #scheduleTable th {
     background-color: #1a1a1a;
-    color: #9e86f7; /* Фіолетовий колір для заголовків */
-    border-bottom: 2px solid #9e86f7 !important; /* Фіолетова лінія під заголовками */
+    color: #9e86f7; 
+    border-bottom: 2px solid #9e86f7 !important; 
 }
-
 [data-theme="dark"] #scheduleTable td {
     background-color: #1a1a1a;
     color: #f5f6fa;
-    border-bottom: 1px solid #9e86f7 !important; /* Фіолетові лінії між рядками */
+    border-bottom: 1px solid #9e86f7 !important; 
 }
-
 [data-theme="dark"] .day-header {
     background-color: #1a1a1a !important;
     color: #f5f6fa !important;
     font-weight: bold;
-    border-bottom: 2px solid #9e86f7 !important; /* Фіолетова лінія під заголовком дня */
-    border-top: 2px solid #9e86f7 !important; /* Фіолетова лінія над заголовком дня */
+    border-bottom: 2px solid #9e86f7 !important; 
+    border-top: 2px solid #9e86f7 !important; 
 }
-
 [data-theme="dark"] .saved-item {
     background: #1a1a1a;
 }
-
 [data-theme="dark"] .theme-toggle .moon-icon {
     opacity: 0;
     transform: rotate(-90deg);
 }
-
 [data-theme="dark"] .theme-toggle .sun-icon {
     opacity: 1;
     transform: rotate(0deg);
 }
-
 [data-theme="dark"] .nav-link {
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .results-table {
     background: #2d3436;
 }
-
 [data-theme="dark"] .results-table th {
     background: #1a1a1a;
 }
-
 [data-theme="dark"] .results-table tr:nth-child(even) {
     background: #1a1a1a;
 }
-
 [data-theme="dark"] .input-section {
     background: #2d3436;
 }
-
 [data-theme="dark"] .subject-input {
     background: #1a1a1a;
     border-color: #4a4a4a;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .suggestions-list {
     background: #2d3436;
     border-color: #4a4a4a;
 }
-
 [data-theme="dark"] .suggestions-list li:hover {
     background: #1a1a1a;
 }
-
 [data-theme="dark"] .subject-list li {
     background: #1a1a1a;
     border: 1px solid #4a4a4a;
 }
-
 [data-theme="dark"] .empty-message {
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .section-title,
 [data-theme="dark"] .main-title {
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .rating-summary {
     background: #1a1a1a;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .control-btn.warning {
     background: #ffeaa7;
     color: #2d3436;
 }
-
 [data-theme="dark"] .control-btn.primary {
     background: #6c5ce7;
 }
-
 [data-theme="dark"] .control-btn.success {
     background: #00b894;
 }
-
 [data-theme="dark"] .control-btn.danger {
     background: #ff7675;
 }
-
 [data-theme="dark"] .empty-slot {
     background-color: #1a1a1a;
-    border: 1px solid #8c7ae6; /* Фіолетова рамка для границь порожніх рядків */
+    border: 1px solid #8c7ae6; 
     color: #6c757d;
 }
-
 [data-theme="dark"] .table-wrapper.desktop-table.fixed-height {
     background: #2d3436;
     color: #f5f6fa;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Темніша тінь для темної теми */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); 
 }
-
 [data-theme="dark"] .table-wrapper.desktop-table.fixed-height table {
     background: #2d3436;
     color: #f5f6fa;
-    border: none; /* Прибираємо рамку самої таблиці, щоб уникнути подвійних границь */
+    border: none; 
 }
-
 [data-theme="dark"] .subject-category-group {
     background: #2d3436;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .subject-category-group h3 {
     background-color: #1a1a1a;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .subjects-list {
     background: #2d3436;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .subject-category {
     background: #2d3436;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .subject-item {
     background: #1a1a1a;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .subject-category-group h3:hover {
     background-color: #2d3436;
 }
-
-/* Стилі для кнопки зміни теми */
 .theme-toggle {
     position: fixed;
     top: 10px;
@@ -1285,50 +1069,40 @@ body {
     transition: all 0.3s ease;
     z-index: 1001;
 }
-
 .theme-toggle:hover {
     transform: scale(1.1);
 }
-
 .theme-toggle .moon-icon,
 .theme-toggle .sun-icon {
     position: absolute;
     transition: all 0.3s ease;
 }
-
 .theme-toggle .moon-icon {
     opacity: 1;
     transform: rotate(0deg);
 }
-
 .theme-toggle .sun-icon {
     opacity: 0;
     transform: rotate(90deg);
 }
-
 [data-theme="dark"] #scheduleTable td:first-child {
-    color: #a29bfe; /* Світло-фіолетовий колір для першої колонки (дати) */
+    color: #a29bfe; 
     font-weight: bold;
 }
-
 [data-theme="dark"] .mobile-lesson-date-right {
-    color: #a29bfe; /* Світло-фіолетовий для дат */
+    color: #a29bfe; 
     font-weight: 500;
 }
-
 [data-theme="dark"] #scheduleTable td:nth-child(4) {
-    color: #a29bfe; /* Світло-фіолетовий для колонки групи */
+    color: #a29bfe; 
     font-weight: 500;
 }
-
 [data-theme="dark"] .page-info {
     background-color: #2d3436;
     color: #f5f6fa;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     border-left: 5px solid #6c5ce7;
 }
-
-/* Стилі для посилань на відеоконференцію */
 .lesson-link {
     color: #fdcb6e;
     text-decoration: none;
@@ -1337,134 +1111,105 @@ body {
     margin-top: 5px;
     transition: color 0.3s;
 }
-
 .lesson-link:hover {
     color: #ffeaa7;
     text-decoration: underline;
 }
-
 [data-theme="light"] .lesson-link {
     color: #d35400;
 }
-
 [data-theme="light"] .lesson-link:hover {
     color: #e67e22;
 }
-
-/* Іконка для посилання */
 .lesson-link i {
     margin-left: 5px;
     font-size: 0.9em;
 }
-
 [data-theme="dark"] .desktop-table {
-    border: 1px solid #8c7ae6; /* Фіолетова рамка для контейнера таблиці */
+    border: 1px solid #8c7ae6; 
     border-radius: 5px;
     overflow: hidden;
-    background: #1a1a1a; /* Змінено з #2d3436 на #1a1a1a */
+    background: #1a1a1a; 
 }
-
 [data-theme="dark"] .table-wrapper.desktop-table.fixed-height table {
-    background: #1a1a1a; /* Змінено з #2d3436 на #1a1a1a */
+    background: #1a1a1a; 
     color: #f5f6fa;
-    border: none; /* Прибираємо рамку самої таблиці, щоб уникнути подвійних границь */
+    border: none; 
 }
-
-/* Ефект при наведенні на рядки таблиці */
 [data-theme="dark"] #scheduleTable tbody tr:hover td {
-    background-color: #2d3436; /* Залишаємо темно-сірий тільки для ефекту ховера */
+    background-color: #2d3436; 
     transition: background-color 0.2s ease;
 }
-
-/* Змінюємо фон для звичайних рядків таблиці */
 [data-theme="dark"] #scheduleTable th {
-    background-color: #1a1a1a; /* Змінено з #2d3436 на #1a1a1a */
+    background-color: #1a1a1a; 
     color: #f5f6fa;
     border-bottom: 1px solid #8c7ae6;
 }
-
 [data-theme="dark"] #scheduleTable td {
-    background-color: #1a1a1a; /* Змінено з #2d3436 на #1a1a1a */
+    background-color: #1a1a1a; 
     color: #f5f6fa;
     border-bottom: 1px solid #3d3d3d;
 }
-
 [data-theme="dark"] #scheduleTable tbody tr {
-    background-color: #1a1a1a; /* Змінено з #2d3436 на #1a1a1a */
+    background-color: #1a1a1a; 
     border-bottom: 1px solid #3d3d3d;
 }
-
 [data-theme="dark"] #scheduleTable tbody tr:nth-child(even) {
-    background-color: #1a1a1a; /* Змінено з #2d3436 на #1a1a1a */
+    background-color: #1a1a1a; 
 }
-
-/* Смуги для днів тижня */
 [data-theme="dark"] .day-header {
-    background: #1a1a1a !important; /* Змінено з #2d3436 на #1a1a1a */
+    background: #1a1a1a !important; 
     border-bottom: 1px solid #8c7ae6 !important;
 }
-
 [data-theme="dark"] #scheduleTable tr.empty-slot td {
     background-color: #1a1a1a;
     color: #6c757d;
-    border: 1px dotted #8c7ae6; /* Пунктирна лінія для порожніх слотів */
+    border: 1px dotted #8c7ae6; 
 }
-
 [data-theme="dark"] #scheduleTable tr.empty-slot {
     background-color: #1a1a1a;
-    border: 1px solid #8c7ae6; /* Фіолетова рамка для порожніх слотів */
+    border: 1px solid #8c7ae6; 
 }
-
 [data-theme="dark"] .lesson-link {
-    color: #fdcb6e; /* Яскраво-жовтий колір для посилань */
+    color: #fdcb6e; 
     font-weight: bold;
     text-decoration: none;
     transition: all 0.3s ease;
 }
-
 [data-theme="dark"] .lesson-link:hover {
-    color: #ffeaa7; /* Світліший жовтий при наведенні */
+    color: #ffeaa7; 
     text-decoration: underline;
 }
-
-/* Стилі для мобільної версії в темній темі */
 @media (max-width: 768px) {
     [data-theme="dark"] #scheduleTable tbody tr {
         border-bottom: 1px solid #3d3d3d;
         padding: 8px 0;
         display: block;
         margin-bottom: 12px;
-        background: #1a1a1a !important; /* Чорний замість сірого */
+        background: #1a1a1a !important; 
         background-image: none !important;
         box-shadow: none !important;
     }
-    
     [data-theme="dark"] #scheduleTable td:before {
-        color: #a29bfe; /* Світло-фіолетовий для міток */
+        color: #a29bfe; 
     }
-    
     [data-theme="dark"] #scheduleTable td {
         border: none !important;
-        background: #1a1a1a !important; /* Чорний замість сірого */
+        background: #1a1a1a !important; 
         background-image: none !important;
         border-image: none !important;
         box-shadow: none !important;
         text-shadow: none !important;
         padding: 8px 15px;
     }
-    
     [data-theme="dark"] #scheduleTable tbody tr:nth-child(even) td {
-        background: #1a1a1a !important; /* Чорний замість сірого */
+        background: #1a1a1a !important; 
     }
-    
-    /* Темний фон для дня тижня в мобільному режимі */
     [data-theme="dark"] .day-header {
         background: #1a1a1a !important;
         border: none !important;
         border-bottom: 1px solid #3d3d3d !important;
     }
-    
-    /* Спеціально для чистих клітинок з часовими слотами */
     [data-theme="dark"] #scheduleTable .time-slot {
         background: transparent !important;
         background-image: none !important;
@@ -1474,12 +1219,10 @@ body {
         border-left: none !important;
         box-shadow: none !important;
         text-shadow: none !important;
-        color: #ffffff; /* Білий колір тексту для часових слотів */
+        color: #ffffff; 
     }
-    
-    /* Очищення для комірок з часом */
     [data-theme="dark"] #scheduleTable tr td:first-child {
-        background: #1a1a1a !important; /* Чорний замість сірого */
+        background: #1a1a1a !important; 
         background-image: none !important;
         border: none !important;
         border-image: none !important;
@@ -1487,9 +1230,7 @@ body {
         text-shadow: none !important;
     }
 }
-
 [data-theme="dark"] .time-slot {
-    color: #ffffff; /* Білий колір для "пара 1", "пара 2", тощо */
+    color: #ffffff; 
     font-weight: bold;
 }
-

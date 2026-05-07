@@ -1,7 +1,6 @@
 const schedulesData = {
     "КН-31": {
-      
-        faculty: "КН", // Додаємо поле faculty
+        faculty: "КН", 
         schedule: [
         {
             date: "24.02.2025", day: "Понеділок", lessons: [
@@ -1922,7 +1921,7 @@ const schedulesData = {
             ]
           },
         {
-            "date": "16.04.2025",  // Змінено на середу, бо пропустили
+            "date": "16.04.2025",  
             "day": "Середа",
             "lessons": [
                 {
@@ -4236,5 +4235,4 @@ const schedulesData = {
         }
     ]
     }
-
 };

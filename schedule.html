@@ -12,14 +12,11 @@
     <script src="theme.js"></script>
     <script src="schedule.js" defer></script>
 </head>
-
 <body>
-
     <button id="theme-toggle" class="theme-toggle">
         <i class="fas fa-moon moon-icon"></i>
         <i class="fas fa-sun sun-icon"></i>
     </button>
-    
     <nav class="main-nav">
         <ul class="nav-list">
             <li class="nav-item">
@@ -48,30 +45,23 @@
             </li>
         </ul>
     </nav>
-
     <main class="container">
         <section class="rating-section">
             <h1 class="main-title">
                 <i class="fas fa-calendar-alt"></i>
                 Розклад
             </h1>
-
             <div class="faculty-selection">
                 <h2 class="section-title"><i class="fas fa-university"></i> Оберіть спеціальність</h2>
                 <div id="faculties" class="button-group"></div>
             </div>
-
             <div class="group-selection" style="display: none;">
                 <h2 class="section-title"><i class="fas fa-users"></i> Оберіть групу</h2>
                 <div id="groups" class="button-group"></div>
             </div>
-
             <div class="schedule-view" style="display: none;">
                 <h2 class="section-title"><i class="fas fa-table"></i> Розклад занять</h2>
-
-                <!-- Фільтри -->
                 <div class="filters schedule-filters">
-                    <!-- Кнопки 7 днів і 1 місяць -->
                     <div class="filter-group">
                         <button class="control-btn primary" onclick="showScheduleForDays(7)">
                             <i class="fas fa-calendar-week"></i> 7 днів
@@ -111,8 +101,6 @@
                         <i class="fas fa-file-pdf"></i> Зберегти у PDF
                     </button>
                 </div>
-
-                <!-- Контейнер для ПК (таблиця) -->
                 <div class="table-wrapper desktop-table fixed-height">
                     <table id="scheduleTable" class="results-table">
                         <thead>
@@ -126,82 +114,59 @@
                         <tbody></tbody>
                     </table>
                 </div>
-
-                <!-- Контейнер для мобільних пристроїв (карточки) -->
                 <div class="mobile-schedule" style="display: none;">
                     <div id="mobileScheduleItems" class="schedule-items"></div>
                 </div>
-                
             </div>
         </section>
     </main>
     <script>
         function showScheduleForDays(days) {
             const today = new Date();
-            const dayOfWeek = today.getDay(); // 0 - неділя, 6 - субота
+            const dayOfWeek = today.getDay(); 
             let dateFrom;
-            
-            // Логіка визначення початкової дати в залежності від дня тижня
-            if (dayOfWeek === 0) { // Неділя
-                // Переходимо на наступний день (понеділок)
+            if (dayOfWeek === 0) { 
                 const nextMonday = new Date(today);
                 nextMonday.setDate(today.getDate() + 1);
                 dateFrom = nextMonday.toISOString().split('T')[0];
-            } else if (dayOfWeek === 6) { // Субота
-                // Поки що починаємо з поточного дня (суботи)
-                // Користувач хоче бачити п'ятницю та понеділок, це буде оброблено в showSchedule
+            } else if (dayOfWeek === 6) { 
                 dateFrom = today.toISOString().split('T')[0];
             } else {
-                // Понеділок-п'ятниця - починаємо з поточного дня
                 dateFrom = today.toISOString().split('T')[0];
             }
-            
-            // Розрахунок кінцевої дати
             const futureDate = new Date(today);
             futureDate.setDate(today.getDate() + days);
             const dateTo = futureDate.toISOString().split('T')[0];
-
             document.getElementById('date-from').value = dateFrom;
             document.getElementById('date-to').value = dateTo;
             applyFilters();
         }
-
         function showScheduleForMonth() {
             const today = new Date();
-            const dayOfWeek = today.getDay(); // 0 - неділя, 6 - субота
+            const dayOfWeek = today.getDay(); 
             let dateFrom;
-
-            // Логіка визначення початкової дати в залежності від дня тижня
-            if (dayOfWeek === 0) { // Неділя
-                // Переходимо на наступний день (понеділок)
+            if (dayOfWeek === 0) { 
                 const nextMonday = new Date(today);
                 nextMonday.setDate(today.getDate() + 1);
                 dateFrom = nextMonday.toISOString().split('T')[0];
-            } else if (dayOfWeek === 6) { // Субота
-                // З п'ятниці
+            } else if (dayOfWeek === 6) { 
                 const friday = new Date(today);
                 friday.setDate(today.getDate() - 1);
                 dateFrom = friday.toISOString().split('T')[0];
             } else {
-                // Понеділок-п'ятниця - починаємо з поточного дня
                 dateFrom = today.toISOString().split('T')[0];
             }
-            
-            // Розрахунок кінцевої дати на місяць вперед
             const futureDate = new Date(today);
             futureDate.setMonth(today.getMonth() + 1);
             const dateTo = futureDate.toISOString().split('T')[0];
-
             document.getElementById('date-from').value = dateFrom;
             document.getElementById('date-to').value = dateTo;
             applyFilters();
         }
     </script>
-
     <button id="scrollToTopBtn" class="scroll-to-top-btn" data-direction="up">
         <span class="toggle-arrow"><i class="fas fa-arrow-up"></i></span>
     </button>
-
     <script src="page-info.js"></script>
 </body>
 </html>

@@ -1,61 +1,43 @@
-/* ======================== */
-/* Змінні та базові стилі   */
-/* ======================== */
 
 :root {
-    /* Основні кольори */
     --primary-color: #4361ee;
     --primary-light: #4895ef;
     --primary-dark: #3a0ca3;
     --secondary-color: #f72585;
     --accent-color: #f72585;
-
-    /* Нейтральні кольори */
     --light-color: #f8f9fa;
     --light-gray: #e9ecef;
     --medium-gray: #adb5bd;
     --dark-gray: #495057;
     --dark-color: #212529;
-
-    /* Функціональні кольори */
     --success-color: #4ade80;
     --warning-color: #fbbf24;
     --danger-color: #f43f5e;
     --info-color: #38bdf8;
-
-    /* Розміри і відступи */
     --spacing-xs: 0.25rem;
     --spacing-sm: 0.5rem;
     --spacing-md: 1rem;
     --spacing-lg: 1.5rem;
     --spacing-xl: 2rem;
     --spacing-xxl: 3rem;
-
-    /* Радіуси і тіні */
     --border-radius-sm: 0.25rem;
     --border-radius-md: 0.5rem;
     --border-radius-lg: 1rem;
     --border-radius-xl: 1.5rem;
     --border-radius-circle: 50%;
-
     --box-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
     --box-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
     --box-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
     --box-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
-
-    /* Анімації */
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
     --transition-slow: 0.5s ease;
 }
-
-/* Базові стилі */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-
 body {
     font-family: 'Montserrat', sans-serif;
     line-height: 1.6;
@@ -65,19 +47,12 @@ body {
     display: flex;
     flex-direction: column;
 }
-
 .container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--spacing-md);
 }
-
-/* ======================== */
-/* Навігація                */
-/* ======================== */
-
-/* Єдині стилі навігації для всіх сторінок сайту */
 .main-nav {
     background-color: white;
     padding: 0;
@@ -87,7 +62,6 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
 }
-
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -96,7 +70,6 @@ body {
     align-items: center;
     padding: 0.75rem 1rem;
 }
-
 .logo {
     display: flex;
     align-items: center;
@@ -106,11 +79,9 @@ body {
     font-weight: 700;
     text-decoration: none;
 }
-
 .logo i {
     font-size: 1.5rem;
 }
-
 .nav-list {
     display: flex;
     list-style: none;
@@ -118,11 +89,9 @@ body {
     padding: 0;
     gap: 1rem;
 }
-
 .nav-item {
     margin: 0;
 }
-
 .nav-link {
     display: flex;
     align-items: center;
@@ -135,30 +104,24 @@ body {
     border-radius: 0.375rem;
     transition: all 0.3s ease;
 }
-
 .nav-link i {
     font-size: 1.25rem;
     color: var(--primary-color);
 }
-
 .nav-link:hover {
     background-color: var(--primary-color);
     color: white;
 }
-
 .nav-link:hover i {
     color: white;
 }
-
 .nav-link.active {
     background-color: var(--primary-color);
     color: white;
 }
-
 .nav-link.active i {
     color: white;
 }
-
 .mobile-menu-btn {
     display: none;
     background: none;
@@ -168,46 +131,35 @@ body {
     cursor: pointer;
     padding: 0.5rem;
 }
-
-/* Темна тема для навігації */
 [data-theme="dark"] .main-nav {
     background-color: #1a1a1a;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
-
 [data-theme="dark"] .logo {
     color: var(--primary-light);
 }
-
 [data-theme="dark"] .nav-link {
     color: #e2e8f0;
 }
-
 [data-theme="dark"] .nav-link i {
     color: var(--primary-light);
 }
-
 [data-theme="dark"] .nav-link:hover,
 [data-theme="dark"] .nav-link.active {
     background-color: var(--primary-light);
     color: #1a202c;
 }
-
 [data-theme="dark"] .nav-link:hover i,
 [data-theme="dark"] .nav-link.active i {
     color: #1a202c;
 }
-
 [data-theme="dark"] .mobile-menu-btn {
     color: #e2e8f0;
 }
-
-/* Мобільна версія навігації */
 @media (max-width: 768px) {
     .nav-container {
         padding: 0.5rem;
     }
-
     .nav-list {
     display: none;
         position: absolute;
@@ -220,45 +172,33 @@ body {
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         z-index: 1000;
     }
-
     .nav-list.show {
         display: flex;
     }
-
     .nav-item {
         width: 100%;
     }
-
     .nav-link {
         width: 100%;
         padding: 0.75rem 1rem;
     }
-
     [data-theme="dark"] .nav-list {
         background-color: #1a1a1a;
     }
-
     .mobile-menu-btn {
         display: block !important;
         position: relative;
         z-index: 101;
     }
 }
-
-/* ======================== */
-/* Головний контент         */
-/* ======================== */
-
 .main-content {
     flex: 1;
     padding: var(--spacing-xl) 0;
 }
-
 .profile-header {
     text-align: center;
     margin-bottom: var(--spacing-xl);
 }
-
 .page-title {
     font-size: 2.5rem;
     font-weight: 700;
@@ -269,32 +209,23 @@ body {
     justify-content: center;
     gap: var(--spacing-sm);
 }
-
 .page-title i {
     color: var(--primary-color);
 }
-
 .profile-subtitle {
     font-size: 1.1rem;
     color: var(--dark-gray);
     max-width: 600px;
     margin: 0 auto;
 }
-
-/* ======================== */
-/* Прогрес заповнення       */
-/* ======================== */
-
 .profile-progress {
     margin-bottom: var(--spacing-xl);
 }
-
 .progress-steps {
     display: flex;
     justify-content: space-between;
     margin-bottom: var(--spacing-md);
 }
-
 .progress-step {
     display: flex;
     flex-direction: column;
@@ -303,7 +234,6 @@ body {
     position: relative;
     z-index: 1;
 }
-
 .progress-step::before {
     content: '';
     position: absolute;
@@ -314,22 +244,18 @@ body {
     background-color: var(--light-gray);
     z-index: -1;
 }
-
 .progress-step:first-child::before {
     display: none;
 }
-
 .progress-step.active .step-icon,
 .progress-step.completed .step-icon {
     background-color: var(--primary-color);
     color: white;
 }
-
 .progress-step.active::before,
 .progress-step.completed::before {
     background-color: var(--primary-color);
 }
-
 .step-icon {
     width: 50px;
     height: 50px;
@@ -343,54 +269,42 @@ body {
     font-size: 1.25rem;
     transition: all var(--transition-normal);
 }
-
 .step-label {
     font-size: 0.9rem;
     font-weight: 500;
     color: var(--dark-gray);
     text-align: center;
 }
-
 .progress-step.active .step-label {
     color: var(--primary-color);
     font-weight: 600;
 }
-
 .progress-bar {
     height: 8px;
     background-color: var(--light-gray);
     border-radius: var(--border-radius-lg);
     overflow: hidden;
 }
-
 .progress-fill {
     height: 100%;
     background-color: var(--primary-color);
     border-radius: var(--border-radius-lg);
     transition: width var(--transition-normal);
 }
-
-/* ======================== */
-/* Кроки профілю            */
-/* ======================== */
-
 .profile-step {
     display: none;
     margin-bottom: var(--spacing-xl);
 }
-
 .profile-step.active-step {
     display: block;
     animation: fadeIn var(--transition-normal);
 }
-
 .step-content {
     background-color: white;
     border-radius: var(--border-radius-lg);
     padding: var(--spacing-xl);
     box-shadow: var(--box-shadow-md);
 }
-
 .section-title {
     font-size: 1.5rem;
     font-weight: 600;
@@ -401,7 +315,6 @@ body {
     text-align: center;
     position: relative;
 }
-
 .section-title::after {
     content: '';
     position: absolute;
@@ -413,24 +326,16 @@ body {
     background-color: var(--primary-color);
     border-radius: var(--border-radius-sm);
 }
-
-/* Змінюємо колір заголовків у темній темі з сірого на світлий */
 [data-theme="dark"] .section-title {
     color: var(--light-color);
     border-bottom: 2px solid var(--primary-light);
 }
-
-/* ======================== */
-/* Картки факультетів       */
-/* ======================== */
-
 .faculty-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: var(--spacing-lg);
     margin-bottom: var(--spacing-lg);
 }
-
 .faculty-card {
     background-color: var(--light-color);
     border-radius: var(--border-radius-lg);
@@ -441,18 +346,15 @@ body {
     text-align: center;
     border: 2px solid transparent;
 }
-
 .faculty-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--box-shadow-lg);
     border-color: var(--primary-light);
 }
-
 .faculty-card.selected {
     border-color: var(--primary-color);
     background-color: rgba(67, 97, 238, 0.05);
 }
-
 .faculty-icon {
     width: 70px;
     height: 70px;
@@ -465,7 +367,6 @@ body {
     margin: 0 auto var(--spacing-md);
     font-size: 1.75rem;
 }
-
 .faculty-card h3 {
     font-size: 1.1rem;
     font-weight: 600;
@@ -473,24 +374,17 @@ body {
     color: var(--dark-color);
     word-wrap: break-word;
 }
-
 .faculty-card p {
     font-size: 0.9rem;
     color: var(--dark-gray);
     word-wrap: break-word;
 }
-
-/* ======================== */
-/* Групи                    */
-/* ======================== */
-
 .groups-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
 }
-
 .group-card {
     background-color: var(--light-color);
     border-radius: var(--border-radius-md);
@@ -500,42 +394,32 @@ body {
     transition: all var(--transition-normal);
     border: 2px solid transparent;
 }
-
 .group-card:hover {
     transform: translateY(-3px);
     box-shadow: var(--box-shadow-md);
     border-color: var(--primary-light);
 }
-
 .group-card.selected {
     border-color: var(--primary-color);
     background-color: rgba(67, 97, 238, 0.05);
 }
-
 .group-card h3 {
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--dark-color);
     word-wrap: break-word;
 }
-
 .group-card p {
     font-size: 0.85rem;
     color: var(--dark-gray);
     word-wrap: break-word;
 }
-
-/* ======================== */
-/* Семестри                 */
-/* ======================== */
-
 .semester-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: var(--spacing-lg);
     margin-bottom: var(--spacing-lg);
 }
-
 .semester-card {
     background-color: var(--light-color);
     border-radius: var(--border-radius-lg);
@@ -545,18 +429,15 @@ body {
     transition: all var(--transition-normal);
     border: 2px solid transparent;
 }
-
 .semester-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--box-shadow-md);
     border-color: var(--primary-light);
 }
-
 .semester-card.selected {
     border-color: var(--primary-color);
     background-color: rgba(67, 97, 238, 0.05);
 }
-
 .semester-icon {
     width: 60px;
     height: 60px;
@@ -569,7 +450,6 @@ body {
     margin: 0 auto var(--spacing-md);
     font-size: 1.5rem;
 }
-
 .semester-card h3 {
     font-size: 1.1rem;
     font-weight: 600;
@@ -577,28 +457,20 @@ body {
     color: var(--dark-color);
     word-wrap: break-word;
 }
-
 .semester-card p {
     font-size: 0.9rem;
     color: var(--dark-gray);
     word-wrap: break-word;
 }
-
-/* ======================== */
-/* Предмети                 */
-/* ======================== */
-
 .subjects-container {
     margin-bottom: var(--spacing-lg);
 }
-
 .subject-category-group {
     margin-bottom: var(--spacing-lg);
     border-radius: var(--border-radius-md);
     overflow: hidden;
     box-shadow: var(--box-shadow-sm);
 }
-
 .subject-category-group h3 {
     background-color: var(--primary-light);
     color: white;
@@ -610,38 +482,31 @@ body {
     align-items: center;
     cursor: pointer;
 }
-
 .subject-category-group h3:hover {
     background-color: var(--primary-color);
 }
-
 .subjects-list {
     background-color: var(--light-color);
     padding: var(--spacing-md);
 }
-
-.subject-item-chosen { /* Стилі для обраних предметів */
+.subject-item-chosen { 
     display: flex;
-    flex-direction: column; /* Вертикальне розташування завжди */
+    flex-direction: column; 
     padding: var(--spacing-md);
     border-bottom: 1px solid var(--light-gray);
     transition: background-color var(--transition-fast);
 }
-
 .subject-item-chosen:last-child {
     border-bottom: none;
 }
-
 .subject-item-chosen:hover {
     background-color: rgba(67, 97, 238, 0.05);
 }
-
-.subject-info-chosen { /* Стилі для інформації обраних предметів */
+.subject-info-chosen { 
     flex: 1;
     min-width: 0;
     margin-bottom: var(--spacing-sm);
 }
-
 .subject-info-chosen h4 {
     font-size: 1.1rem;
     font-weight: 600;
@@ -652,7 +517,6 @@ body {
     hyphens: auto;
     max-width: 100%;
 }
-
 .subject-info-chosen small {
     display: block;
     font-size: 0.9rem;
@@ -663,21 +527,18 @@ body {
     margin-bottom: var(--spacing-sm);
     max-width: 100%;
 }
-
 .subject-info-chosen small i {
     margin-right: var(--spacing-xs);
     color: var(--primary-color);
 }
-
-.subgroups-chosen { /* Стилі для підгруп обраних предметів */
+.subgroups-chosen { 
     word-wrap: break-word;
     overflow-wrap: break-word;
-    padding-left: 0; /* Підгрупи під інформацією без відступу */
+    padding-left: 0; 
     margin-top: var(--spacing-sm);
     max-width: 100%;
 }
-
-.subgroups_chosen label { /* corrected class name here */
+.subgroups_chosen label { 
     display: block;
     margin-bottom: var(--spacing-xs);
     font-size: 0.85rem;
@@ -687,25 +548,20 @@ body {
     hyphens: auto;
     max-width: 100%;
 }
-
-
 .subject-item {
     display: flex;
     align-items: flex-start;
     padding: var(--spacing-md);
     border-bottom: 1px solid var(--light-gray);
     transition: background-color var(--transition-fast);
-    flex-direction: column; /* Вертикальне розташування для списку предметів на вибір */
+    flex-direction: column; 
 }
-
 .subject-item:last-child {
     border-bottom: none;
 }
-
 .subject-item:hover {
     background-color: rgba(67, 97, 238, 0.05);
 }
-
 .subject-item input[type="checkbox"] {
     margin-right: 0;
     margin-bottom: var(--spacing-sm);
@@ -714,13 +570,11 @@ body {
     accent-color: var(--primary-color);
     order: -1;
 }
-
 .subject-info {
     flex: 1;
     min-width: 0;
     margin-left: 0;
 }
-
 .subject-info h4 {
     font-size: 1.1rem;
     font-weight: 600;
@@ -731,7 +585,6 @@ body {
     hyphens: auto;
     max-width: 100%;
 }
-
 .subject-info small {
     display: block;
     background-color: #f8f9fa;
@@ -743,20 +596,16 @@ body {
     width: 100%;
     box-sizing: border-box;
 }
-
 .subject-info small i {
     margin-right: 6px;
     color: #0d6efd;
 }
-
 .subject-info small i.fa-graduation-cap {
     color: #198754;
 }
-
 .subject-info small i.fa-clipboard-check {
     color: #0dcaf0;
 }
-
 .subgroups {
     margin-top: var(--spacing-sm);
     padding-left: 0;
@@ -764,7 +613,6 @@ body {
     overflow-wrap: break-word;
     max-width: 100%;
 }
-
 .subgroups label {
     display: block;
     margin-bottom: var(--spacing-xs);
@@ -775,12 +623,6 @@ body {
     hyphens: auto;
     max-width: 100%;
 }
-
-
-/* ======================== */
-/* Кнопки дій               */
-/* ======================== */
-
 .step-actions {
     display: flex;
     gap: 1rem;
@@ -788,7 +630,6 @@ body {
     justify-content: center;
     flex-wrap: wrap;
 }
-
 .btn {
     display: inline-flex;
     align-items: center;
@@ -804,96 +645,75 @@ body {
     min-width: 160px;
     text-align: center;
 }
-
 .btn i {
     font-size: 1.1rem;
 }
-
 .btn-primary {
     background-color: var(--primary-color);
     color: white;
 }
-
 .btn-primary:hover {
     background-color: var(--primary-dark);
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
 .btn-secondary {
     background-color: var(--light-gray);
     color: var(--dark-gray);
 }
-
 .btn-secondary:hover {
     background-color: var(--medium-gray);
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
 .btn-danger {
     background-color: var(--danger-color);
     color: white;
 }
-
 .btn-danger:hover {
     opacity: 0.9;
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
 [data-theme="dark"] .btn-secondary {
     background-color: #2d3436;
     color: #f5f6fa;
     border: 1px solid #4895ef;
 }
-
 [data-theme="dark"] .btn-secondary:hover {
     background-color: #1a1a1a;
 }
-
 [data-theme="dark"] .btn-primary {
     background-color: #4895ef;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .btn-primary:hover {
     background-color: #3a7bc8;
 }
-
 [data-theme="dark"] .btn-danger {
     background-color: #e74c3c;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .btn-danger:hover {
     background-color: #c0392b;
 }
-
 @media (max-width: 576px) {
     .step-actions {
         flex-direction: column;
         gap: 0.75rem;
     }
-
     .btn {
         width: 100%;
         padding: 0.875rem;
         font-size: 0.95rem;
     }
 }
-
-/* ======================== */
-/* Підсумок профілю         */
-/* ======================== */
-
 .profile-summary-content {
     background-color: var(--light-color);
     border-radius: var(--border-radius-md);
     padding: var(--spacing-lg);
     margin-bottom: var(--spacing-lg);
 }
-
 .profile-summary-content h3 {
     font-size: 1.2rem;
     font-weight: 600;
@@ -903,11 +723,9 @@ body {
     align-items: center;
     gap: var(--spacing-sm);
 }
-
 .profile-summary-content h3 i {
     color: var(--primary-color);
 }
-
 .profile-summary-content p {
     margin-bottom: var(--spacing-md);
     font-size: 1rem;
@@ -915,12 +733,10 @@ body {
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
-
 .profile-summary-content ul {
     list-style-type: none;
     margin-bottom: var(--spacing-md);
 }
-
 .profile-summary-content ul li {
     background-color: #f8f9fa;
     padding: 12px;
@@ -928,7 +744,6 @@ body {
     border-radius: 8px;
     line-height: 1.5;
 }
-
 .profile-summary-content ul li small {
     display: block;
     margin-top: 8px;
@@ -936,24 +751,19 @@ body {
     background-color: #e9ecef;
     border-radius: 4px;
 }
-
 .profile-summary-content ul li i {
     margin-right: 6px;
 }
-
 .profile-summary-content ul li i.fa-users {
     color: #0d6efd;
 }
-
 .profile-summary-content li:last-child {
     border-bottom: none;
 }
-
 .profile-summary-content li i {
     color: var(--primary-color);
     margin-right: var(--spacing-sm);
 }
-
 .profile-summary-content strong {
     font-weight: 600;
     color: var(--dark-color);
@@ -961,11 +771,6 @@ body {
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
-
-/* ======================== */
-/* Футер                    */
-/* ======================== */
-
 .footer {
     background-color: #0b78bc;
     color: white;
@@ -974,19 +779,12 @@ body {
     margin-top: auto;
     width: 100%;
 }
-
 .footer .container {
     background-color: #0b78bc;
 }
-
 [data-theme="dark"] .footer .container {
     background-color: #0b78bc;
 }
-
-/* ======================== */
-/* Перемикач теми           */
-/* ======================== */
-
 .theme-toggle-profile {
     position: fixed;
     bottom: 20px;
@@ -1006,7 +804,6 @@ body {
     box-shadow: var(--box-shadow-lg);
     transition: all 0.3s ease;
 }
-
 .theme-toggle {
     position: fixed;
     bottom: 70px;
@@ -1026,47 +823,31 @@ body {
     box-shadow: var(--box-shadow-lg);
     transition: all 0.3s ease;
 }
-
-
-
-
-
 .theme-toggle:hover {
     transform: scale(1.1);
     background-color: var(--primary-dark);
 }
-
 .theme-toggle .moon-icon,
 .theme-toggle .sun-icon {
     position: absolute;
     transition: all 0.3s ease;
 }
-
 .theme-toggle .moon-icon {
     opacity: 1;
     transform: rotate(0deg);
 }
-
 .theme-toggle .sun-icon {
     opacity: 0;
     transform: rotate(90deg);
 }
-
-/* Стилі для темної теми */
 [data-theme="dark"] .theme-toggle .moon-icon {
     opacity: 0;
     transform: rotate(-90deg);
 }
-
 [data-theme="dark"] .theme-toggle .sun-icon {
     opacity: 1;
     transform: rotate(0deg);
 }
-
-/* ======================== */
-/* Темна тема               */
-/* ======================== */
-
 [data-theme="dark"] {
     --primary-color: #6c5ce7;
     --primary-light: #a29bfe;
@@ -1086,168 +867,131 @@ body {
     --text-muted: #9CA3AF;
     --light-color: #F3F4F6;
 }
-
 [data-theme="dark"] body {
     background: #1a1a1a;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .main-nav {
     background-color: #1a1a1a;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
-
 [data-theme="dark"] .logo {
     color: var(--primary-light);
 }
-
 [data-theme="dark"] .nav-link {
     color: #e2e8f0;
 }
-
 [data-theme="dark"] .nav-link i {
     color: var(--primary-light);
 }
-
 [data-theme="dark"] .nav-link:hover,
 [data-theme="dark"] .nav-link.active {
     background-color: var(--primary-light);
     color: #1a202c;
 }
-
 [data-theme="dark"] .nav-link:hover i,
 [data-theme="dark"] .nav-link.active i {
     color: #1a202c;
 }
-
 [data-theme="dark"] .mobile-menu-btn {
     color: #e2e8f0;
 }
-
 [data-theme="dark"] .rating-section,
 [data-theme="dark"] .saved-category {
     background: #2d3436;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
-
 [data-theme="dark"] .subject-item-chosen {
     background-color: #1a1a1a;
     border: 1px solid #4a4a4a;
 }
-
 [data-theme="dark"] .subject-info-chosen h4 {
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .subject-info-chosen small {
     color: #dfe6e9;
     background-color: #1a1a1a;
 }
-
 [data-theme="dark"] .credit-highlight {
     background-color: #2d3436;
     color: #f5f6fa;
     border: 1px solid #4895ef;
 }
-
 [data-theme="dark"] .web-credits {
     background-color: #2d3436;
     color: #f5f6fa;
     border: 1px solid #2ecc71;
 }
-
 [data-theme="dark"] .credit-banner {
     background-color: #2d3436;
     color: #f5f6fa;
     border: 1px solid #4895ef;
 }
-
 [data-theme="dark"] .credit-banner strong {
     color: #4895ef;
 }
-
 [data-theme="dark"] .subject-info small, 
 [data-theme="dark"] .subject-info-chosen small {
     background-color: #1a1a1a;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .credit-info {
     background-color: #2d3436;
     color: #f5f6fa;
     border: 1px solid #4895ef;
 }
-
 [data-theme="dark"] .credit-block {
     background-color: #2d3436;
     border: 1px solid #4895ef;
 }
-
 [data-theme="dark"] .section-divider {
     border-color: #4895ef;
     background-color: #1a1a1a;
 }
-
 [data-theme="dark"] .subject-category-group h3 {
     background-color: #1a1a1a;
     color: #f5f6fa;
     border-bottom-color: #4895ef;
 }
-
 [data-theme="dark"] .subject-category-group h3:hover {
     background-color: #2d3436;
 }
-
 [data-theme="dark"] .subjects-list {
     background-color: #1a1a1a;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .subject-item {
     background-color: #1a1a1a;
     color: #f5f6fa;
     border: 1px solid #4895ef;
 }
-
 [data-theme="dark"] .subject-item:hover {
     background-color: #2d3436;
 }
-
 [data-theme="dark"] .subject-info h4 {
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .subgroups label {
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .profile-summary-content {
     background-color: #2d3748;
     color: #e2e8f0;
 }
-
 [data-theme="dark"] .profile-summary-content ul li {
     background-color: #1a1a1a;
     border: 1px solid #4895ef;
 }
-
 [data-theme="dark"] .profile-summary-content ul li:hover {
     background-color: #2d3436;
 }
-
 [data-theme="dark"] .profile-summary-content ul li small {
     background-color: #2d3436;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .profile-summary-content strong {
     color: #4895ef;
 }
-
-/* ======================== */
-/* Анімації                 */
-/* ======================== */
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -1258,7 +1002,6 @@ body {
         transform: translateY(0);
     }
 }
-
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -1269,8 +1012,6 @@ body {
         transform: translateX(0);
     }
 }
-
-/* Стилі для посилань на групи поза медіа-запитами */
 .subgroups a, .subgroups-chosen a {
     display: inline-block;
     word-break: break-all;
@@ -1280,13 +1021,10 @@ body {
     transition: color var(--transition-fast);
     margin-right: 4px;
 }
-
 .subgroups a:hover, .subgroups-chosen a:hover {
     color: var(--primary-dark);
     text-decoration: underline;
 }
-
-/* Додаткові поліпшення для вертикального списку */
 .subgroups label, .subgroups-chosen label {
         display: flex;
     flex-wrap: wrap;
@@ -1294,16 +1032,12 @@ body {
     gap: 4px;
     margin-bottom: 6px;
 }
-
-/* Покращений стиль для інформації про кредити та екзамени */
 .subject-info small, .subject-info-chosen small {
     display: inline-block;
     margin-right: 8px;
     margin-bottom: 4px;
     line-height: 1.4;
 }
-
-/* Спеціальні стилі для зміченої області з кредитами та типом оцінювання */
 .credit-banner {
     display: block;
     width: 100%;
@@ -1319,17 +1053,12 @@ body {
     border-left: 4px solid #1a73e8;
     line-height: 1.3;
 }
-
-/* Темна тема для банера з кредитами */
 [data-theme="dark"] .credit-banner {
     background-color: #1e3a5f;
     color: #90caf9;
     border-left: 4px solid #5c8eff;
 }
-
-/* Спеціально для мобільних пристроїв - ще більш виразні стилі */
 @media (max-width: 576px) {
-    /* Банер з кредитами на всю ширину з підкресленням важливості */
     .credit-banner {
         border-left: 5px solid #1a73e8;
         margin: 10px 0;
@@ -1341,28 +1070,19 @@ body {
         border-radius: 4px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    
-    /* Підкреслення тексту всередині банера для більшої уваги */
     .credit-banner strong {
         color: #0d47a1;
         font-weight: 700;
     }
-    
-    /* Для темної теми */
     [data-theme="dark"] .credit-banner {
         background-color: #1e3a5f;
         color: #90caf9;
         border-left: 5px solid #5c8eff;
     }
-    
     [data-theme="dark"] .credit-banner strong {
         color: #bbdefb;
     }
 }
-
-/* ПРЯМІ СТИЛІ ДЛЯ ІНФОРМАЦІЇ ПРО КРЕДИТИ І ЗАЛІК/ЕКЗАМЕН */
-
-/* Загальний стиль для БУДЬ-ЯКОГО елемента, що містить інформацію про кредити */
 [class*="subject"] span:contains("кредитів"),
 .subject-item-chosen span:contains("кредитів"),
 small:contains("кредитів"),
@@ -1384,8 +1104,6 @@ a:contains("кредитів") {
     box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
     box-sizing: border-box !important;
 }
-
-/* Темна тема */
 [data-theme="dark"] [class*="subject"] span:contains("кредитів"),
 [data-theme="dark"] .subject-item-chosen span:contains("кредитів"),
 [data-theme="dark"] small:contains("кредитів"),
@@ -1396,13 +1114,9 @@ a:contains("кредитів") {
     color: #90caf9 !important;
     border-left: 5px solid #5c8eff !important;
 }
-
-/* Окрема стилізація для кожного елемента окремо */
 .subject-item-chosen {
     position: relative !important;
 }
-
-/* Стилізація для першого розділу - Економіка */
 .credit-econ, 
 span:nth-of-type(1):contains("кредитів") {
     background-color: #e3f2fd !important;
@@ -1415,8 +1129,6 @@ span:nth-of-type(1):contains("кредитів") {
     color: #0d47a1 !important;
     border-left: 5px solid #0d47a1 !important;
 }
-
-/* Стилізація для другого розділу - Комп'ютерні мережі */
 .credit-net,
 span:nth-of-type(2):contains("кредитів") {
     background-color: #e8eaf6 !important;
@@ -1429,8 +1141,6 @@ span:nth-of-type(2):contains("кредитів") {
     color: #303f9f !important;
     border-left: 5px solid #303f9f !important;
 }
-
-/* Стилізація для третього розділу - Практикум */
 .credit-prakt,
 span:nth-of-type(3):contains("кредитів") {
     background-color: #e0f2f1 !important;
@@ -1443,8 +1153,6 @@ span:nth-of-type(3):contains("кредитів") {
     color: #00695c !important;
     border-left: 5px solid #00695c !important;
 }
-
-/* Стилізація для четвертого розділу - Unity */
 .credit-unity,
 span:nth-of-type(4):contains("кредитів") {
     background-color: #f3e5f5 !important;
@@ -1457,8 +1165,6 @@ span:nth-of-type(4):contains("кредитів") {
     color: #6a1b9a !important;
     border-left: 5px solid #6a1b9a !important;
 }
-
-/* Стилізація для п'ятого розділу - Web */
 .credit-web,
 span:nth-of-type(5):contains("кредитів") {
     background-color: #fff3e0 !important;
@@ -1471,8 +1177,6 @@ span:nth-of-type(5):contains("кредитів") {
     color: #e65100 !important;
     border-left: 5px solid #e65100 !important;
 }
-
-/* Пряме застосування до всіх елементів із текстом про кредити */
 small:contains("кредитів"),
 span:contains("кредитів") {
     font-weight: bold !important;
@@ -1488,39 +1192,30 @@ span:contains("кредитів") {
     color: #0d47a1 !important;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
 }
-
-/* Коли профіль налаштований, приховуємо навігаційні елементи */
 body.profile-completed .profile-progress,
 body.profile-completed .progress-steps {
     display: none !important;
 }
-
-/* Прибираємо кружечки з прогресу, які ми бачимо на скріншоті */
 body.profile-completed .progress-step {
     display: none !important;
 }
-
-/* Стилі для секцій профілю в темній темі */
 [data-theme="dark"] .profile-step {
     background-color: var(--dark-bg);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-lg);
 }
-
 [data-theme="dark"] .step-content {
     background-color: var(--dark-bg);
     color: var(--light-color);
     padding: var(--spacing-lg);
 }
-
 [data-theme="dark"] .profile-summary-content {
     background-color: var(--dark-bg);
     color: var(--light-color);
     border: 1px solid var(--border-color);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
-
 [data-theme="dark"] .subject-item,
 [data-theme="dark"] .subject-item-chosen {
     background-color: var(--dark-bg-lighter);
@@ -1531,21 +1226,18 @@ body.profile-completed .progress-step {
     padding: var(--spacing-md);
     border-radius: var(--border-radius-md);
 }
-
 [data-theme="dark"] .subject-item:hover,
 [data-theme="dark"] .subject-item-chosen:hover {
     background-color: var(--dark-bg-hover);
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
-
 [data-theme="dark"] .subject-info h4,
 [data-theme="dark"] .subject-info-chosen h4 {
     color: var(--light-color);
     font-weight: 600;
     margin-bottom: var(--spacing-sm);
 }
-
 [data-theme="dark"] .subject-info small,
 [data-theme="dark"] .subject-info-chosen small {
     background-color: var(--dark-bg);
@@ -1554,87 +1246,70 @@ body.profile-completed .progress-step {
     border-radius: var(--border-radius-sm);
     display: inline-block;
 }
-
 [data-theme="dark"] .main-content {
     background-color: var(--dark-bg-darker);
     min-height: 100vh;
     padding: var(--spacing-xl) 0;
 }
-
 [data-theme="dark"] .container {
     background-color: transparent;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--spacing-md);
 }
-
 [data-theme="dark"] .faculty-card {
     background-color: #1a1a1a;
     color: #f5f6fa;
     border: 1px solid #374151;
 }
-
 [data-theme="dark"] .faculty-card h3 {
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .faculty-card p {
     color: #9CA3AF;
 }
-
 [data-theme="dark"] .faculty-card:hover {
     border-color: var(--primary-light);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
-
 [data-theme="dark"] .faculty-card.selected {
     border-color: var(--primary-light);
     background-color: rgba(108, 92, 231, 0.1);
 }
-
 [data-theme="dark"] .group-card {
     background-color: #1a1a1a;
     color: #f5f6fa;
     border: 1px solid #374151;
 }
-
 [data-theme="dark"] .group-card h3 {
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .group-card p {
     color: #9CA3AF;
 }
-
 [data-theme="dark"] .group-card:hover {
     border-color: var(--primary-light);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
-
 [data-theme="dark"] .group-card.selected {
     border-color: var(--primary-light);
     background-color: rgba(108, 92, 231, 0.1);
 }
-
 [data-theme="dark"] .semester-card {
     background-color: #1a1a1a;
     color: #f5f6fa;
     border: 1px solid #374151;
 }
-
 [data-theme="dark"] .semester-card h3 {
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .semester-card p {
     color: #9CA3AF;
 }
-
 [data-theme="dark"] .semester-card:hover {
     border-color: var(--primary-light);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
-
 [data-theme="dark"] .semester-card.selected {
     border-color: var(--primary-light);
     background-color: rgba(108, 92, 231, 0.1);

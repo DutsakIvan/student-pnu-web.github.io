@@ -1,4 +1,3 @@
-/* schedule.css */
 
 :root {
     --primary-color: #4361ee;
@@ -12,13 +11,11 @@
     --text-color: #2d3436;
     --transition-speed: 0.3s;
 }
-
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-
 body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     line-height: 1.6;
@@ -26,14 +23,11 @@ body {
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     min-height: 100vh;
 }
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
 }
-
-/* Навігація */
 .main-nav {
     background-color: white;
     padding: 0;
@@ -43,7 +37,6 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
 }
-
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -52,7 +45,6 @@ body {
     align-items: center;
     padding: 0.75rem 1rem;
 }
-
 .logo {
     display: flex;
     align-items: center;
@@ -62,11 +54,9 @@ body {
     font-weight: 700;
     text-decoration: none;
 }
-
 .logo i {
     font-size: 1.5rem;
 }
-
 .nav-list {
     display: flex;
     list-style: none;
@@ -74,11 +64,9 @@ body {
     padding: 0;
     gap: 1rem;
 }
-
 .nav-item {
     margin: 0;
 }
-
 .nav-link {
     display: flex;
     align-items: center;
@@ -91,30 +79,24 @@ body {
     border-radius: 0.375rem;
     transition: all 0.3s ease;
 }
-
 .nav-link i {
     font-size: 1.25rem;
     color: var(--primary-color);
 }
-
 .nav-link:hover {
     background-color: var(--primary-color);
     color: white;
 }
-
 .nav-link:hover i {
     color: white;
 }
-
 .nav-link.active {
     background-color: var(--primary-color);
     color: white;
 }
-
 .nav-link.active i {
     color: white;
 }
-
 .mobile-menu-btn {
     display: none;
     background: none;
@@ -124,46 +106,35 @@ body {
     cursor: pointer;
     padding: 0.5rem;
 }
-
-/* Темна тема для навігації */
 [data-theme="dark"] .main-nav {
     background-color: #1a1a1a;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
-
 [data-theme="dark"] .logo {
     color: var(--primary-light);
 }
-
 [data-theme="dark"] .nav-link {
     color: #e2e8f0;
 }
-
 [data-theme="dark"] .nav-link i {
     color: var(--primary-light);
 }
-
 [data-theme="dark"] .nav-link:hover,
 [data-theme="dark"] .nav-link.active {
     background-color: var(--primary-light);
     color: #1a202c;
 }
-
 [data-theme="dark"] .nav-link:hover i,
 [data-theme="dark"] .nav-link.active i {
     color: #1a202c;
 }
-
 [data-theme="dark"] .mobile-menu-btn {
     color: #e2e8f0;
 }
-
-/* Мобільна версія навігації */
 @media (max-width: 768px) {
     .nav-container {
         padding: 0.5rem;
     }
-
     .nav-list {
         display: none;
         position: absolute;
@@ -176,32 +147,25 @@ body {
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         z-index: 1000;
     }
-
     .nav-list.show {
         display: flex;
     }
-
     .nav-item {
         width: 100%;
     }
-
     .nav-link {
         width: 100%;
         padding: 0.75rem 1rem;
     }
-
     .mobile-menu-btn {
         display: block !important;
         position: relative;
         z-index: 101;
     }
-
     [data-theme="dark"] .nav-list {
         background-color: #1a1a1a;
     }
 }
-
-/* Секції */
 .rating-section {
     background: white;
     border-radius: 16px;
@@ -209,7 +173,6 @@ body {
     margin: 2rem 0;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
-
 .section-title {
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
@@ -218,8 +181,6 @@ body {
     gap: 0.75rem;
     color: var(--dark-gray);
 }
-
-/* Кнопки */
 .control-btn {
     padding: 0.75rem 1.5rem;
     display: inline-flex;
@@ -236,63 +197,51 @@ body {
     margin: 0 0.25rem;
     margin-top: 1.48rem;
 }
-
 .control-btn.primary {
     background: var(--primary-color);
     color: white;
 }
-
 .control-btn.success {
     background: var(--success-color);
     color: white;
 }
-
 .control-btn.warning {
     background: var(--warning-color);
     color: var(--text-color);
 }
-
 .control-btn.danger {
     background: var(--danger-color);
     color: white;
 }
-
 .control-btn.secondary {
     background: #7f8c8d;
     color: white;
 }
-
 .control-btn.secondary:hover {
     background: #95a5a6;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
-
 .control-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
-
-/* Форма введення */
 .input-section {
     background: var(--light-gray);
     border-radius: 12px;
     padding: 1.5rem;
     margin: 2rem 0;
 }
-
 .input-group {
     margin-bottom: 1.5rem;
     position: relative;
 }
-
 .input-label {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
     color: var(--dark-gray);
 }
-
 .subject-input {
     width: 100%;
     padding: 0.875rem;
@@ -301,19 +250,15 @@ body {
     font-size: 1rem;
     transition: border-color var(--transition-speed);
 }
-
 .subject-input:focus {
     border-color: var(--primary-color);
     outline: none;
     box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
 }
-
-/* Автодоповнення */
 .autocomplete-wrapper {
     position: relative;
     width: 100%;
 }
-
 .suggestions-list {
     position: absolute;
     top: 100%;
@@ -328,36 +273,29 @@ body {
     overflow-y: auto;
     display: none;
 }
-
 .suggestions-list li {
     padding: 12px 16px;
     cursor: pointer;
     transition: background 0.2s;
 }
-
 .suggestions-list li:hover {
     background: var(--light-gray);
 }
-
-/* Додані предмети */
 .subjects-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
     margin-top: 1.5rem;
 }
-
 .subject-category {
     background: white;
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
-
 .subject-list {
     list-style: none;
 }
-
 .subject-list li {
     padding: 1rem;
     margin-bottom: 0.75rem;
@@ -368,7 +306,6 @@ body {
     align-items: center;
     animation: slideIn 0.3s ease;
 }
-
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -379,8 +316,6 @@ body {
         transform: translateX(0);
     }
 }
-
-/* Результати та таблиця */
 .results-table {
     margin-top: 2rem;
     background: white;
@@ -388,12 +323,10 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     overflow: hidden;
 }
-
 .results-table table {
     width: 100%;
     border-collapse: collapse;
 }
-
 .results-table th,
 .results-table td {
     padding: 1rem 1.5rem;
@@ -402,21 +335,17 @@ body {
     white-space: normal;
     word-wrap: break-word;
 }
-
 .results-table thead {
     background: var(--primary-color);
     color: white;
 }
-
 .results-table tbody tr:nth-child(even) {
     background: #f8f9fa;
 }
-
 .results-table td:last-child {
     font-weight: 500;
     color: var(--secondary-color);
 }
-
 .rating-summary {
     padding: 1.5rem;
     background: var(--light-gray);
@@ -425,26 +354,20 @@ body {
     gap: 1rem;
     font-weight: 500;
 }
-
 .rating-summary .total {
     color: var(--success-color);
     font-weight: 600;
 }
-
-/* Групування кнопок */
 .button-group {
     display: flex;
     gap: 1rem;
     margin-top: 1.5rem;
     flex-wrap: wrap;
 }
-
 .button-group .control-btn {
     flex: 1;
     min-width: 200px;
 }
-
-/* Стилі для кнопки зміни теми */
 .theme-toggle {
     position: fixed;
     top: 60px;
@@ -464,88 +387,69 @@ body {
     transition: all 0.3s ease;
     z-index: 1000;
 }
-
 .theme-toggle:hover {
     transform: scale(1.1);
 }
-
 .theme-toggle .moon-icon,
 .theme-toggle .sun-icon {
     position: absolute;
     transition: all 0.3s ease;
 }
-
 .theme-toggle .moon-icon {
     opacity: 1;
     transform: rotate(0deg);
 }
-
 .theme-toggle .sun-icon {
     opacity: 0;
     transform: rotate(90deg);
 }
-
-/* Адаптивність */
 @media (max-width: 768px) {
     .filters {
         flex-direction: column;
         align-items: flex-start;
     }
-
     .filters .filter-group {
         width: 100%;
     }
-
     .filters .control-btn {
         width: auto;
         max-width: 250px;
         align-self: center;
         margin-top: 0.5rem;
     }
-
     .subjects-container {
         grid-template-columns: 1fr;
     }
-
     .controls-wrapper {
         display: flex;
         flex-direction: column;
         gap: 1rem;
     }
-
     .control-btn {
         width: 100%;
         justify-content: center;
         min-width: unset;
         margin: 0;
     }
-
     .button-group {
         flex-direction: column;
     }
-
     .button-group .control-btn {
         width: 100%;
         min-width: unset;
     }
-
     .suggestions-list {
         width: 100% !important;
     }
-
     .rating-summary {
         grid-template-columns: 1fr;
     }
-
     .table-wrapper {
         overflow-x: auto;
     }
-
     #scheduleTable td {
         font-size: 0.9em;
     }
-
-    /* --- Мобільні стилі для таблиці (компактні картки) --- */
     #scheduleTable {
         table-layout: auto;
         width: 100%;
@@ -553,11 +457,9 @@ body {
         margin-top: 1rem;
         font-size: 0.9em;
     }
-
     #scheduleTable thead {
         display: none;
     }
-
     #scheduleTable th,
     #scheduleTable td {
         border: none;
@@ -571,7 +473,6 @@ body {
         width: 100%;
         box-sizing: border-box;
     }
-
     #scheduleTable tbody tr {
         margin-bottom: 15px;
         display: block;
@@ -581,7 +482,6 @@ body {
         background-color: white;
         padding: 10px;
     }
-
     #scheduleTable td:before {
         font-weight: bold;
         display: inline-block;
@@ -590,7 +490,6 @@ body {
         margin-right: 5px;
         vertical-align: top;
     }
-
     #scheduleTable td:nth-child(1),
     #scheduleTable td:nth-child(2),
     #scheduleTable td:nth-child(3),
@@ -600,7 +499,6 @@ body {
         border: none;
         padding: 0;
     }
-
     #scheduleTable tbody tr.empty-slot {
         padding: 5px 10px;
         margin-bottom: 10px;
@@ -608,15 +506,12 @@ body {
         background-color: #f8f9fa;
         color: #777;
     }
-
     #scheduleTable tbody tr.empty-slot td {
         padding: 0;
     }
-
     #scheduleTable tbody tr.empty-slot td:before {
         content: none;
     }
-
     .day-header {
         position: sticky;
         top: 5px;
@@ -627,22 +522,17 @@ body {
         margin-top: 1rem;
         border-radius: 4px;
     }
-
     .time-slot {
         font-size: 1em;
         margin-bottom: 2px;
         display: inline-block;
     }
-
     #scheduleTable td:nth-child(2) {
         font-weight: 500;
     }
-
     #scheduleTable tbody tr:nth-child(even) {
         background-color: white;
     }
-
-    /* Стиль для дати в мобільному розкладі - Right Style */
     .mobile-lesson-date-right {
         font-size: 1em;
         color: #777;
@@ -655,45 +545,33 @@ body {
         position: relative;
         top: -0.3em;
     }
-
-    /* Зміна позиції кнопки theme-toggle на мобільних пристроях */
-   
-        /* Інші стилі для мобільних пристроїв... */
-    
         .theme-toggle {
-            position: fixed; /* Переконаємося, що позиція фіксована */
-            top: auto; /* Скасовуємо верхнє положення */
-            bottom: 20px; /* Встановлюємо 20px віднизу */
-            right: 20px; /* Залишаємо праве положення */
+            position: fixed; 
+            top: auto; 
+            bottom: 20px; 
+            right: 20px; 
             width: 36px;
             height: 36px;
             font-size: 1rem;
-            z-index: 1000; /* Переконаємося, що кнопка поверх інших елементів */
+            z-index: 1000; 
         }
-    
-        /* Інші стилі для мобільних пристроїв... */
     }
 s
-
-/* Збережені матеріали */
 .saved-content {
     display: grid;
     gap: 2rem;
 }
-
 .saved-category {
     background: white;
     border-radius: 16px;
     padding: 2rem;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
-
 .saved-items-container {
     display: grid;
     gap: 1rem;
     margin-top: 1.5rem;
 }
-
 .saved-item {
     background: var(--light-gray);
     border-radius: 12px;
@@ -705,17 +583,14 @@ s
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     transition: transform var(--transition-speed);
 }
-
 .saved-item:hover {
     transform: translateY(-3px);
 }
-
 .saved-item-header {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
-
 .delete-btn {
     background: var(--danger-color);
     color: white;
@@ -725,20 +600,15 @@ s
     cursor: pointer;
     transition: opacity var(--transition-speed);
 }
-
 .delete-btn:hover {
     opacity: 0.9;
 }
-
 .empty-message {
     text-align: center;
     color: var(--dark-gray);
     padding: 2rem;
     font-style: italic;
 }
-
-/* --- Специфічні стилі для schedule.html --- */
-
 .faculty-selection {
     background-color: #f0f8ff;
     border: 1px solid #add8e6;
@@ -746,7 +616,6 @@ s
     border-radius: 8px;
     margin-bottom: 1rem;
 }
-
 .group-selection {
     background-color: #f0f8ff;
     border: 1px solid #add8e6;
@@ -754,7 +623,6 @@ s
     border-radius: 8px;
     margin-bottom: 1rem;
 }
-
 #faculties button,
 #groups button {
     background-color: var(--primary-color);
@@ -766,20 +634,16 @@ s
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
 #faculties button:hover,
 #groups button:hover {
     background-color: var(--secondary-color);
 }
-
-/* Таблиця розкладу */
 #scheduleTable {
     table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
     margin-top: 1rem;
 }
-
 #scheduleTable th,
 #scheduleTable td {
     border: 1px solid #ddd;
@@ -789,27 +653,22 @@ s
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
 #scheduleTable th:nth-child(1),
 #scheduleTable td:nth-child(1) {
     width: 15%;
 }
-
 #scheduleTable th:nth-child(2),
 #scheduleTable td:nth-child(2) {
     width: 45%;
 }
-
 #scheduleTable th:nth-child(3),
 #scheduleTable td:nth-child(3) {
     width: 25%;
 }
-
 #scheduleTable th:nth-child(4),
 #scheduleTable td:nth-child(4) {
     width: 15%;
 }
-
 .day-header {
     background-color: #e0e0e0;
     font-weight: bold;
@@ -818,30 +677,24 @@ s
     margin-top: 1rem;
     border-radius: 4px;
 }
-
 .time-slot {
     color: #555;
     font-size: 0.9em;
     margin-bottom: 4px;
     display: block;
 }
-
 #scheduleTable td:nth-child(2) {
     font-weight: 500;
 }
-
 #scheduleTable td small {
     color: #777;
     display: block;
     margin-top: 4px;
     font-size: 0.85em;
 }
-
 #scheduleTable tbody tr.day-separator {
     border-top: 3px solid var(--primary-color);
 }
-
-/* Фільтри */
 .filters {
     display: flex;
     flex-wrap: nowrap;
@@ -850,7 +703,6 @@ s
     align-items: center;
     justify-content: flex-start;
 }
-
 .filters.schedule-filters {
     display: flex;
     flex-wrap: wrap;
@@ -859,17 +711,14 @@ s
     align-items: flex-start;
     justify-content: space-between;
 }
-
 .filter-group {
     display: flex;
     flex-direction: column;
 }
-
 .filters label {
     margin-bottom: 0.25rem;
     font-size: 0.9em;
 }
-
 .filters input[type="date"],
 .filters input[type="text"] {
     padding: 0.5rem;
@@ -877,12 +726,10 @@ s
     border-radius: 4px;
     font-size: 1rem;
 }
-
 .autocomplete-wrapper {
     position: relative;
     width: 100%;
 }
-
 .suggestions-list {
     position: absolute;
     top: 100%;
@@ -899,23 +746,18 @@ s
     padding: 0;
     list-style: none;
 }
-
 .suggestions-list li {
     padding: 12px 16px;
     cursor: pointer;
     transition: background-color 0.2s;
 }
-
 .suggestions-list li:hover {
     background-color: #f8f9fa;
 }
-
 .not-selected {
     color: #888;
     font-style: italic;
 }
-
-/* стрілочка */
 .scroll-to-top-btn {
     position: fixed;
     bottom: 20px;
@@ -929,26 +771,21 @@ s
     transition: background-color 0.3s ease;
     display: none;
 }
-
 .scroll-to-top-btn:hover {
     background-color: #357abd;
 }
-
 .toggle-arrow {
     display: inline-block;
     font-size: 20px;
     color: white;
     transition: transform 0.3s ease;
 }
-
 .toggle-arrow.down {
     transform: rotate(180deg);
 }
-
 .scroll-to-top-btn.show {
     display: block;
 }
-
 .table-wrapper.desktop-table.fixed-height {
     margin-top: 2rem;
     background: white;
@@ -960,13 +797,10 @@ s
     margin-left: auto;
     margin-right: auto;
 }
-
 .table-wrapper.desktop-table.fixed-height table {
     width: 100%;
     border-collapse: collapse;
 }
-
-/* --- Десктопні стилі для таблиці (фіксована ширина) --- */
 @media (min-width: 769px) {
     #scheduleTable {
         table-layout: fixed;
@@ -974,7 +808,6 @@ s
         border-collapse: collapse;
         margin-top: 1rem;
     }
-
     #scheduleTable th,
     #scheduleTable td {
         border: 1px solid #ddd;
@@ -984,31 +817,23 @@ s
         overflow: hidden;
         text-overflow: ellipsis;
     }
-
     #scheduleTable th:nth-child(1),
     #scheduleTable td:nth-child(1) {
         width: 15%;
     }
-
     #scheduleTable th:nth-child(2),
     #scheduleTable td:nth-child(2) {
         width: 45%;
     }
-
     #scheduleTable th:nth-child(3),
     #scheduleTable td:nth-child(3) {
         width: 25%;
     }
-
     #scheduleTable th:nth-child(4),
     #scheduleTable td:nth-child(4) {
         width: 15%;
     }
 }
-
-/* --- Кінець десктопних стилів таблиці --- */
-
-/* --- Мобільні стилі для таблиці (компактні картки) --- */
 @media (max-width: 768px) {
     #scheduleTable {
         table-layout: auto;
@@ -1017,11 +842,9 @@ s
         margin-top: 1rem;
         font-size: 0.9em;
     }
-
     #scheduleTable thead {
         display: none;
     }
-
     #scheduleTable th,
     #scheduleTable td {
         border: none;
@@ -1035,7 +858,6 @@ s
         width: 100%;
         box-sizing: border-box;
     }
-
     #scheduleTable tbody tr {
         margin-bottom: 15px;
         display: block;
@@ -1045,7 +867,6 @@ s
         background-color: white;
         padding: 10px;
     }
-
     #scheduleTable td:before {
         font-weight: bold;
         display: inline-block;
@@ -1054,7 +875,6 @@ s
         margin-right: 5px;
         vertical-align: top;
     }
-
     #scheduleTable td:nth-child(1),
     #scheduleTable td:nth-child(2),
     #scheduleTable td:nth-child(3),
@@ -1064,7 +884,6 @@ s
         border: none;
         padding: 0;
     }
-
     #scheduleTable tbody tr.empty-slot {
         padding: 5px 10px;
         margin-bottom: 10px;
@@ -1072,15 +891,12 @@ s
         background-color: #f8f9fa;
         color: #777;
     }
-
     #scheduleTable tbody tr.empty-slot td {
         padding: 0;
     }
-
     #scheduleTable tbody tr.empty-slot td:before {
         content: none;
     }
-
     .day-header {
         position: sticky;
         top: 5px;
@@ -1091,21 +907,17 @@ s
         margin-top: 1rem;
         border-radius: 4px;
     }
-
     .time-slot {
         font-size: 1em;
         margin-bottom: 2px;
         display: inline-block;
     }
-
     #scheduleTable td:nth-child(2) {
         font-weight: 500;
     }
-
     #scheduleTable tbody tr:nth-child(even) {
         background-color: white;
     }
-
     .mobile-lesson-date-right {
         font-size: 1em;
         color: #777;
@@ -1119,7 +931,6 @@ s
         top: -0.3em;
     }
 }
-
 .day-header .toggle-arrow {
     font-size: 0.8em;
     margin-left: 10px;
@@ -1128,8 +939,6 @@ s
     vertical-align: middle;
     color: var(--secondary-color);
 }
-
-/* Інформаційні повідомлення */
 .page-info {
     background: #8c7ae6;
     color: #fff;
@@ -1140,29 +949,24 @@ s
     box-shadow: 0 4px 10px rgba(140, 122, 230, 0.3);
     animation: fadeIn 0.5s ease;
 }
-
 .page-info h3 {
     font-size: 1.2rem;
     margin-bottom: 10px;
     color: #ffffff;
     font-weight: 600;
 }
-
 .page-info p {
     margin-bottom: 10px;
     line-height: 1.5;
 }
-
 .page-info ul {
     padding-left: 20px;
     margin-bottom: 10px;
 }
-
 .page-info li {
     margin-bottom: 5px;
     line-height: 1.5;
 }
-
 .page-info .close-btn {
     position: absolute;
     top: 10px;
@@ -1180,18 +984,14 @@ s
     cursor: pointer;
     transition: all 0.2s ease;
 }
-
 .page-info .close-btn:hover {
     background: rgba(255, 255, 255, 0.4);
     transform: scale(1.1);
 }
-
 .schedule-info {
     background: #8c7ae6;
     border-left: 4px solid #5f43e0;
 }
-
-/* Анімація появи */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -1202,8 +1002,6 @@ s
         transform: translateY(0);
     }
 }
-
-/* Темна тема */
 [data-theme="dark"] {
     --primary-color: #6c5ce7;
     --primary-light: #a29bfe;
@@ -1216,24 +1014,20 @@ s
     --text-color: #f5f6fa;
     background: #1a1a1a;
 }
-
 [data-theme="dark"] body {
     background: #1a1a1a;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .main-nav {
     background-color: #1a1a1a;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
-
 [data-theme="dark"] .rating-section,
 [data-theme="dark"] .faculty-selection,
 [data-theme="dark"] .group-selection {
     background: #2d3436;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] #scheduleTable {
     background-color: #1a1a1a;
     color: #ffffff;
@@ -1241,19 +1035,16 @@ s
     width: 100%;
     border: none !important;
 }
-
 [data-theme="dark"] #scheduleTable th {
     background-color: #1a1a1a;
     color: #9e86f7;
     border-bottom: 2px solid #9e86f7 !important;
 }
-
 [data-theme="dark"] #scheduleTable td {
     background-color: #1a1a1a;
     color: #f5f6fa;
     border-bottom: 1px solid #9e86f7 !important;
 }
-
 [data-theme="dark"] .day-header {
     background-color: #1a1a1a !important;
     color: #f5f6fa !important;
@@ -1261,162 +1052,128 @@ s
     border-bottom: 2px solid #9e86f7 !important;
     border-top: 2px solid #9e86f7 !important;
 }
-
 [data-theme="dark"] .saved-item {
     background: #1a1a1a;
 }
-
 [data-theme="dark"] .theme-toggle .moon-icon {
     opacity: 0;
     transform: rotate(-90deg);
 }
-
 [data-theme="dark"] .theme-toggle .sun-icon {
     opacity: 1;
     transform: rotate(0deg);
 }
-
 [data-theme="dark"] .nav-list {
     background-color: #1a1a1a;
 }
-
 [data-theme="dark"] .results-table {
     background: #2d3436;
 }
-
 [data-theme="dark"] .results-table th {
     background: #1a1a1a;
 }
-
 [data-theme="dark"] .results-table tr:nth-child(even) {
     background: #1a1a1a;
 }
-
 [data-theme="dark"] .input-section {
     background: #2d3436;
 }
-
 [data-theme="dark"] .subject-input {
     background: #1a1a1a;
     border-color: #4a4a4a;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .suggestions-list {
     background: #2d3436;
     border-color: #4a4a4a;
 }
-
 [data-theme="dark"] .suggestions-list li:hover {
     background: #1a1a1a;
 }
-
 [data-theme="dark"] .subject-list li {
     background: #1a1a1a;
     border: 1px solid #4a4a4a;
 }
-
 [data-theme="dark"] .empty-message {
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .section-title,
 [data-theme="dark"] .main-title {
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .rating-summary {
     background: #1a1a1a;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .control-btn.warning {
     background: #ffeaa7;
     color: #2d3436;
 }
-
 [data-theme="dark"] .control-btn.primary {
     background: #6c5ce7;
 }
-
 [data-theme="dark"] .control-btn.success {
     background: #00b894;
 }
-
 [data-theme="dark"] .control-btn.danger {
     background: #ff7675;
 }
-
 [data-theme="dark"] .empty-slot {
     background-color: #1a1a1a;
     border: 1px solid #8c7ae6;
     color: #6c757d;
 }
-
 [data-theme="dark"] .table-wrapper.desktop-table.fixed-height {
     background: #2d3436;
     color: #f5f6fa;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
-
 [data-theme="dark"] .table-wrapper.desktop-table.fixed-height table {
     background: #2d3436;
     color: #f5f6fa;
     border: none;
 }
-
 [data-theme="dark"] .subject-category-group {
     background: #2d3436;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .subject-category-group h3 {
     background-color: #1a1a1a;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .subjects-list {
     background: #2d3436;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .subject-category {
     background: #2d3436;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .subject-item {
     background: #1a1a1a;
     color: #f5f6fa;
 }
-
 [data-theme="dark"] .subject-category-group h3:hover {
     background-color: #2d3436;
 }
-
 [data-theme="dark"] #scheduleTable td:first-child {
     color: #a29bfe;
     font-weight: bold;
 }
-
 [data-theme="dark"] .mobile-lesson-date-right {
     color: #a29bfe;
     font-weight: 500;
 }
-
 [data-theme="dark"] #scheduleTable td:nth-child(4) {
     color: #a29bfe;
     font-weight: 500;
 }
-
 [data-theme="dark"] .page-info {
     background-color: #2d3436;
     color: #f5f6fa;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     border-left: 5px solid #6c5ce7;
 }
-
-/* Стилі для посилань на відеоконференцію */
 .lesson-link {
     color: #fdcb6e;
     text-decoration: none;
@@ -1425,93 +1182,75 @@ s
     margin-top: 5px;
     transition: color 0.3s;
 }
-
 .lesson-link:hover {
     color: #ffeaa7;
     text-decoration: underline;
 }
-
 [data-theme="light"] .lesson-link {
     color: #d35400;
 }
-
 [data-theme="light"] .lesson-link:hover {
     color: #e67e22;
 }
-
 .lesson-link i {
     margin-left: 5px;
     font-size: 0.9em;
 }
-
 [data-theme="dark"] .desktop-table {
     border: 1px solid #8c7ae6;
     border-radius: 5px;
     overflow: hidden;
     background: #1a1a1a;
 }
-
 [data-theme="dark"] .table-wrapper.desktop-table.fixed-height table {
     background: #1a1a1a;
     color: #f5f6fa;
     border: none;
 }
-
 [data-theme="dark"] #scheduleTable tbody tr:hover td {
     background-color: #2d3436;
     transition: background-color 0.2s ease;
 }
-
 [data-theme="dark"] #scheduleTable th {
     background-color: #1a1a1a;
     color: #f5f6fa;
     border-bottom: 1px solid #8c7ae6;
 }
-
 [data-theme="dark"] #scheduleTable td {
     background-color: #1a1a1a;
     color: #f5f6fa;
     border-bottom: 1px solid #3d3d3d;
 }
-
 [data-theme="dark"] #scheduleTable tbody tr {
     background-color: #1a1a1a;
     border-bottom: 1px solid #3d3d3d;
 }
-
 [data-theme="dark"] #scheduleTable tbody tr:nth-child(even) {
     background-color: #1a1a1a;
 }
-
 [data-theme="dark"] .day-header {
     background: #1a1a1a !important;
     border-bottom: 1px solid #8c7ae6 !important;
 }
-
 [data-theme="dark"] #scheduleTable tr.empty-slot td {
     background-color: #1a1a1a;
     color: #6c757d;
     border: 1px dotted #8c7ae6;
 }
-
 [data-theme="dark"] #scheduleTable tr.empty-slot {
     background-color: #1a1a1a;
     border: 1px solid #8c7ae6;
 }
-
 [data-theme="dark"] .lesson-link {
     color: #fdcb6e;
     font-weight: bold;
     text-decoration: none;
     transition: all 0.3s ease;
 }
-
 [data-theme="dark"] .lesson-link:hover {
     color: #ffeaa7;
     text-decoration: underline;
 }
-
-/* Стилі для мобільної версії в темній темі */
 @media (max-width: 768px) {
     [data-theme="dark"] #scheduleTable tbody tr {
         border-bottom: 1px solid #3d3d3d;
@@ -1522,11 +1261,9 @@ s
         background-image: none !important;
         box-shadow: none !important;
     }
-
     [data-theme="dark"] #scheduleTable td:before {
         color: #a29bfe;
     }
-
     [data-theme="dark"] #scheduleTable td {
         border: none !important;
         background: #1a1a1a !important;
@@ -1536,17 +1273,14 @@ s
         text-shadow: none !important;
         padding: 8px 15px;
     }
-
     [data-theme="dark"] #scheduleTable tbody tr:nth-child(even) td {
         background: #1a1a1a !important;
     }
-
     [data-theme="dark"] .day-header {
         background: #1a1a1a !important;
         border: none !important;
         border-bottom: 1px solid #3d3d3d !important;
     }
-
     [data-theme="dark"] #scheduleTable .time-slot {
         background: transparent !important;
         background-image: none !important;
@@ -1558,7 +1292,6 @@ s
         text-shadow: none !important;
         color: #ffffff;
     }
-
     [data-theme="dark"] #scheduleTable tr td:first-child {
         background: #1a1a1a !important;
         background-image: none !important;
@@ -1568,15 +1301,11 @@ s
         text-shadow: none !important;
     }
 }
-
 [data-theme="dark"] .time-slot {
     color: #ffffff;
     font-weight: bold;
 }
-
 @media (max-width: 768px) {
-    /* Інші стилі для мобільних пристроїв... */
-
     .theme-toggle {
         position: fixed;
         top: auto;
@@ -1588,20 +1317,17 @@ s
         z-index: 1000;
     }
 }
-/* Стилі для навігаційного списку */
 .nav-list {
     display: flex;
     justify-content: center;
     padding: 1rem 0;
     list-style: none;
 }
-
 .nav-item {
     margin: 0 1.5rem;
 }
-
 .nav-link {
-    color: #1e90ff !important; /* Новий колір тексту (додж-блю) з приоритетом */
+    color: #1e90ff !important; 
     text-decoration: none;
     font-weight: 600;
     padding: 0.5rem 1rem;
@@ -1611,42 +1337,32 @@ s
     align-items: center;
     gap: 0.5rem;
 }
-
 .nav-link i {
-    color: #1e90ff !important; /* Синхронізація кольору іконок */
+    color: #1e90ff !important; 
 }
-
 .nav-link:hover {
-    background: var(--primary-color); /* #4a90e2 */
-    color: white !important; /* Білий текст при наведенні */
+    background: var(--primary-color); 
+    color: white !important; 
 }
-
 .nav-link:hover i {
-    color: white !important; /* Білі іконки при наведенні */
+    color: white !important; 
 }
-
 .nav-link.active {
-    background: var(--primary-color); /* #4a90e2 */
-    color: white !important; /* Білий текст в активному стані */
+    background: var(--primary-color); 
+    color: white !important; 
 }
-
 .nav-link.active i {
-    color: white !important; /* Білі іконки в активному стані */
+    color: white !important; 
 }
-
-/* Темна тема */
 [data-theme="dark"] .nav-link {
     color: #e2e8f0;
 }
-
 [data-theme="dark"] .nav-link:hover,
 [data-theme="dark"] .nav-link.active {
     background-color: var(--primary-light);
     color: #1a202c;
 }
-
 [data-theme="dark"] .nav-link:hover i,
 [data-theme="dark"] .nav-link.active i {
     color: #1a202c;
 }
-
