@@ -115,14 +115,13 @@ function normalizeSubgroup(subgroup) {
         .replace(/\s+/g, ' ')
         .trim();
 
-    // Якщо це збірна група, зберігаємо оригінальний тип заняття
-    if (normalized.includes('кн(зб)')) {
-        const match = subgroup.match(/КН\(зб\)(\d+\.\d+)\s*\(([^)]+)\)/i);
-        if (match) {
-            const [, number, type] = match;
-            const normalizedType = normalizeType(type);
-            return `КН(зб)${number}(${normalizedType})`;
-        }
+    // Якщо це збірна група, зберігаємо оригінальний ID та тип заняття
+    // Підтримує: КН(зб)2.27(Лекція), КН-зб22(Лекція), В42¤092л1(Лекція)
+    const zbMatch = subgroup.match(/^(\S+)\s*\(([^)]+)\)$/i);
+    if (zbMatch && !zbMatch[1].toLowerCase().startsWith('підгрупа')) {
+        const [, groupId, type] = zbMatch;
+        const normalizedType = normalizeType(type);
+        return `${groupId}(${normalizedType})`;
     }
 
     // Нормалізуємо типи занять
@@ -158,10 +157,12 @@ function normalizeType(type) {
         'сем': 'Семінар',
         'семінар': 'Семінар',
         'семинар': 'Семінар',
-        'кек': 'Консультація',
+        'кср': 'КСР',
+        'кек': 'Контрольний екзамен',
         'екз': 'Екзамен',
         'консультація': 'Консультація',
-        'екзамен': 'Екзамен'
+        'екзамен': 'Екзамен',
+        'держат': 'Держ. атестація'
     };
 
     // Перевіряємо точні співпадіння
@@ -178,12 +179,6 @@ function normalizeType(type) {
         }
     }
 
-    // Додаткова перевірка для семінарів
-    if (type.includes('с') || type.includes('прс')) {
-        console.log('[TYPE] Розпізнано як семінар через додаткову перевірку');
-        return 'Семінар';
-    }
-
     console.log('[TYPE] Не вдалося нормалізувати тип:', type);
     console.log('[TYPE] ========= Кінець нормалізації типу =========\n');
     return type.charAt(0).toUpperCase() + type.slice(1);
@@ -198,11 +193,12 @@ function extractCoreSubject(subject) {
 
     // Видаляємо префікси та суфікси з урахуванням всіх можливих варіантів
     let core = subject
-        .replace(/^Збірна група\s+КН\(зб\)\s*/, '')
-        .replace(/^Потік\s+[^\\n]+/, '')
-        .replace(/КН\(зб\)\d+\.\d+\s*/, '')
-        .replace(/^\(підгр\.\s*\d+\)\s*/, '')
-        .replace(/[\s]*\([\s]*(Л|Лек|Лаб|ПрС|прс|Прс|Сем|ПРАКТИКА|Практика|Семінар)[\s]*\)[\s]*$/, '')
+        .replace(/^Збірна група\s+\S+\s+/, '')           // "Збірна група КН-зб22 ", "Збірна група В42¤092л1 "
+        .replace(/^Потік\s+[\wА-Яа-яіїєґІЇЄҐ'`'\-,\s]+?\s+(?=[А-ЯІЇЄҐA-Z])/, '')  // "Потік КН-41, КН-42 "
+        .replace(/^\(підгр\.\s*\d+\)\s*/, '')              // "(підгр. 1) "
+        .replace(/^[А-ЯІЇЄҐA-Z]{1,4}-\d{1,2}\s+/, '')     // "КН-41 ", "КН-42 " — префікс групи
+        .replace(/\.\.\.[^(]*/, '')                        // "... Держ.Ат. Консультації" або "... Письм.Екз.- за групу"
+        .replace(/[\s]*\([\s]*(Л|Лек|Лекція|Лаб|ПрС|Сем|Семінар|КСР|КЕк|Екз|Консультація|Практика|Держ\.Ат\.)[\s]*\)[\s]*$/i, '')
         .replace(/\n/g, ' ')
         .trim();
 
@@ -238,23 +234,23 @@ function extractSubgroup(subject) {
     console.log('[SUBGROUP] Оригінальний текст:', subject);
 
     // Шукаємо тип в кінці рядка з урахуванням всіх можливих варіантів
-    const typePattern = /[\s]*\([\s]*(Л|Лек|Лаб|ПрС|прс|Прс|Сем|ПРАКТИКА|Практика|Семінар|КЕк|Екз|Консультація)[\s]*\)[\s]*$/i;
+    const typePattern = /[\s]*\([\s]*(Л|Лек|Лекція|Лаб|ПрС|Сем|Семінар|КСР|КЕк|Екз|Консультація|Практика|Держ\.Ат\.)[\s]*\)[\s]*$/i;
     const typeMatch = subject.match(typePattern);
 
     console.log('[SUBGROUP] Пошук типу заняття за патерном:', typePattern);
     console.log('[SUBGROUP] Знайдений тип (сирий):', typeMatch ? typeMatch[0] : 'не знайдено');
     console.log('[SUBGROUP] Знайдений тип (група 1):', typeMatch ? typeMatch[1] : 'не знайдено');
 
-    // Перевіряємо на наявність збірної групи
+    // Перевіряємо на наявність збірної групи (універсальний regex)
     if (subject.includes('Збірна група')) {
-        const zbMatch = subject.match(/Збірна група\s+КН\(зб\)(\d+\.\d+)/);
+        const zbMatch = subject.match(/Збірна група\s+(\S+)/);
         console.log('[SUBGROUP] Знайдено збірну групу:', zbMatch ? zbMatch[1] : 'ні');
 
         if (zbMatch && typeMatch) {
-            const groupNum = zbMatch[1];
+            const groupId = zbMatch[1];
             const type = typeMatch[1];
             const normalizedType = normalizeType(type);
-            const result = `КН(зб)${groupNum}(${normalizedType})`;
+            const result = `${groupId}(${normalizedType})`;
             console.log('[SUBGROUP] Результат для збірної групи:', result);
             return result;
         }
@@ -398,7 +394,7 @@ function showSchedule(groupKey) {
         console.error('[SCHEDULE] Помилка: група', groupKey, 'не знайдена');
         return;
     }
-    const schedule = groupData.schedule;
+    let schedule = groupData.schedule;
     const tbody = document.querySelector('#scheduleTable tbody');
     if (!tbody) {
         console.error('[SCHEDULE] Помилка: таблиця розкладу не знайдена');
@@ -433,6 +429,58 @@ function showSchedule(groupKey) {
         1: "09:00-10:20", 2: "10:35-11:55", 3: "12:20-13:40", 4: "13:50-15:10",
         5: "15:20-16:40", 6: "16:50-18:10", 7: "18:15-19:35", 8: "19:40-21:00"
     };
+
+    // --- ПОБУДОВА ЗЛИВНОГО РОЗКЛАДУ ---
+    let mergedSchedule = [];
+    if (groupData && groupData.schedule) {
+        groupData.schedule.forEach(day => {
+            mergedSchedule.push(JSON.parse(JSON.stringify(day))); // Глибока копія
+        });
+    }
+
+    const faculty = groupData.faculty;
+    for (const otherGroupKey in schedulesData) {
+        if (otherGroupKey === groupKey) continue;
+        const otherGroupData = schedulesData[otherGroupKey];
+        // Беремо тільки групи з того ж факультету
+        if (otherGroupData.faculty !== faculty) continue;
+
+        otherGroupData.schedule.forEach(otherDay => {
+            let targetDay = mergedSchedule.find(d => d.date === otherDay.date);
+            
+            otherDay.lessons.forEach(lesson => {
+                // Перевіряємо, чи користувач обрав цей предмет/підгрупу
+                if (shouldDisplayLesson(lesson)) {
+                    let alreadyExists = false;
+                    if (targetDay) {
+                        alreadyExists = targetDay.lessons.some(l => 
+                            l.time && lesson.time && l.time.replace(/\s/g, "") === lesson.time.replace(/\s/g, "") && 
+                            l.subject === lesson.subject
+                        );
+                    }
+
+                    if (!alreadyExists) {
+                        if (!targetDay) {
+                            targetDay = { date: otherDay.date, day: otherDay.day, lessons: [] };
+                            mergedSchedule.push(targetDay);
+                        }
+                        const borrowedLesson = JSON.parse(JSON.stringify(lesson));
+                        borrowedLesson.borrowedFrom = otherGroupKey;
+                        targetDay.lessons.push(borrowedLesson);
+                    }
+                }
+            });
+        });
+    }
+
+    // Сортуємо дні по даті
+    mergedSchedule.sort((a, b) => {
+        const dateA = new Date(a.date.split('.').reverse().join('-'));
+        const dateB = new Date(b.date.split('.').reverse().join('-'));
+        return dateA - dateB;
+    });
+
+    schedule = mergedSchedule;
 
     // Визначаємо, чи це мобільний вигляд
     const isMobileView = window.innerWidth <= 768;
@@ -532,12 +580,18 @@ function showSchedule(groupKey) {
                             row.classList.add('empty-slot');
                         } else {
                             // Оформлення для мобільного та десктопного вигляду
+                            let borrowedBadge = '';
+                            if (lesson.borrowedFrom) {
+                                borrowedBadge = `<div class="borrowed-badge" style="margin-top: 5px; font-size: 0.8em; color: #fff; background-color: #28a745; padding: 2px 6px; border-radius: 4px; display: inline-block;">Знайдено в розкладі ${lesson.borrowedFrom}</div>`;
+                            }
+
                             if (isMobileView) {
                                 subjectCell.innerHTML = `<span class="mobile-label">Предмет: </span>${lesson.subject}`;
                                 if (lesson.details) subjectCell.innerHTML += `<br><small>${lesson.details}</small>`;
                                 if (lesson.link && lesson.link.trim() !== '') {
                                     subjectCell.innerHTML += `<br><small><a href="${lesson.link}" target="_blank" class="lesson-link">Посилання на відеоконференцію <i class="fas fa-external-link-alt"></i></a></small>`;
                                 }
+                                if (borrowedBadge) subjectCell.innerHTML += `<br>${borrowedBadge}`;
                                 teacherCell.innerHTML = `<span class="mobile-label">Викладач: </span>${lesson.teacher || ''}`;
                                 groupCell.innerHTML = `<span class="mobile-label">Група: </span>${lesson.group || groupKey}`;
                             } else {
@@ -546,6 +600,7 @@ function showSchedule(groupKey) {
                                 if (lesson.link && lesson.link.trim() !== '') {
                                     subjectCell.innerHTML += `<br><small><a href="${lesson.link}" target="_blank" class="lesson-link">Посилання на відеоконференцію <i class="fas fa-external-link-alt"></i></a></small>`;
                                 }
+                                if (borrowedBadge) subjectCell.innerHTML += `<br>${borrowedBadge}`;
                                 teacherCell.textContent = lesson.teacher || '';
                                 groupCell.textContent = lesson.group || groupKey;
                             }
@@ -705,7 +760,13 @@ function restoreState() {
 
     if (savedState) {
         // Якщо є збережений стан, використовуємо його
-        window.currentState = JSON.parse(savedState);
+        try {
+            window.currentState = JSON.parse(savedState);
+        } catch (error) {
+            console.error('[SCHEDULE] Помилка парсингу збереженого стану:', error);
+            localStorage.removeItem('appState');
+            window.currentState = initialState;
+        }
     } else {
         // Якщо немає збереженого стану, використовуємо стандартний порожній стан
         window.currentState = initialState;
@@ -746,7 +807,7 @@ function restoreState() {
     // Кінцеву дату залишаємо порожньою для показу всього розкладу
     window.currentState.dateFrom = formattedDateFrom;
     window.currentState.dateTo = '';
-    document.getElementById('date-from').value = formattedDateFrom;
+    document.getElementById('date-from').value = formatDateForInput(dateFrom);
     document.getElementById('date-to').value = '';
 
     console.log(`[SCHEDULE] Ініціалізація. Встановлено початкову дату: ${formattedDateFrom}`);
@@ -891,8 +952,10 @@ function extractBaseSubjectName(subject) {
     // Видаляємо номер підгрупи та інші технічні деталі
     return subject
         .replace(/^\d+\.\d+\s+/, '')  // Видаляємо номер на початку (2.26 і т.д.)
-        .replace(/^КН\(зб\)\d+\.\d+\s*/, '')  // Видаляємо формат КН(зб)2.26
-        .replace(/^Збірна група\s+КН\(зб\)\d+\.\d+\s*/, '')  // Видаляємо "Збірна група КН(зб)2.26"
+        .replace(/^Збірна група\s+\S+\s+/, '')  // Видаляємо "Збірна група XXX"
+        .replace(/^Потік\s+[\wА-Яа-яіїєґІЇЄҐ'`'\-,\s]+?\s+(?=[А-ЯІЇЄҐA-Z])/, '')  // Видаляємо "Потік КН-41, КН-42 "
+        .replace(/^[А-ЯІЇЄҐA-Z]{1,4}-\d{1,2}\s+/, '')  // Видаляємо "КН-41 "
+        .replace(/\.\.\.[^(]*/, '')  // Видаляємо суфікси "... Держ.Ат."
         .toLowerCase()
         .trim();
 }
@@ -956,13 +1019,6 @@ function shouldDisplayLesson(lesson) {
         return false;
     }
 
-    // Перевіряємо чи це ПрС або Сем
-    const isPrSOrSem = lesson.subject.match(/\((ПрС|Сем)\)$/i);
-    if (isPrSOrSem) {
-        console.log('[SCHEDULE] Знайдено ПрС/Сем, показуємо автоматично');
-        return true;
-    }
-
     // Перевіряємо пошук по викладачу
     if (searchTeacher) {
         const teacherName = lesson.teacher ? lesson.teacher.toLowerCase() : '';
@@ -1001,19 +1057,24 @@ function shouldDisplayLesson(lesson) {
 
     const selectedSubgroups = window.currentState.selectedSubjects[selectedSubjectKey] || [];
 
+    // Якщо користувач обрав предмет, але не обрав ЖОДНОЇ підгрупи/лекції - показуємо все
+    if (selectedSubgroups.length === 0) {
+        return true;
+    }
+
     // Для потокових лекцій
-    if (lesson.subject.includes('Потік') || lesson.subject.includes('КН-21, КН-22, КН-23')) {
+    if (lesson.subject.includes('Потік')) {
         return selectedSubgroups.includes('Лекція');
     }
 
-    // Для збірних груп
+    // Для збірних груп (універсальний regex — підтримує КН(зб)2.27, КН-зб22, В42¤092л1)
     if (lesson.subject.includes('Збірна група')) {
-        const zbMatch = lesson.subject.match(/КН\(зб\)(\d+\.\d+)/);
-        const typeMatch = lesson.subject.match(/\((Л|Лек|Лаб)\)$/i);
+        const zbMatch = lesson.subject.match(/Збірна група\s+(\S+)/);
+        const typeMatch = lesson.subject.match(/\((Л|Лек|Лекція|Лаб|ПрС|Сем|Семінар|КСР|КЕк|Екз|Консультація|Практика|Держ\.Ат\.)\)$/i);
         if (zbMatch && typeMatch) {
-            const groupNum = zbMatch[1];
+            const groupId = zbMatch[1];
             const type = normalizeType(typeMatch[1]);
-            const subgroupToCheck = `КН(зб)${groupNum}(${type})`;
+            const subgroupToCheck = `${groupId}(${type})`;
             console.log('[SCHEDULE] Перевірка збірної групи:', {
                 знайдена: subgroupToCheck,
                 обрані: selectedSubgroups,
@@ -1036,7 +1097,7 @@ function shouldDisplayLesson(lesson) {
     }
 
     // Для звичайних занять перевіряємо тип
-    const typeMatch = lesson.subject.match(/\((Л|Лек|Лаб)\)$/i);
+    const typeMatch = lesson.subject.match(/\((Л|Лек|Лекція|Лаб|ПрС|Сем|Семінар|КСР|КЕк|Екз|Консультація|Практика|Держ\.Ат\.)\)$/i);
     if (typeMatch) {
         const type = normalizeType(typeMatch[1]);
         console.log('[SCHEDULE] Перевірка типу заняття:', {

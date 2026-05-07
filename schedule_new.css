@@ -1650,10 +1650,3 @@ s
     color: #1a202c;
 }
 
-.nav-list.show {
-    display: flex; /* Показуємо при додаванні класу show */
-}
-
-.mobile-menu-btn {
-    display: block; /* Показуємо кнопку на мобільних */
-}
