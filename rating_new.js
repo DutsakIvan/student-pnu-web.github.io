@@ -535,7 +535,7 @@ function saveLocally() {
         examRating,
         creditRating,
         totalRating,
-        timestamp: '2025-03-07', // Використовуємо фіксовану дату
+        timestamp: Date.now(),
         html: document.getElementById('results-section').outerHTML
     };
 

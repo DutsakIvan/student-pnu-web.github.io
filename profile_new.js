@@ -1,6 +1,6 @@
 // Дані про групи
 const groups = {
-    "КН": ["КН-11", "КН-12", "КН-13", "КН-21", "КН-22", "КН-23", "КН-31", "КН-32"],
+    "КН": ["КН-11", "КН-12", "КН-13", "КН-21", "КН-22", "КН-23", "КН-31", "КН-32", "КН-41", "КН-42"],
     "ІПЗ": ["ІПЗ-11", "ІПЗ-12", "ІПЗ-21", "ІПЗ-22"],
     "ІСТ": ["ІСТ-11", "ІСТ-12", "ІСТ-21"],
     "ПР": ["ПР-31", "ПР-32", "ПР-33", "ПР-34", "ПР-35"]
@@ -124,7 +124,13 @@ function normalizeType(type) {
         'прс': 'Семінар',
         'практика': 'Семінар',
         'сем': 'Семінар',
-        'семінар': 'Семінар'
+        'семінар': 'Семінар',
+        'кср': 'КСР',
+        'кек': 'Контрольний екзамен',
+        'екз': 'Екзамен',
+        'консультація': 'Консультація',
+        'екзамен': 'Екзамен',
+        'держат': 'Держ. атестація'
     };
     
     // Перевіряємо точні співпадіння
@@ -146,7 +152,14 @@ function normalizeType(type) {
 function loadState() {
     const savedState = localStorage.getItem('appState');
     if (savedState) {
-        window.currentState = JSON.parse(savedState);
+        try {
+            window.currentState = JSON.parse(savedState);
+        } catch (error) {
+            console.error('[PROFILE] Помилка парсингу збереженого стану:', error);
+            localStorage.removeItem('appState');
+            showStep('step-faculty');
+            return;
+        }
         // Якщо є всі дані, показуємо профіль
         if (window.currentState.faculty && window.currentState.group && window.currentState.semester && window.currentState.selectedSubjects) {
             showProfileSummary();
@@ -185,13 +198,13 @@ function clearProfileState() {
     // Відзначаємо, що користувач мав обрані предмети, які були очищені
     localStorage.setItem('hadSelectedSubjects', 'true');
     
-    // Видаляємо лише дані профілю, але зберігаємо тему
-    for (const key in localStorage) {
-        // Не видаляємо ключі 'theme', 'schedulesData' та 'hadSelectedSubjects'
-        if (key !== 'theme' && key !== 'schedulesData' && key !== 'hadSelectedSubjects') {
+    // Видаляємо лише дані профілю, але зберігаємо тему та збережені дані
+    const keysToKeep = ['theme', 'schedulesData', 'hadSelectedSubjects', 'savedSchedules', 'savedRatings'];
+    Object.keys(localStorage).forEach(key => {
+        if (!keysToKeep.includes(key)) {
             localStorage.removeItem(key);
         }
-    }
+    });
     
     // Відновлюємо збережену тему
     if (currentTheme) {
@@ -310,54 +323,26 @@ function getUniqueSubgroupsForSubject(subjectName) {
         return [];
     }
 
-    const schedule = schedulesData[currentGroup].schedule;
+    const currentFaculty = schedulesData[currentGroup].faculty;
+    const currentCourse = getCourseFromGroup(currentGroup);
 
-    // Перевіряємо, чи предмет має тільки ПрС або Сем заняття
-    let hasOnlyPrSOrSem = true;
-    let hasAnyPrSOrSem = false;
-
-    // Спочатку перевіряємо всі заняття цього предмета
-    for (const day of schedule) {
-        for (const lesson of day.lessons) {
-            if (!lesson.subject) continue;
-
-            let lessonSubject = lesson.subject;
-            // Для збірних груп та потокових лекцій беремо назву з другого рядка
-            if (lesson.subject.includes('Збірна група') || lesson.subject.includes('Потік')) {
-                const lines = lesson.subject.split('\n');
-                if (lines.length > 1) {
-                    lessonSubject = lines[1];
-                }
-            }
-
-            const normalizedLessonSubject = normalizeSubject(extractCoreSubject(lessonSubject));
-            const normalizedSearchSubject = normalizeSubject(subjectName);
-
-            if (normalizedLessonSubject.includes(normalizedSearchSubject) || 
-                normalizedSearchSubject.includes(normalizedLessonSubject)) {
-                
-                const isPrSOrSem = lesson.subject.match(/\((ПрС|Сем)\)$/i);
-                if (isPrSOrSem) {
-                    hasAnyPrSOrSem = true;
-                } else {
-                    hasOnlyPrSOrSem = false;
-                }
-            }
+    // Збираємо розклад з усіх груп того ж факультету і курсу
+    let allLessons = [];
+    for (const [groupName, data] of Object.entries(schedulesData)) {
+        if (data.faculty === currentFaculty && getCourseFromGroup(groupName) === currentCourse) {
+            data.schedule.forEach(day => {
+                day.lessons.forEach(lesson => {
+                    if (lesson.subject) {
+                        allLessons.push(lesson);
+                    }
+                });
+            });
         }
     }
 
-    // Якщо предмет має тільки ПрС або Сем заняття, повертаємо пустий масив
-    if (hasOnlyPrSOrSem && hasAnyPrSOrSem) {
-        console.log('[PROFILE] Предмет має тільки ПрС/Сем заняття, не додаємо підгрупи');
-        return [];
-    }
-
-    // Якщо є інші типи занять, збираємо їх підгрупи
-    schedule.forEach(day => {
-        day.lessons.forEach(lesson => {
-            if (!lesson.subject) return;
-
-            let lessonSubject = lesson.subject;
+    // Перевіряємо всі заняття цього предмета
+    allLessons.forEach(lesson => {
+        let lessonSubject = lesson.subject;
             // Для збірних груп та потокових лекцій беремо назву з другого рядка
             if (lesson.subject.includes('Збірна група') || lesson.subject.includes('Потік')) {
                 const lines = lesson.subject.split('\n');
@@ -374,22 +359,18 @@ function getUniqueSubgroupsForSubject(subjectName) {
                 
                 console.log('[PROFILE] Знайдено співпадіння для предмета:', lesson.subject);
 
-                // Пропускаємо ПрС та Сем
-                const isPrSOrSem = lesson.subject.match(/\((ПрС|Сем)\)$/i);
-                if (isPrSOrSem) return;
-
                 // Для потокових лекцій
-                if (lesson.subject.includes('Потік') || lesson.subject.includes('КН-21, КН-22, КН-23')) {
+                if (lesson.subject.includes('Потік')) {
                     uniqueSubgroups.add('Лекція');
                 }
-                // Для збірних груп
+                // Для збірних груп (універсальний regex)
                 else if (lesson.subject.includes('Збірна група')) {
-                    const zbMatch = lesson.subject.match(/КН\(зб\)(\d+\.\d+)/);
-                    const typeMatch = lesson.subject.match(/\((Л|Лек|Лаб)\)$/i);
+                    const zbMatch = lesson.subject.match(/Збірна група\s+(\S+)/);
+                    const typeMatch = lesson.subject.match(/\((Л|Лек|Лекція|Лаб|ПрС|Сем|Семінар|КСР|КЕк|Екз|Консультація|Практика|Держ\.Ат\.)\)$/i);
                     if (zbMatch && typeMatch) {
-                        const groupNum = zbMatch[1];
+                        const groupId = zbMatch[1];
                         const type = normalizeType(typeMatch[1]);
-                        uniqueSubgroups.add(`КН(зб)${groupNum}(${type})`);
+                        uniqueSubgroups.add(`${groupId}(${type})`);
                     }
                 }
                 // Для підгруп
@@ -401,13 +382,12 @@ function getUniqueSubgroupsForSubject(subjectName) {
                 }
                 // Для звичайних занять
                 else {
-                    const typeMatch = lesson.subject.match(/\((Л|Лек|Лаб)\)$/i);
+                    const typeMatch = lesson.subject.match(/\((Л|Лек|Лекція|Лаб|ПрС|Сем|Семінар|КСР|КЕк|Екз|Консультація|Практика|Держ\.Ат\.)\)$/i);
                     if (typeMatch) {
                         uniqueSubgroups.add(normalizeType(typeMatch[1]));
                     }
                 }
-            }
-        });
+        }
     });
 
     const result = Array.from(uniqueSubgroups);
@@ -430,9 +410,11 @@ function extractCoreSubject(subject) {
     if (!subject) return '';
     return subject
         .replace(/^\(підгр\. \d+\)\s*/, '')
-        .replace(/^Збірна група \S+\s*/, '')
-        .replace(/^Потік \S+\s*/, '')
-        .replace(/\s*\((Л|Лекція|Лаб|Сем|ПрС)\)$/, '')
+        .replace(/^Збірна група\s+\S+\s+/, '')  // Універсальний: "Збірна група XXX "
+        .replace(/^Потік\s+[\wА-Яа-яіїєґІЇЄҐ'`'\-,\s]+?\s+(?=[А-ЯІЇЄҐA-Z])/, '')  // "Потік КН-41, КН-42 "
+        .replace(/^[А-ЯІЇЄҐA-Z]{1,4}-\d{1,2}\s+/, '')  // "КН-41 " — префікс групи
+        .replace(/\.\.\.[^(]*/, '')  // "... Держ.Ат. Консультації"
+        .replace(/\s*\((Л|Лек|Лекція|Лаб|ПрС|Сем|Семінар|КСР|КЕк|Екз|Консультація|Практика|Держ\.Ат\.)\)$/i, '')
         .replace(/\n/g, ' ')
         .trim();
 }
@@ -548,36 +530,14 @@ function showSubjects(semester, group) {
         `;
         subjectDiv.appendChild(subjectInfo);
 
-        // Перевіряємо типи занять предмета у розкладі
-        let hasOnlyPrSOrSem = true;
-        let hasAnyLessons = false;
-        const currentGroup = window.currentState.group;
-        if (currentGroup && schedulesData[currentGroup]) {
-            const schedule = schedulesData[currentGroup].schedule;
-            for (const day of schedule) {
-                for (const lesson of day.lessons) {
-                    if (!lesson.subject) continue;
-                    const normalizedLessonSubject = normalizeSubject(extractCoreSubject(lesson.subject));
-                    const normalizedSearchSubject = normalizeSubject(subjectData.displayName);
-                    if (normalizedLessonSubject.includes(normalizedSearchSubject) || 
-                        normalizedSearchSubject.includes(normalizedLessonSubject)) {
-                        hasAnyLessons = true;
-                        const lessonType = lesson.subject.match(/\((ПрС|Сем)\)$/i);
-                        if (!lessonType) hasOnlyPrSOrSem = false;
-                    }
-                }
-            }
-        }
+        const availableSubgroups = getUniqueSubgroupsForSubject(subjectData.displayName);
+        if (availableSubgroups.length > 0) {
+            const subgroupsDiv = document.createElement('div');
+            subgroupsDiv.className = 'subgroups';
+            subgroupsDiv.style.display = isChecked ? 'block' : 'none';
 
-        if (!(hasOnlyPrSOrSem && hasAnyLessons)) {
-            const availableSubgroups = getUniqueSubgroupsForSubject(subjectData.displayName);
-            if (availableSubgroups.length > 0) {
-                const subgroupsDiv = document.createElement('div');
-                subgroupsDiv.className = 'subgroups';
-                subgroupsDiv.style.display = isChecked ? 'block' : 'none';
-
-                availableSubgroups.forEach(subgroup => {
-                    const label = document.createElement('label');
+            availableSubgroups.forEach(subgroup => {
+                const label = document.createElement('label');
                     label.innerHTML = `
                         <input type="checkbox" data-subject="${subjectData.name}" data-subgroup="${subgroup}" 
                                ${selectedSubgroups.includes(subgroup) ? 'checked' : ''}>
@@ -586,41 +546,58 @@ function showSubjects(semester, group) {
                     subgroupsDiv.appendChild(label);
                 });
                 subjectDiv.appendChild(subgroupsDiv);
-            }
         }
 
         const checkbox = subjectDiv.querySelector('input[type="checkbox"]');
         checkbox.addEventListener('change', (event) => {
             const subject = event.target.dataset.subject;
+            const subgroupsDiv = subjectDiv.querySelector('.subgroups');
+            const subgroupCheckboxes = subjectDiv.querySelectorAll('.subgroups input[type="checkbox"]');
+            
             if (event.target.checked) {
                 window.currentState.selectedSubjects[subject] = [];
-                const subgroupsDiv = subjectDiv.querySelector('.subgroups');
                 if (subgroupsDiv) subgroupsDiv.style.display = 'block';
+                
+                // Автоматично вибираємо всі підгрупи
+                subgroupCheckboxes.forEach(cb => {
+                    cb.checked = true;
+                    window.currentState.selectedSubjects[subject].push(cb.dataset.subgroup);
+                });
             } else {
-                const subgroupsDiv = subjectDiv.querySelector('.subgroups');
                 if (subgroupsDiv) subgroupsDiv.style.display = 'none';
+                // Знімаємо виділення з усіх підгруп
+                subgroupCheckboxes.forEach(cb => {
+                    cb.checked = false;
+                });
                 delete window.currentState.selectedSubjects[subject];
             }
             saveState();
         });
-
         const subgroupCheckboxes = subjectDiv.querySelectorAll('.subgroups input[type="checkbox"]');
         subgroupCheckboxes.forEach(subgroupCheckbox => {
             subgroupCheckbox.addEventListener('change', (event) => {
-                const subject = event.target.dataset.subject;
+                const subjectNameDataset = event.target.dataset.subject;
                 const subgroup = event.target.dataset.subgroup;
                 if (event.target.checked) {
-                    if (!window.currentState.selectedSubjects[subject]) {
-                        window.currentState.selectedSubjects[subject] = [];
+                    if (!window.currentState.selectedSubjects[subjectNameDataset]) {
+                        window.currentState.selectedSubjects[subjectNameDataset] = [];
                     }
-                    if (!window.currentState.selectedSubjects[subject].includes(subgroup)) {
-                        window.currentState.selectedSubjects[subject].push(subgroup);
+                    if (!window.currentState.selectedSubjects[subjectNameDataset].includes(subgroup)) {
+                        window.currentState.selectedSubjects[subjectNameDataset].push(subgroup);
                     }
+                    // Якщо вибрали підгрупу, ставимо галочку і на головному предметі
+                    const mainCb = subjectDiv.querySelector('input[type="checkbox"]:not([data-subgroup])');
+                    if (mainCb && !mainCb.checked) mainCb.checked = true;
                 } else {
-                    window.currentState.selectedSubjects[subject] = 
-                        window.currentState.selectedSubjects[subject].filter(s => s !== subgroup);
-                    if (window.currentState.selectedSubjects[subject].length === 0) {
-                        delete window.currentState.selectedSubjects[subject];
+                    window.currentState.selectedSubjects[subjectNameDataset] = 
+                        window.currentState.selectedSubjects[subjectNameDataset].filter(s => s !== subgroup);
+                    if (window.currentState.selectedSubjects[subjectNameDataset].length === 0) {
+                        delete window.currentState.selectedSubjects[subjectNameDataset];
+                        // Знімаємо галочку з предмета, якщо всі підгрупи вимкнуті
+                        const mainCb = subjectDiv.querySelector('input[type="checkbox"]:not([data-subgroup])');
+                        if (mainCb) mainCb.checked = false;
+                        const subgroupsDiv = subjectDiv.querySelector('.subgroups');
+                        if (subgroupsDiv) subgroupsDiv.style.display = 'none';
                     }
                 }
                 saveState();
