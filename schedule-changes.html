@@ -3,33 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Головна сторінка - Student PNU</title>
+    <title>Зміни в розкладі — Student PNU</title>
+    <meta name="description" content="Детальний перегляд змін у розкладі занять ПНУ. Порівняння було/стало для кожного дня.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="schedule-changes.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="theme.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelector('.mobile-menu-btn').addEventListener('click', (e) => {
-                e.stopPropagation();
-                const navList = document.querySelector('.nav-list');
-                if (navList) navList.classList.toggle('show');
-            });
-            const closeMenu = (event) => {
-                const navList = document.querySelector('.nav-list');
-                if (navList && navList.classList.contains('show') && !event.target.closest('.main-nav')) {
-                    navList.classList.remove('show');
-                }
-            };
-            document.addEventListener('click', closeMenu);
-            document.addEventListener('touchstart', closeMenu, {passive: true});
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    const navList = document.querySelector('.nav-list');
-                    if (navList) navList.classList.remove('show');
-                });
-            });
-        });
-    </script>
+    <script src="schedule-changes.js" defer></script>
 </head>
 <body>
     <button id="theme-toggle" class="theme-toggle">
@@ -50,7 +32,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="schedule-changes.html" class="nav-link">
+                    <a href="schedule-changes.html" class="nav-link active">
                         <i class="fas fa-bell"></i>
                         <span>Зміни</span>
                     </a>
@@ -81,22 +63,39 @@
     </nav>
     <main class="main-content">
         <div class="container">
-            <section class="home-section">
+            <section class="changes-section">
                 <h1 class="page-title">
-                    <i class="fas fa-graduation-cap"></i>
-                    Вітаємо!
+                    <i class="fas fa-exchange-alt"></i>
+                    Зміни в розкладі
                 </h1>
-                <p class="home-subtitle">
-                    Ласкаво просимо до Student PNU - вашого персонального помічника в навчанні.
-                    Тут ви можете легко керувати своїм розкладом, відстежувати рейтинговий бал,
-                    зберігати важливу інформацію та багато іншого.
-                </p>
+                <p class="page-subtitle">Детальний перегляд змін: які пари додали, видалили або перенесли</p>
+
+                <div class="history-selector" id="history-selector" style="display:none;">
+                    <label for="history-select"><i class="fas fa-history"></i> Історія змін:</label>
+                    <select id="history-select"></select>
+                </div>
+
+                <div class="change-timestamp" id="change-timestamp"></div>
+
+                <div class="group-tabs" id="group-tabs"></div>
+
+                <div id="changes-content">
+                    <div class="empty-state" id="loading-state">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <h3>Завантаження...</h3>
+                        <p>Отримуємо дані про зміни в розкладі</p>
+                    </div>
+                </div>
             </section>
         </div>
     </main>
+    <button id="scrollToTopBtn" class="scroll-to-top-btn" data-direction="up">
+        <span class="toggle-arrow"><i class="fas fa-arrow-up"></i></span>
+    </button>
+    <script src="page-info.js"></script>
     <footer class="footer">
         <div class="container">
-            <p>© 2026 Student PNU. Всі права захищені.</p>
+            <p>&copy; 2026 Student PNU. Всі права захищені.</p>
         </div>
     </footer>
 </body>

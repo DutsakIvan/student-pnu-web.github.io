@@ -72,6 +72,17 @@ function addPageInfo(pageType) {
                 </ul>
             `
         },
+        'schedule-changes': {
+            title: 'Зміни в розкладі',
+            content: `
+                <p>На цій сторінці ви можете переглянути останні зміни в розкладі занять.</p>
+                <ul>
+                    <li>Бачите які саме пари додали, видалили або перенесли</li>
+                    <li>Порівняння "було" та "стало" для кожного дня</li>
+                    <li>Історія попередніх змін доступна у випадаючому списку</li>
+                </ul>
+            `
+        },
         'rating-details': {
             title: 'Деталі збереженого рейтингового балу',
             content: `
@@ -125,6 +136,7 @@ function getCurrentPageType() {
     if (path.includes('profile.html')) return 'profile';
     if (path.includes('rating.html')) return 'rating';
     if (path.includes('saved.html')) return 'saved';
+    if (path.includes('schedule-changes.html')) return 'schedule-changes';
     if (path.includes('schedule-details.html')) return 'schedule-details';
     if (path.includes('rating-details.html')) return 'rating-details';
     if (path.includes('index.html') || path.endsWith('/')) return 'index';
