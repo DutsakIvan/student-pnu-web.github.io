@@ -370,7 +370,7 @@ body {
 }
 .theme-toggle {
     position: fixed;
-    top: 60px;
+    bottom: 80px;
     right: 20px;
     width: 40px;
     height: 40px;
@@ -497,7 +497,7 @@ body {
         width: auto;
         display: block;
         border: none;
-        padding: 0;
+        padding: 2px 0;
     }
     #scheduleTable tbody tr.empty-slot {
         padding: 5px 10px;
@@ -548,7 +548,7 @@ body {
         .theme-toggle {
             position: fixed; 
             top: auto; 
-            bottom: 20px; 
+            bottom: 80px; 
             right: 20px; 
             width: 36px;
             height: 36px;
@@ -882,7 +882,7 @@ s
         width: auto;
         display: block;
         border: none;
-        padding: 0;
+        padding: 2px 0;
     }
     #scheduleTable tbody tr.empty-slot {
         padding: 5px 10px;
@@ -1254,7 +1254,7 @@ s
 @media (max-width: 768px) {
     [data-theme="dark"] #scheduleTable tbody tr {
         border-bottom: 1px solid #3d3d3d;
-        padding: 8px 0;
+        padding: 10px;
         display: block;
         margin-bottom: 12px;
         background: #1a1a1a !important;
@@ -1309,7 +1309,7 @@ s
     .theme-toggle {
         position: fixed;
         top: auto;
-        bottom: 20px;
+        bottom: 80px;
         right: 20px;
         width: 36px;
         height: 36px;

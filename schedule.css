@@ -1052,7 +1052,7 @@ body {
 }
 .theme-toggle {
     position: fixed;
-    top: 10px;
+    bottom: 80px;
     right: 20px;
     width: 40px;
     height: 40px;
