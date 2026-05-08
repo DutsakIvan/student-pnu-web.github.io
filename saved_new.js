@@ -2,9 +2,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navList = document.querySelector('.nav-list');
     if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', () => {
-            navList.classList.toggle('show');
+        mobileMenuBtn.addEventListener('click', (e) => {
+        // Prevent event from bubbling to document immediately
+        e.stopPropagation();
+        const navList = document.querySelector('.nav-list');
+        if (navList) navList.classList.toggle('show');
+    });
+
+    const closeMenu = (event) => {
+        const navList = document.querySelector('.nav-list');
+        if (navList && navList.classList.contains('show') && !event.target.closest('.main-nav')) {
+            navList.classList.remove('show');
+        }
+    };
+    
+    document.addEventListener('click', closeMenu);
+    document.addEventListener('touchstart', closeMenu, {passive: true});
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            const navList = document.querySelector('.nav-list');
+            if (navList) navList.classList.remove('show');
         });
+    });
     }
     loadSavedItems();
 });

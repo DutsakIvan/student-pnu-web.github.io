@@ -9,8 +9,24 @@
     <script src="theme.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
-                document.querySelector('.nav-list').classList.toggle('show');
+            document.querySelector('.mobile-menu-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                const navList = document.querySelector('.nav-list');
+                if (navList) navList.classList.toggle('show');
+            });
+            const closeMenu = (event) => {
+                const navList = document.querySelector('.nav-list');
+                if (navList && navList.classList.contains('show') && !event.target.closest('.main-nav')) {
+                    navList.classList.remove('show');
+                }
+            };
+            document.addEventListener('click', closeMenu);
+            document.addEventListener('touchstart', closeMenu, {passive: true});
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    const navList = document.querySelector('.nav-list');
+                    if (navList) navList.classList.remove('show');
+                });
             });
         });
     </script>
